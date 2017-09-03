@@ -43,8 +43,14 @@ public class LoginController {
 
 	@ResponseBody
 	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
-	public void logout(HttpSession session) {
+	public void logout() {
 		System.out.println("Logged out.");
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/test" }, method = RequestMethod.GET)
+	public void test() {
+		System.out.println("This is a test.");
 	}
  
 
