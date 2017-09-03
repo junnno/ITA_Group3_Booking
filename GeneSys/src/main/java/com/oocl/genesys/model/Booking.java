@@ -1,0 +1,116 @@
+package com.oocl.genesys.model;
+
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.joda.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
+
+@Entity
+@Table(name="GS_BOOKING")
+public class Booking {
+	
+	@Id
+	@OneToMany(fetch=FetchType.LAZY, mappedBy= "booking")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String bkgNum;
+	
+	@NotNull
+    @Column(name = "STATUS", nullable = false)
+    private int status;
+    
+	@NotNull
+    @Column(name = "IS_VALID_WEIGHT", nullable = false)
+    private int isValidWeight;
+    
+	@NotNull
+    @Column(name = "IS_APPROVED", nullable = false)
+    private int isApproved;
+    
+	@NotNull
+    @Column(name = "IS_GOOD_CUSTOMER", nullable = false)
+    private int isGoodCustomer;
+ 
+	@Size(min=3, max=3)
+	@NotNull
+    @Column(name = "FROM_CITY", nullable = false)
+    private String fromCity;
+	
+	@Size(min=3, max=3)
+	@NotNull
+    @Column(name = "TO_CITY", nullable = false)
+    private String toCity;
+
+	public String getBkgNum() {
+		return bkgNum;
+	}
+
+	public void setBkgNum(String bkgNum) {
+		this.bkgNum = bkgNum;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getIsValidWeight() {
+		return isValidWeight;
+	}
+
+	public void setIsValidWeight(int isValidWeight) {
+		this.isValidWeight = isValidWeight;
+	}
+
+	public int getIsApproved() {
+		return isApproved;
+	}
+
+	public void setIsApproved(int isApproved) {
+		this.isApproved = isApproved;
+	}
+
+	public int getIsGoodCustomer() {
+		return isGoodCustomer;
+	}
+
+	public void setIsGoodCustomer(int isGoodCustomer) {
+		this.isGoodCustomer = isGoodCustomer;
+	}
+
+	public String getFromCity() {
+		return fromCity;
+	}
+
+	public void setFromCity(String fromCity) {
+		this.fromCity = fromCity;
+	}
+
+	public String getToCity() {
+		return toCity;
+	}
+
+	public void setToCity(String toCity) {
+		this.toCity = toCity;
+	}
+
+
+}
+
