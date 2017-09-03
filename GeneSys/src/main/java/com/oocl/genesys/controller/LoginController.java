@@ -1,43 +1,51 @@
 package com.oocl.genesys.controller;
 
-import java.util.List;
-import java.util.Locale;
 
-import javax.validation.Valid;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
+
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.javacodegeeks.model.Employee;
-import com.javacodegeeks.service.EmployeeService;
+import com.oocl.genesys.dao.UserDAO;
+
+import com.oocl.genesys.model.User;
 
 
 @Controller
-@RequestMapping("/")
 @ComponentScan("com.oocl.genesys") 
 public class LoginController {
-	
-    @Autowired
-    EmployeeService service;
- 
-    /*
-     * This method will list all existing employees.
-     */
-    @RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
-    public String listEmployees(ModelMap model) {
- 
-        List<Employee> employees = service.findAllEmployees();
-        model.addAttribute("employees", employees);
-        return "allemployees";
-    }
+
+	@Autowired
+	UserDAO userDAO;
+
+	@ResponseBody
+	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
+	public User login(@RequestParam(required = true) String username, @RequestParam(required = true) String password) {
+		List<User> users = userDAO.getAllUsers();
+		for (User user : users) {
+			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+				System.out.println("You are now logged in");
+				return user;
+			}
+		}
+		return null;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
+	public void logout(HttpSession session) {
+		System.out.println("Logged out.");
+	}
  
 
 }
