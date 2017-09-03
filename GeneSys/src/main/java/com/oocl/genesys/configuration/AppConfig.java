@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.javacodegeeks")
+@ComponentScan(basePackages = "com.oocl.genesys")
 public class AppConfig {
 	
 	@Bean
