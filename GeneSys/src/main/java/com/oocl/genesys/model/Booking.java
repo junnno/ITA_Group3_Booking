@@ -1,6 +1,5 @@
 package com.oocl.genesys.model;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,15 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.Type;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.joda.time.LocalDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -27,7 +21,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Booking {
 	
 	@Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gs_booking_seq")
+	@SequenceGenerator(name="booking_seq", sequenceName="gs_booking_seq")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="booking_seq")
     private String bkgNum;
 	
 	
