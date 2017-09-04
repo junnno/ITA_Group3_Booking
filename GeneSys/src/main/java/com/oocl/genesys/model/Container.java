@@ -25,8 +25,7 @@ public class Container {
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="BKG_NUM", nullable=false)
-    @Column(name = "BKG_NUM", nullable = false)
-    private int bkgNum;
+    private Booking bkgNum;
 	
 	@NotNull
     @Column(name = "GROSS_WEIGHT", nullable = false)
@@ -65,11 +64,11 @@ public class Container {
 		this.container_id = container_id;
 	}
 
-	public int getBkgNum() {
+	public Booking getBkgNum() {
 		return bkgNum;
 	}
 
-	public void setBkgNum(int bkgNum) {
+	public void setBkgNum(Booking bkgNum) {
 		this.bkgNum = bkgNum;
 	}
 
