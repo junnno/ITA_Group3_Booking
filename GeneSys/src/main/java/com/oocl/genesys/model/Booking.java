@@ -27,7 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Booking {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gs_booking_seq")
     private String bkgNum;
 	
 	

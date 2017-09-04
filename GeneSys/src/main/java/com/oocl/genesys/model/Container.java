@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 public class Container {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gs_container_seq")
     private int container_id;
 	
 	@NotNull

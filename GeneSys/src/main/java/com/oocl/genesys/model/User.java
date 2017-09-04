@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @Table(name="GS_USERS")
 public class User {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gs_user_seq")
     private int id;
 	
 	@NotNull
