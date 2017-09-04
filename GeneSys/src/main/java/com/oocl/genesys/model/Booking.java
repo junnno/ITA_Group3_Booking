@@ -1,6 +1,8 @@
 package com.oocl.genesys.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,9 +27,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Booking {
 	
 	@Id
-	@OneToMany(fetch=FetchType.LAZY, mappedBy= "booking")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String bkgNum;
+	
 	
 	@NotNull
     @Column(name = "STATUS", nullable = false)
@@ -54,7 +56,10 @@ public class Booking {
 	@NotNull
     @Column(name = "TO_CITY", nullable = false)
     private String toCity;
-
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy= "booking")
+	private List<Container> containerList = new ArrayList<Container>();
+	
 	public String getBkgNum() {
 		return bkgNum;
 	}
