@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,8 +13,10 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="GS_USERS")
 public class User {
+	
 	@Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gs_user_seq")
+	@SequenceGenerator(name="user_seq", sequenceName="gs_user_seq")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user_seq")
     private int id;
 	
 	@NotNull
