@@ -52,7 +52,7 @@ public class Booking {
     @Column(name = "TO_CITY", nullable = false)
     private String toCity;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy= "booking")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy= "bkgNum")
 	private List<Container> containerList = new ArrayList<Container>();
 	
 	public List<Container> getContainerList() {
