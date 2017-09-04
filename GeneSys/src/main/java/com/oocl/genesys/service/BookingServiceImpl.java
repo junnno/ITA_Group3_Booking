@@ -1,10 +1,12 @@
 package com.oocl.genesys.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.oocl.genesys.dao.BookingDAO;
 import com.oocl.genesys.model.Booking;
 
+@Service("bookingService")
 public class BookingServiceImpl implements BookingService {
 	
 	@Autowired

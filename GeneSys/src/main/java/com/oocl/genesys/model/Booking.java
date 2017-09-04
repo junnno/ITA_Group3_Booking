@@ -55,6 +55,14 @@ public class Booking {
 	@OneToMany(fetch=FetchType.LAZY, mappedBy= "booking")
 	private List<Container> containerList = new ArrayList<Container>();
 	
+	public List<Container> getContainerList() {
+		return containerList;
+	}
+
+	public void setContainerList(List<Container> containerList) {
+		this.containerList = containerList;
+	}
+
 	public String getBkgNum() {
 		return bkgNum;
 	}
