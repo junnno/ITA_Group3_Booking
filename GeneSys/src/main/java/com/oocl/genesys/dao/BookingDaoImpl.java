@@ -3,9 +3,11 @@ package com.oocl.genesys.dao;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import com.oocl.genesys.model.Booking;
 
+@Repository("bkgDao")
 public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements BookingDAO {
 
 	@Override
