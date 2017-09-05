@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -24,8 +25,8 @@ public class Container {
 	
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="BKG_NUM", nullable=false)
-    private Booking bkgNum;
+	@JoinColumn(name="bkgNum", nullable=false)
+    private Booking booking;
 	
 	@NotNull
     @Column(name = "GROSS_WEIGHT", nullable = false)
@@ -64,12 +65,13 @@ public class Container {
 		this.container_id = container_id;
 	}
 
-	public Booking getBkgNum() {
-		return bkgNum;
+
+	public Booking getBooking() {
+		return booking;
 	}
 
-	public void setBkgNum(Booking bkgNum) {
-		this.bkgNum = bkgNum;
+	public void setBooking(Booking booking) {
+		this.booking = booking;
 	}
 
 	public double getGrossWeight() {

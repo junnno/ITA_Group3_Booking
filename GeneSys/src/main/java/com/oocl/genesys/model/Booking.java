@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -52,7 +54,7 @@ public class Booking {
     @Column(name = "TO_CITY", nullable = false)
     private String toCity;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy= "bkgNum")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy= "booking")
 	private List<Container> containerList = new ArrayList<Container>();
 	
 	public List<Container> getContainerList() {

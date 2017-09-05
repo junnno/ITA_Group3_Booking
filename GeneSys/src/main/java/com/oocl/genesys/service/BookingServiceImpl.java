@@ -1,5 +1,7 @@
 package com.oocl.genesys.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,7 @@ import com.oocl.genesys.model.Booking;
 public class BookingServiceImpl implements BookingService {
 	
 	@Autowired
-    private BookingDAO dao;
+    BookingDAO dao;
 	@Override
 	public void saveBkg(Booking booking) {
 		// TODO Auto-generated method stub
@@ -28,6 +30,11 @@ public class BookingServiceImpl implements BookingService {
 	public Booking searchBkgByBkgNum(String bkgNum) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public List<Booking> listAllBooking() {
+		return dao.listAllBooking();
 	}
 
 	@Override
