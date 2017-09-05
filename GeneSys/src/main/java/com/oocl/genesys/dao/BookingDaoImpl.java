@@ -1,5 +1,8 @@
 package com.oocl.genesys.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
@@ -29,6 +32,12 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 	public void updateBkg() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public List<Booking> listAllBooking(){
+		Criteria criteria = createEntityCriteria();
+        return (List<Booking>) criteria.list();	
 	}
 
 	@Override
