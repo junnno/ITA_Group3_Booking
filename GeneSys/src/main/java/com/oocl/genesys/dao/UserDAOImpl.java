@@ -5,11 +5,13 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.oocl.genesys.dao.AbstractDAO;
 import com.oocl.genesys.model.User;
 
 @Repository("userDao")
+@Transactional
 public class UserDAOImpl extends AbstractDAO<Integer, User> implements UserDAO {
 
 	@Override
@@ -40,20 +42,22 @@ public class UserDAOImpl extends AbstractDAO<Integer, User> implements UserDAO {
 		delete(user);
 	}
 
+	// TODO : NPE
 	@Override
 	public boolean checkIfUserExists(String username) {
 		Criteria criteria = createEntityCriteria();
         criteria.add(Restrictions.eq("username", username));
-        if(criteria.uniqueResult().equals(null)) return true;
-        else return false;
+        if(criteria.uniqueResult().equals(null)) return false;
+        else return true;
 	}
 
+	// TODO : NPE
 	@Override
 	public boolean checkIfEmailExists(String email) {
 		Criteria criteria = createEntityCriteria();
         criteria.add(Restrictions.eq("email", email));
-        if(criteria.uniqueResult().equals(null)) return true;
-        else return false;
+        if(criteria.uniqueResult().equals(null)) return false;
+        else return true;
 	}
 
 }

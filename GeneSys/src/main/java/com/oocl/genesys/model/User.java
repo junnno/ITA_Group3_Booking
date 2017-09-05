@@ -15,8 +15,8 @@ import javax.validation.constraints.Size;
 public class User {
 	
 	@Id
-	@SequenceGenerator(name="user_seq", sequenceName="gs_user_seq")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user_seq")
+	@SequenceGenerator(name="gs_user_seq", sequenceName="gs_user_seq", allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gs_user_seq")
     private int id;
 	
 	@NotNull
@@ -93,7 +93,7 @@ public class User {
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = lastName;
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
