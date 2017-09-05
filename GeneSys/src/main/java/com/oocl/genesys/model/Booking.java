@@ -43,6 +43,16 @@ public class Booking {
 	@NotNull
     @Column(name = "IS_GOOD_CUSTOMER", nullable = false)
     private int isGoodCustomer;
+	
+	@Size(max=40)
+	@NotNull
+    @Column(name = "CONSIGNEE", nullable = false)
+    private String consignee;
+	
+	@Size(max=40)
+	@NotNull
+    @Column(name = "SHIPPER", nullable = false)
+    private String shipper;
  
 	@Size(min=3, max=3)
 	@NotNull
@@ -103,6 +113,22 @@ public class Booking {
 
 	public void setIsGoodCustomer(int isGoodCustomer) {
 		this.isGoodCustomer = isGoodCustomer;
+	}
+
+	public String getConsignee() {
+		return consignee;
+	}
+
+	public void setConsignee(String consignee) {
+		this.consignee = consignee;
+	}
+
+	public String getShipper() {
+		return shipper;
+	}
+
+	public void setShipper(String shipper) {
+		this.shipper = shipper;
 	}
 
 	public String getFromCity() {
