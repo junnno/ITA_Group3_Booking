@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.oocl.genesys.dao.BookingDAO;
 import com.oocl.genesys.model.Booking;
 
 @Service("bookingService")
+@Transactional
 public class BookingServiceImpl implements BookingService {
 	
 	@Autowired

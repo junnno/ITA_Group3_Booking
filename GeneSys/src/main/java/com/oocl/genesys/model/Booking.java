@@ -23,6 +23,7 @@ import javax.validation.constraints.Size;
 public class Booking {
 	
 	@Id
+	@Column(name = "BKG_NUM", nullable = false)
 	@SequenceGenerator(name="booking_seq", sequenceName="gs_booking_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="booking_seq")
     private String bkgNum;
@@ -37,7 +38,7 @@ public class Booking {
     private int isValidWeight;
     
 	@NotNull
-    @Column(name = "IS_APPROVED", nullable = false)
+    @Column(name = "IS_APPROVED_DOC", nullable = false)
     private int isApproved;
     
 	@NotNull

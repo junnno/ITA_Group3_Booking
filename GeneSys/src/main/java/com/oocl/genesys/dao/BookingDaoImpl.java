@@ -37,7 +37,9 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 	@Override
 	public List<Booking> listAllBooking(){
 		Criteria criteria = createEntityCriteria();
-        return (List<Booking>) criteria.list();	
+        List<Booking> bkgList = (List<Booking>) criteria.list();
+		return bkgList;
+        
 	}
 
 	@Override
