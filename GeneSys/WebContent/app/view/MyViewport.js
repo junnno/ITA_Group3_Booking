@@ -13,12 +13,12 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('Login.view.MyViewport', {
+Ext.define('Booking.view.MyViewport', {
     extend: 'Ext.container.Viewport',
     alias: 'widget.myviewport',
 
     requires: [
-        'Login.view.MyViewportViewModel',
+        'Booking.view.MyViewportViewModel',
         'Ext.toolbar.Toolbar',
         'Ext.toolbar.Fill',
         'Ext.form.field.ComboBox',
@@ -65,6 +65,7 @@ Ext.define('Login.view.MyViewport', {
                                 },
                                 {
                                     xtype: 'button',
+                                    itemId: 'mybutton3',
                                     allowDepress: false,
                                     scale: 'medium',
                                     text: 'Search'
@@ -79,20 +80,20 @@ Ext.define('Login.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'textfield',
-                                    fieldLabel: 'Booking',
-                                    size: 60
+                                    fieldLabel: 'Booking'
                                 },
                                 {
                                     xtype: 'textfield',
-                                    fieldLabel: 'Container',
-                                    size: 60
+                                    maxWidth: 60,
+                                    fieldLabel: 'Container'
                                 },
                                 {
                                     xtype: 'combobox',
+                                    maxWidth: 60,
                                     modelValidation: true,
                                     fieldLabel: 'Status',
-                                    size: 60,
                                     displayField: 'Key',
+                                    forceSelection: true,
                                     queryMode: 'local',
                                     store: 'StatusStore',
                                     valueField: 'Value'
@@ -106,13 +107,17 @@ Ext.define('Login.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'combobox',
+                                    maxWidth: 60,
                                     fieldLabel: 'From',
-                                    size: 60
+                                    forceSelection: true,
+                                    store: 'CityStore'
                                 },
                                 {
                                     xtype: 'combobox',
+                                    maxWidth: 60,
                                     fieldLabel: 'To',
-                                    size: 60
+                                    forceSelection: true,
+                                    store: 'CityStore'
                                 }
                             ]
                         }
@@ -231,6 +236,7 @@ Ext.define('Login.view.MyViewport', {
                         },
                         {
                             xtype: 'button',
+                            itemId: 'mybutton2',
                             scale: 'medium',
                             text: 'Update'
                         }

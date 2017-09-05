@@ -13,7 +13,7 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('Login.model.StatusModel', {
+Ext.define('Booking.model.StatusModel', {
     extend: 'Ext.data.Model',
     alias: 'model.status',
 
@@ -21,7 +21,7 @@ Ext.define('Login.model.StatusModel', {
         'Ext.data.field.String'
     ],
     uses: [
-        'Login.model.StatusModel'
+        'Booking.model.StatusModel'
     ],
 
     fields: [
@@ -31,7 +31,7 @@ Ext.define('Login.model.StatusModel', {
             mapping: 'key',
             name: 'Key',
             persist: false,
-            reference: 'Login.model.StatusModel'
+            reference: 'Booking.model.StatusModel'
         },
         {
             type: 'string',

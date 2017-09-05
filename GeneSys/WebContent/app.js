@@ -21,19 +21,30 @@ Ext.Loader.setConfig({
 
 Ext.application({
     models: [
-        'StatusModel'
+        'CityModel',
+        'CntrModel',
+        'CntrTypeModel',
+        'CntrWgtUntModel'
     ],
     stores: [
-        'StatusStore'
+        'CityStore',
+        'CntrStore',
+        'CntrTypeStore',
+        'CntrWgtUntStore'
     ],
     views: [
-        'loginWindow',
-        'MyViewport'
+        'BkgDtlViewport'
     ],
-    name: 'Login',
+    controllers: [
+        'LogInController',
+        'ResetController',
+        'SearchController',
+        'UpdateController'
+    ],
+    name: 'Booking',
 
     launch: function() {
-        Ext.create('Login.view.loginWindow', {renderTo: Ext.getBody()});
+        Ext.create('Booking.view.loginWindow');
     }
 
 });

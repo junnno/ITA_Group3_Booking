@@ -52,6 +52,7 @@ Ext.define('Booking.view.MainController', {
                     fieldLabel: 'Container Type',
                     allowBlank: false,
                     displayField: 'code',
+                    forceSelection: true,
                     queryMode: 'local',
                     store: 'CntrTypeStore',
                     valueField: 'code'
@@ -59,7 +60,6 @@ Ext.define('Booking.view.MainController', {
                 {
                     xtype: 'numberfield',
                     fieldLabel: 'Container Net Weight',
-                    allowBlank: false,
                     maxValue: 999999.99,
                     minValue: 0,
                     decimalPrecision: 2
@@ -67,7 +67,6 @@ Ext.define('Booking.view.MainController', {
                 {
                     xtype: 'numberfield',
                     fieldLabel: 'Container Gross Weight',
-                    allowBlank: false,
                     maxValue: 999999.99,
                     minValue: 0,
                     decimalPrecision: 2
@@ -77,6 +76,7 @@ Ext.define('Booking.view.MainController', {
                     fieldLabel: 'Container Weight Unit',
                     allowBlank: false,
                     displayField: 'name',
+                    forceSelection: true,
                     queryMode: 'local',
                     store: 'CntrWgtUntStore',
                     valueField: 'code'
@@ -109,7 +109,17 @@ Ext.define('Booking.view.MainController', {
                                     }
                                 }
                                 if(errors.length > 0 ){
-                                    Ext.MessageBox.alert('Waring!','Please fill up all fields to add');
+                                    var isMissingField = false;
+                                    errors.forEach(function(i){
+                                        if(i=='This field is required'){
+                                            isMissingField = true;
+                                        }
+                                    });
+                                    if(isMissingField){
+                                        Ext.MessageBox.alert('Waring!','Please fill up all fields to add!');
+                                    }else{
+                                        Ext.MessageBox.alert('Waring!','Please correct all invalid fields!');
+                                    }
                                 }else{
                                     for(var x=0; x<containerCmp.length; x++){
                                         //data.push(containerCmp[x].getValue());

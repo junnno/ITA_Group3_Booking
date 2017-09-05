@@ -13,11 +13,11 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('Login.store.StatusStore', {
+Ext.define('Booking.store.StatusStore', {
     extend: 'Ext.data.Store',
 
     requires: [
-        'Login.model.StatusModel',
+        'Booking.model.StatusModel',
         'Ext.data.proxy.Ajax',
         'Ext.data.reader.Array'
     ],
@@ -27,7 +27,7 @@ Ext.define('Login.store.StatusStore', {
         cfg = cfg || {};
         me.callParent([Ext.apply({
             storeId: 'StatusStore',
-            model: 'Login.model.StatusModel',
+            model: 'Booking.model.StatusModel',
             data: [
                 {
                     Key: 'Approved',

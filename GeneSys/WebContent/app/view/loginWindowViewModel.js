@@ -13,7 +13,7 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('Login.view.loginWindowViewModel', {
+Ext.define('Booking.view.loginWindowViewModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.loginwindow'
 

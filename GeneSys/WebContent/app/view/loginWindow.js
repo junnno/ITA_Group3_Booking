@@ -13,12 +13,13 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('Login.view.loginWindow', {
+Ext.define('Booking.view.loginWindow', {
     extend: 'Ext.window.Window',
     alias: 'widget.loginWindow',
 
     requires: [
-        'Login.view.loginWindowViewModel',
+        'Booking.view.loginWindowViewModel',
+        'Ext.Img',
         'Ext.form.field.Text',
         'Ext.toolbar.Toolbar',
         'Ext.toolbar.Fill',
@@ -31,40 +32,41 @@ Ext.define('Login.view.loginWindow', {
     },
     autoShow: true,
     draggable: false,
-    height: 192,
+    flex: 1,
     padding: 20,
     resizable: false,
-    width: 400,
+    width: 394,
+    layout: 'center',
     closable: false,
     placeholderCollapseHideMode: 3,
     title: '',
 
-    layout: {
-        type: 'vbox',
-        align: 'center',
-        pack: 'center'
-    },
     dockedItems: [
+        {
+            xtype: 'image',
+            dock: 'top',
+            flex: 1,
+            height: 160,
+            width: 201,
+            src: 'brand.png'
+        },
         {
             xtype: 'textfield',
             dock: 'top',
-            height: 30,
+            flex: 1,
             itemId: 'username',
             margin: 10,
-            maxHeight: 30,
             emptyText: 'Username'
         },
         {
             xtype: 'textfield',
             dock: 'top',
-            height: 30,
+            flex: 1,
             itemId: 'password',
-            inputType: 'password',
             margin: 10,
-            maxHeight: 30,
             fieldLabel: '',
-            emptyText: 'Password',
-            size: 15
+            inputType: 'password',
+            emptyText: 'Password'
         },
         {
             xtype: 'toolbar',
@@ -91,12 +93,14 @@ Ext.define('Login.view.loginWindow', {
                         {
                             xtype: 'button',
                             modal: true,
+                            itemId: 'mybutton',
                             scale: 'medium',
                             text: 'Reset'
                         },
                         {
                             xtype: 'button',
                             modal: true,
+                            itemId: 'mybutton1',
                             enableToggle: true,
                             pressed: true,
                             scale: 'medium',

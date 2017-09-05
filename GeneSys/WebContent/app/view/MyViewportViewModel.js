@@ -13,7 +13,7 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('Login.view.MyViewportViewModel', {
+Ext.define('Booking.view.MyViewportViewModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.myviewport'
 

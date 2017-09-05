@@ -13,7 +13,7 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('Login.view.loginWindowViewController', {
+Ext.define('Booking.view.loginWindowViewController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.loginwindow'
 });

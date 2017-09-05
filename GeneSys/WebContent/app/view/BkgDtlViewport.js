@@ -18,7 +18,9 @@ Ext.define('Booking.view.BkgDtlViewport', {
     alias: 'widget.bkgdtlviewport',
 
     requires: [
+        'Booking.view.BkgDtlViewportViewModel',
         'Booking.view.MainController',
+        'Ext.Img',
         'Ext.form.FieldSet',
         'Ext.form.field.ComboBox',
         'Ext.form.RadioGroup',
@@ -30,6 +32,9 @@ Ext.define('Booking.view.BkgDtlViewport', {
     ],
 
     controller: 'bkgdtlviewport',
+    viewModel: {
+        type: 'bkgdtlviewport'
+    },
     flex: 1,
     height: 250,
     id: 'BkgDtlViewportId',
@@ -37,6 +42,14 @@ Ext.define('Booking.view.BkgDtlViewport', {
     layout: 'fit',
 
     items: [
+        {
+            xtype: 'image',
+            dock: 'top',
+            height: '',
+            maxHeight: 45,
+            maxWidth: 100,
+            src: 'brand.png'
+        },
         {
             xtype: 'container',
             flex: 1,
@@ -113,6 +126,8 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                             id: 'BkgFrmCityid',
                                                             fieldLabel: 'From City',
                                                             displayField: 'code',
+                                                            enableRegEx: false,
+                                                            forceSelection: true,
                                                             queryMode: 'local',
                                                             store: 'CityStore',
                                                             valueField: 'code'
@@ -122,6 +137,7 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                             id: 'BkgToCityId',
                                                             fieldLabel: 'To City',
                                                             displayField: 'name',
+                                                            forceSelection: true,
                                                             queryMode: 'local',
                                                             store: 'CityStore',
                                                             valueField: 'code'
@@ -146,19 +162,27 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                             items: [
                                                 {
                                                     xtype: 'radiofield',
-                                                    boxLabel: 'GC'
+                                                    id: 'gcCgoNatId',
+                                                    boxLabel: 'GC',
+                                                    inputValue: 'GC'
                                                 },
                                                 {
                                                     xtype: 'radiofield',
-                                                    boxLabel: 'DG'
+                                                    id: 'dgCgoNatId',
+                                                    boxLabel: 'DG',
+                                                    inputValue: 'DG'
                                                 },
                                                 {
                                                     xtype: 'radiofield',
-                                                    boxLabel: 'RF'
+                                                    id: 'rfCgoNatId',
+                                                    boxLabel: 'RF',
+                                                    inputValue: 'RF'
                                                 },
                                                 {
                                                     xtype: 'radiofield',
-                                                    boxLabel: 'AW'
+                                                    id: 'awCgoNatId',
+                                                    boxLabel: 'AW',
+                                                    inputValue: 'AW'
                                                 }
                                             ]
                                         },
@@ -260,14 +284,17 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                     items: [
                                         {
                                             xtype: 'checkboxfield',
+                                            id: 'validWgtId',
                                             boxLabel: 'Valid Weight'
                                         },
                                         {
                                             xtype: 'checkboxfield',
+                                            id: 'ApproveDocId',
                                             boxLabel: 'Approved Documents'
                                         },
                                         {
                                             xtype: 'checkboxfield',
+                                            id: 'GoodCusId',
                                             boxLabel: 'Good Customer'
                                         }
                                     ]
