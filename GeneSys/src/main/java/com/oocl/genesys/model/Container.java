@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,14 +18,14 @@ import javax.validation.constraints.Size;
 public class Container {
 
 	@Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gs_container_seq")
+	@SequenceGenerator(name="container_seq", sequenceName="gs_container_seq")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="container_seq")
     private int container_id;
 	
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="BKG_NUM", nullable=false)
-    @Column(name = "BKG_NUM", nullable = false)
-    private int bkgNum;
+    private Booking bkgNum;
 	
 	@NotNull
     @Column(name = "GROSS_WEIGHT", nullable = false)
@@ -64,11 +64,11 @@ public class Container {
 		this.container_id = container_id;
 	}
 
-	public int getBkgNum() {
+	public Booking getBkgNum() {
 		return bkgNum;
 	}
 
-	public void setBkgNum(int bkgNum) {
+	public void setBkgNum(Booking bkgNum) {
 		this.bkgNum = bkgNum;
 	}
 
