@@ -9,7 +9,6 @@ public interface BookingDAO {
 	void deleteBkg(String bkgNum);
 	void updateBkg();
 	public List<Booking> listAllBooking();
-	Booking searchBkgByBkgNum(String bkgNum);
-	
+	Booking searchBkgByBkgNum(int bkgNum);
 	
 }

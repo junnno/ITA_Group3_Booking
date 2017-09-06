@@ -45,7 +45,7 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 	}
 
 	@Override
-	public Booking searchBkgByBkgNum(String bkgNum) {
+	public Booking searchBkgByBkgNum(int bkgNum) {
 		// TODO Auto-generated method stub
 		Criteria criteria = createEntityCriteria();
         criteria.add(Restrictions.eq("bkgNum", bkgNum));
