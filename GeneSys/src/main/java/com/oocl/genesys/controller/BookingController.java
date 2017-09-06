@@ -19,6 +19,7 @@ import com.oocl.genesys.model.Container;
 import com.oocl.genesys.service.BookingService;
 
 @Controller
+@RequestMapping("/booking")
 @ComponentScan("com.oocl.genesys") 
 public class BookingController {
 	
@@ -93,11 +94,21 @@ public class BookingController {
      * This method will provide the medium to update an existing employee.
      */
     @RequestMapping(value = { "/update/{bkgNum}" }, method = RequestMethod.GET)
-    public String editEmployee(@PathVariable String bkgNum, ModelMap model) {
-        Booking booking = bkgService.searchBkgByBkgNum(bkgNum);
+    public void updateBooking(@PathVariable int bkgNum, ModelMap model) {
+    	System.out.println("Update Booking Page");
+        Booking booking = bkgService.searchBkgByBkgNum(String.valueOf(bkgNum));
+        
+        System.out.println(booking.getBkgNum());
+        System.out.println(booking.getConsignee());
+        System.out.println(booking.getFromCity());
+        System.out.println(booking.getIsGoodCustomer());
+       
+        booking.setConsignee("TESTUPDATE");
+        bkgService.updateBkg(booking);
+        
         model.addAttribute("booking", booking);
         model.addAttribute("update", true);
-        return "update";
+//        return "update";
     }
      
     /*
@@ -105,13 +116,14 @@ public class BookingController {
      * updating employee in database. It also validates the user input
      */
     @RequestMapping(value = { "/update" }, method = RequestMethod.POST)
-    public String updateEmployee(@Valid Booking booking, BindingResult result,
+    public String updateBooking(@Valid Booking booking, BindingResult result,
             ModelMap model, @PathVariable String ssn) {
  
         if (result.hasErrors()) {
             return "update";
         }
  
+        bkgService.updateBkg(booking);
         model.addAttribute("success", "Booking # " + booking.getBkgNum()  + " updated successfully.");
         return "success";
     }
