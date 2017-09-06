@@ -95,17 +95,7 @@ public class BookingController {
      */
     @RequestMapping(value = { "/update/{bkgNum}" }, method = RequestMethod.GET)
     public void updateBooking(@PathVariable int bkgNum, ModelMap model) {
-    	System.out.println("Update Booking Page");
         Booking booking = bkgService.searchBkgByBkgNum(String.valueOf(bkgNum));
-        
-        System.out.println(booking.getBkgNum());
-        System.out.println(booking.getConsignee());
-        System.out.println(booking.getFromCity());
-        System.out.println(booking.getIsGoodCustomer());
-       
-        booking.setConsignee("TESTUPDATE");
-        bkgService.updateBkg(booking);
-        
         model.addAttribute("booking", booking);
         model.addAttribute("update", true);
 //        return "update";
