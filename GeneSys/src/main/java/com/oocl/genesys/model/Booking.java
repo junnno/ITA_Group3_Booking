@@ -25,7 +25,7 @@ public class Booking {
 	
 	@Id
 	@Column(name = "BKG_NUM", nullable = false)
-	@SequenceGenerator(name="booking_seq", sequenceName="gs_booking_seq")
+	@SequenceGenerator(name="booking_seq", sequenceName="gs_booking_seq", allocationSize = 1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="booking_seq")
     private int bkgNum;
 	
@@ -66,7 +66,7 @@ public class Booking {
     @Column(name = "TO_CITY", nullable = false)
     private String toCity;
 	
-	@OneToMany(fetch=FetchType.LAZY, targetEntity=Container.class, mappedBy= "booking",cascade={CascadeType.MERGE})
+	@OneToMany(fetch=FetchType.LAZY, targetEntity=Container.class, mappedBy= "booking",cascade={CascadeType.ALL})
 	private List<Container> containerList = new ArrayList<Container>();
 	
 	public List<Container> getContainerList() {

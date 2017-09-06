@@ -45,44 +45,42 @@ public class BookingController {
 		return "";
     }
 	
-	@RequestMapping(value = { "/saveBkg" }, method = RequestMethod.GET)
-    public String saveBkg(ModelMap model) {
+	@RequestMapping(value = { "/testSaveBkg" }, method = RequestMethod.GET)
+    public String testSaveBkg(ModelMap model) {
 		Booking bkg = new Booking();
 		//bkg.setBkgNum("404100001");
-		//bkg.setContainerList(getContainerList());
 		bkg.setFromCity("HKG");
 		bkg.setToCity("PUS");
 		bkg.setIsApproved(1);
 		bkg.setIsGoodCustomer(1);
 		bkg.setIsValidWeight(1);
-		//missing shipper and consignee
+		bkg.setConsignee("Consignee");
+		bkg.setShipper("Shipper");
 		bkg.setStatus(1);
+		bkg.setContainerList(getContainerList(bkg));
+		
 		bkgService.saveBkg(bkg);
+		
 		System.out.println("Booking saved");
 		return "test";
-		/*List<Booking> bkg = bkgService.listAllBooking();
-		String msg = "";
-		if(!bkg.isEmpty()){
-			msg = "Success";
-		}else {
-			msg = "Not success";
-		}
-		model.addAttribute("bkg", bkg);
-		return msg;*/
     }
 	
-	private static List<Container> getContainerList() {
+	private List<Container> getContainerList(Booking bkg) {
 		List<Container> cntr = new ArrayList<Container>();
-		cntr.add(getContainer());
+		int loop = 3;
+		for(int i=0; i<loop; i++) {
+			cntr.add(getContainer(bkg, (i+1)));
+		}
+		
 		return cntr;
 	}
 
-	private static Container getContainer() {
+	private static Container getContainer(Booking bkg, int i) {
 		Container cntr = new Container();
+		cntr.setBooking(bkg);
 		cntr.setCargoDesc("TestBooking");
 		cntr.setCargoNature("GC");
-		cntr.setContainer_id(10001);
-		cntr.setContainerNum("GENE10000001");
+		cntr.setContainerNum("GENE10100"+i);
 		cntr.setContainerType("20GP");
 		cntr.setGrossWeight(123.00);
 		cntr.setNetWeight(123.00);

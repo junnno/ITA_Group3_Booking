@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 public class Container {
 
 	@Id
-	@SequenceGenerator(name="gs_container_seq", sequenceName="gs_container_seq")
+	@SequenceGenerator(name="gs_container_seq", sequenceName="gs_container_seq", allocationSize = 1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gs_container_seq")
     private int container_id;
 	
