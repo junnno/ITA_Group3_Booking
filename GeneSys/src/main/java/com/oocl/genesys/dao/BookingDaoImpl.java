@@ -24,10 +24,8 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 	@Override
 	public void deleteBkg(String bkgNum) {
 		// TODO Auto-generated method stub
-		Query query = getSession().createSQLQuery("delete from BOOKING where bkgNum = :bkgNum");
-        query.setString("bkgNum", bkgNum);
-        query.executeUpdate();
-
+		Booking bkg = searchBkgByBkgNum(bkgNum);
+		delete(bkg);
 	}
 
 	@Override

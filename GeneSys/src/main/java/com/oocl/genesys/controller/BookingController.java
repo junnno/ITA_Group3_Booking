@@ -45,8 +45,17 @@ public class BookingController {
 		return "";
     }
 	
-	@RequestMapping(value = { "/testSaveBkg" }, method = RequestMethod.GET)
-    public String testSaveBkg(ModelMap model) {
+    @RequestMapping(value = { "/searchBkg/{bkgNum}" }, method = RequestMethod.GET)
+    public String searchBkgByBkgNum(@PathVariable int bkgNum, ModelMap model) {
+    	System.out.println("Search Booking by booking number: " + bkgNum);
+        Booking booking = bkgService.searchBkgByBkgNum(String.valueOf(bkgNum));
+        
+        System.out.println("from:" + booking.getFromCity() + "    to: " + booking.getToCity());
+        return "";
+    }
+	
+	@RequestMapping(value = { "/saveBkg" }, method = RequestMethod.GET)
+    public String saveBkg(ModelMap model) {
 		Booking bkg = new Booking();
 		//bkg.setBkgNum("404100001");
 		bkg.setFromCity("HKG");

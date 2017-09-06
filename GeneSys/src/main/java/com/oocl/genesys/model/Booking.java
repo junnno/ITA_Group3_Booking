@@ -24,11 +24,14 @@ import javax.validation.constraints.Size;
 public class Booking {
 	
 	@Id
-	@Column(name = "BKG_NUM", nullable = false)
+	@Column(name = "BKG_ID", nullable = false)
 	@SequenceGenerator(name="booking_seq", sequenceName="gs_booking_seq", allocationSize = 1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="booking_seq")
-    private int bkgNum;
+    private int bkgId;
 	
+	@NotNull
+    @Column(name = "BKG_NUM", nullable = false)
+	private int bkgNum;
 	
 	@NotNull
     @Column(name = "STATUS", nullable = false)
