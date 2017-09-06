@@ -1,5 +1,6 @@
 package com.oocl.genesys.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.oocl.genesys.model.Booking;
+import com.oocl.genesys.model.Container;
 import com.oocl.genesys.service.BookingService;
 
 @Controller
@@ -37,5 +38,50 @@ public class BookingController {
         
 		return "";
     }
+	
+	@RequestMapping(value = { "/saveBkg" }, method = RequestMethod.GET)
+    public String saveBkg(ModelMap model) {
+		Booking bkg = new Booking();
+		//bkg.setBkgNum("404100001");
+		//bkg.setContainerList(getContainerList());
+		bkg.setFromCity("HKG");
+		bkg.setToCity("PUS");
+		bkg.setIsApproved(1);
+		bkg.setIsGoodCustomer(1);
+		bkg.setIsValidWeight(1);
+		//missing shipper and consignee
+		bkg.setStatus(1);
+		bkgService.saveBkg(bkg);
+		System.out.println("Booking saved");
+		return "test";
+		/*List<Booking> bkg = bkgService.listAllBooking();
+		String msg = "";
+		if(!bkg.isEmpty()){
+			msg = "Success";
+		}else {
+			msg = "Not success";
+		}
+		model.addAttribute("bkg", bkg);
+		return msg;*/
+    }
+	
+	private static List<Container> getContainerList() {
+		List<Container> cntr = new ArrayList<Container>();
+		cntr.add(getContainer());
+		return cntr;
+	}
+
+	private static Container getContainer() {
+		Container cntr = new Container();
+		cntr.setCargoDesc("TestBooking");
+		cntr.setCargoNature("GC");
+		cntr.setContainer_id(10001);
+		cntr.setContainerNum("GENE10000001");
+		cntr.setContainerType("20GP");
+		cntr.setGrossWeight(123.00);
+		cntr.setNetWeight(123.00);
+		cntr.setUnit(1);
+		return cntr;
+	}
 	
 }

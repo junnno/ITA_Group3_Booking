@@ -19,13 +19,13 @@ import javax.validation.constraints.Size;
 public class Container {
 
 	@Id
-	@SequenceGenerator(name="container_seq", sequenceName="gs_container_seq")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="container_seq")
+	@SequenceGenerator(name="gs_container_seq", sequenceName="gs_container_seq")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gs_container_seq")
     private int container_id;
 	
 	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="bkgNum", nullable=false)
+	@ManyToOne(targetEntity=Booking.class,fetch = FetchType.LAZY)
+	@JoinColumn(name="bkg_num", nullable=false)
     private Booking booking;
 	
 	@NotNull

@@ -3,6 +3,7 @@ package com.oocl.genesys.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +27,7 @@ public class Booking {
 	@Column(name = "BKG_NUM", nullable = false)
 	@SequenceGenerator(name="booking_seq", sequenceName="gs_booking_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="booking_seq")
-    private String bkgNum;
+    private int bkgNum;
 	
 	
 	@NotNull
@@ -65,7 +66,7 @@ public class Booking {
     @Column(name = "TO_CITY", nullable = false)
     private String toCity;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy= "booking")
+	@OneToMany(fetch=FetchType.LAZY, targetEntity=Container.class, mappedBy= "booking",cascade={CascadeType.MERGE})
 	private List<Container> containerList = new ArrayList<Container>();
 	
 	public List<Container> getContainerList() {
@@ -76,11 +77,11 @@ public class Booking {
 		this.containerList = containerList;
 	}
 
-	public String getBkgNum() {
+	public int getBkgNum() {
 		return bkgNum;
 	}
 
-	public void setBkgNum(String bkgNum) {
+	public void setBkgNum(int bkgNum) {
 		this.bkgNum = bkgNum;
 	}
 

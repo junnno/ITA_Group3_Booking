@@ -7,10 +7,12 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.oocl.genesys.model.Booking;
 
-@Repository("bkgDao")
+@Repository("bookingDao")
+@Transactional
 public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements BookingDAO {
 
 	@Override
