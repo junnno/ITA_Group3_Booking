@@ -31,7 +31,7 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public Booking searchBkgByBkgNum(String bkgNum) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.searchBkgByBkgNum(bkgNum);
 	}
 	
 	@Override
@@ -40,17 +40,19 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public void updateBkg(Booking bkg) {
+	public void updateBkg(Booking booking) {
 		// TODO Auto-generated method stub
-		Booking entity = dao.searchBkgByBkgNum(bkg.getBkgNum());
+		Booking entity = dao.searchBkgByBkgNum(String.valueOf(booking.getBkgNum()));
         if(entity!=null){
 //            entity.setBkgNum(bkg.getBkgNum());
-            entity.setIsApproved(bkg.getIsApproved());
-            entity.setIsGoodCustomer(bkg.getIsGoodCustomer());
-            entity.setIsValidWeight(bkg.getIsValidWeight());
-            entity.setStatus(bkg.getStatus());
-            entity.setFromCity(bkg.getFromCity());
-            entity.setToCity(bkg.getFromCity());
+            entity.setConsignee(booking.getConsignee());
+            entity.setFromCity(booking.getFromCity());
+            entity.setIsApproved(booking.getIsApproved());
+            entity.setIsGoodCustomer(booking.getIsApproved());
+            entity.setIsValidWeight(booking.getIsValidWeight());
+            entity.setShipper(booking.getShipper());
+            entity.setStatus(booking.getStatus());
+            entity.setToCity(booking.getToCity());
         }
 	}
 

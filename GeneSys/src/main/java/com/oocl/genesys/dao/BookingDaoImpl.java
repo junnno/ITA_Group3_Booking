@@ -48,7 +48,7 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 	public Booking searchBkgByBkgNum(String bkgNum) {
 		// TODO Auto-generated method stub
 		Criteria criteria = createEntityCriteria();
-        criteria.add(Restrictions.eq("bkgNum", bkgNum));
+        criteria.add(Restrictions.eq("bkgNum", Integer.valueOf(bkgNum)));
         return (Booking) criteria.uniqueResult();
 	}
 

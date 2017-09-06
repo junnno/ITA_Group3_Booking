@@ -3,17 +3,23 @@ package com.oocl.genesys.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.oocl.genesys.model.Booking;
 import com.oocl.genesys.model.Container;
 import com.oocl.genesys.service.BookingService;
 
 @Controller
+@RequestMapping("/booking")
 @ComponentScan("com.oocl.genesys") 
 public class BookingController {
 	
@@ -81,5 +87,33 @@ public class BookingController {
 		cntr.setUnit(1);
 		return cntr;
 	}
+	
+	/*
+     * This method will provide the medium to update an existing employee.
+     */
+    @RequestMapping(value = { "/update/{bkgNum}" }, method = RequestMethod.GET)
+    public void updateBooking(@PathVariable int bkgNum, ModelMap model) {
+        Booking booking = bkgService.searchBkgByBkgNum(String.valueOf(bkgNum));
+        model.addAttribute("booking", booking);
+        model.addAttribute("update", true);
+//        return "update";
+    }
+     
+    /*
+     * This method will be called on form submission, handling POST request for
+     * updating employee in database. It also validates the user input
+     */
+    @RequestMapping(value = { "/update" }, method = RequestMethod.POST)
+    public String updateBooking(@Valid Booking booking, BindingResult result,
+            ModelMap model, @PathVariable String ssn) {
+ 
+        if (result.hasErrors()) {
+            return "update";
+        }
+ 
+        bkgService.updateBkg(booking);
+        model.addAttribute("success", "Booking # " + booking.getBkgNum()  + " updated successfully.");
+        return "success";
+    }
 	
 }

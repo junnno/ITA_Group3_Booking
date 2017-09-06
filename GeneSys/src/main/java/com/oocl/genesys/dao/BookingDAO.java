@@ -11,5 +11,4 @@ public interface BookingDAO {
 	public List<Booking> listAllBooking();
 	Booking searchBkgByBkgNum(String bkgNum);
 	
-	
 }
