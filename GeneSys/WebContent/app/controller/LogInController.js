@@ -23,7 +23,8 @@ Ext.define('Booking.controller.LogInController', {
     },
 
     onMybutton1Click: function(button, e, eOpts) {
-
+    	Ext.getCmp('logInView').hide();
+    	Ext.create("Booking.view.SearchBookingView");
     }
 
 });
