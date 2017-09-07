@@ -68,9 +68,20 @@ public class Booking {
 	@NotNull
     @Column(name = "TO_CITY", nullable = false)
     private String toCity;
+
+	@Column(name = "IS_DELETED", nullable = true)
+    private int isDeleted;
 	
 	@OneToMany(fetch=FetchType.LAZY, targetEntity=Container.class, mappedBy= "booking",cascade={CascadeType.ALL})
 	private List<Container> containerList = new ArrayList<Container>();
+	
+	public int getBkgId() {
+		return bkgId;
+	}
+
+	public void setBkgId(int bkgId) {
+		this.bkgId = bkgId;
+	}
 	
 	public List<Container> getContainerList() {
 		return containerList;
@@ -150,6 +161,14 @@ public class Booking {
 
 	public void setToCity(String toCity) {
 		this.toCity = toCity;
+	}
+
+	public int getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(int isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 
