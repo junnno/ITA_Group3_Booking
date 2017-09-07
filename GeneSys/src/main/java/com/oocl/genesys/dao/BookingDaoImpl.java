@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,12 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 	public void saveBkg(Booking booking) {
 		// TODO Auto-generated method stub
 		persist(booking);
+	}
+	
+	@Override
+	public void flushBkg() {
+		// TODO Auto-generated method stub
+		flush();
 	}
 
 	@Override
@@ -39,7 +46,6 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 		Criteria criteria = createEntityCriteria();
         List<Booking> bkgList = (List<Booking>) criteria.list();
 		return bkgList;
-        
 	}
 
 	@Override

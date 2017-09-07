@@ -21,6 +21,12 @@ public class BookingServiceImpl implements BookingService {
 		dao.saveBkg(booking);
 
 	}
+	
+	@Override
+	public void flushBkg() {
+		// TODO Auto-generated method stub
+		dao.flushBkg();
+	}
 
 	@Override
 	public void deleteBkg(String bkgNum) {
@@ -47,8 +53,8 @@ public class BookingServiceImpl implements BookingService {
 //            entity.setBkgNum(bkg.getBkgNum());
             entity.setConsignee(booking.getConsignee());
             entity.setFromCity(booking.getFromCity());
-            entity.setIsApproved(booking.getIsApproved());
-            entity.setIsGoodCustomer(booking.getIsApproved());
+            entity.setIsApprovedDoc(booking.getIsApprovedDoc());
+            entity.setIsGoodCustomer(booking.getIsGoodCustomer());
             entity.setIsValidWeight(booking.getIsValidWeight());
             entity.setShipper(booking.getShipper());
             entity.setStatus(booking.getStatus());

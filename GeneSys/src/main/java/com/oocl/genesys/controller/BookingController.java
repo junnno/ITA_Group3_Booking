@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oocl.genesys.model.Booking;
 import com.oocl.genesys.model.Container;
@@ -33,16 +34,16 @@ public class BookingController {
 		return "";
     }
 	
+	@ResponseBody
 	@RequestMapping(value = { "/listBkg" }, method = RequestMethod.GET)
-    public String listBkg(ModelMap model) {
+    public List<Booking> listBkg(ModelMap model) {
 		System.out.println("List Booking");
 		List<Booking> bkgList = bkgService.listAllBooking();
         for(Booking bkg:bkgList) {
         	System.out.println("Booking Number: " + bkg.getBkgNum());
         }
-        model.addAttribute("booking", bkgList);
-        
-		return "";
+        model.addAttribute("booking", bkgList);        
+		return bkgList;
     }
 	
     @RequestMapping(value = { "/searchBkg/{bkgNum}" }, method = RequestMethod.GET)
@@ -54,20 +55,21 @@ public class BookingController {
         return "";
     }
 	
-	@RequestMapping(value = { "/saveBkg" }, method = RequestMethod.GET)
-    public String saveBkg(ModelMap model) {
+	@RequestMapping(value = { "/testSaveBkg" }, method = RequestMethod.GET)
+    public String testSaveBkg(ModelMap model) {
 		Booking bkg = new Booking();
-		//bkg.setBkgNum("404100001");
+		bkg.setBkgNum("40410004");
 		bkg.setFromCity("HKG");
 		bkg.setToCity("PUS");
-		bkg.setIsApproved(1);
+		bkg.setIsApprovedDoc(1);
 		bkg.setIsGoodCustomer(1);
 		bkg.setIsValidWeight(1);
 		bkg.setConsignee("Consignee");
 		bkg.setShipper("Shipper");
 		bkg.setStatus(1);
+		bkg.setIsDeleted(0);
 		bkg.setContainerList(getContainerList(bkg));
-		
+		bkgService.flushBkg();
 		bkgService.saveBkg(bkg);
 		
 		System.out.println("Booking saved");
@@ -89,7 +91,7 @@ public class BookingController {
 		cntr.setBooking(bkg);
 		cntr.setCargoDesc("TestBooking");
 		cntr.setCargoNature("GC");
-		cntr.setContainerNum("GENE10100"+i);
+		cntr.setContainerNum("GENE10200"+i);
 		cntr.setContainerType("20GP");
 		cntr.setGrossWeight(123.00);
 		cntr.setNetWeight(123.00);
