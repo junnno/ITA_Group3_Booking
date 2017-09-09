@@ -20,6 +20,12 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 		// TODO Auto-generated method stub
 		persist(booking);
 	}
+	
+	@Override
+	public void flushBkg() {
+		// TODO Auto-generated method stub
+		flush();
+	}
 
 	@Override
 	public void deleteBkg(String bkgNum) {

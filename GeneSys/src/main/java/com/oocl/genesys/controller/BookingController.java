@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oocl.genesys.model.Booking;
 import com.oocl.genesys.model.Container;
@@ -33,8 +34,9 @@ public class BookingController {
 		return "";
     }
 	
+	@ResponseBody
 	@RequestMapping(value = { "/listBkg" }, method = RequestMethod.GET)
-    public String listBkg(ModelMap model) {
+	public List<Booking> listBkg(ModelMap model) {
 		System.out.println("List Booking");
 		List<Booking> bkgList = bkgService.listAllBooking();
         for(Booking bkg:bkgList) {
@@ -42,7 +44,7 @@ public class BookingController {
         }
         model.addAttribute("booking", bkgList);
         
-		return "";
+		return bkgList;
     }
 	
     @RequestMapping(value = { "/searchBkg/{bkgNum}" }, method = RequestMethod.GET)
@@ -54,13 +56,13 @@ public class BookingController {
         return "";
     }
 	
-	@RequestMapping(value = { "/saveBkg" }, method = RequestMethod.GET)
-    public String saveBkg(ModelMap model) {
+	@RequestMapping(value = { "/testSaveBkg" }, method = RequestMethod.GET)
+    public String testSaveBkg(ModelMap model) {
 		Booking bkg = new Booking();
-		//bkg.setBkgNum("404100001");
+		bkg.setBkgNum("404100001");
 		bkg.setFromCity("HKG");
 		bkg.setToCity("PUS");
-		bkg.setIsApproved(1);
+		bkg.setIsApprovedDoc(1);
 		bkg.setIsGoodCustomer(1);
 		bkg.setIsValidWeight(1);
 		bkg.setConsignee("Consignee");
@@ -68,6 +70,7 @@ public class BookingController {
 		bkg.setStatus(1);
 		bkg.setContainerList(getContainerList(bkg));
 		
+		bkgService.flushBkg();
 		bkgService.saveBkg(bkg);
 		
 		System.out.println("Booking saved");
