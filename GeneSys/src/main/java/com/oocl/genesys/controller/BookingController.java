@@ -48,11 +48,16 @@ public class BookingController {
 		return bkgList;
     }
 	
-    @RequestMapping(value = { "/searchBkg/{bkgNum}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/searchBkg/bkgNum={bkgNum}" }, method = RequestMethod.GET)
     public String searchBkgByBkgNum(@PathVariable String bkgNum, ModelMap model) {
     	System.out.println("Search Booking by booking number: " + bkgNum);
         Booking booking = bkgService.searchBkgByBkgNum(bkgNum);
-        System.out.println("from:" + booking.getFromCity() + "    to: " + booking.getToCity());
+        if(booking!=null) {	
+        	System.out.println("Booking number: " + booking.getBkgNum());
+        }
+        else {
+   		 System.out.println("No booking found.");
+        }
         return "success";
     }
     
@@ -60,9 +65,14 @@ public class BookingController {
     public String searchBkgByCntrNum(@PathVariable String cntrNum, ModelMap model) {
     	System.out.println("Search Booking by Container number: " + cntrNum);
     	 Booking booking = bkgService.searchBkgByCntrNum(cntrNum);
-    	 System.out.println("done");
-    	 System.out.println("Booking number: "+booking.getBkgNum());
-        return "";
+    	 if(booking!=null) {
+    		 System.out.println("Booking number: "+booking.getBkgNum());
+    	 }
+    	 else {
+    		 System.out.println("No booking found.");
+    	}
+    	 
+        return "success";
     }
     @RequestMapping(value = { "/testSaveBkg" }, method = RequestMethod.GET)
     public String testSaveBkg(ModelMap model) {
@@ -136,12 +146,24 @@ public class BookingController {
         return "success";
     }
     
-    @RequestMapping(value = { "/search" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/search" }, method = RequestMethod.GET)
     public String search(@Valid BookingSearchCriteria bookingCriteria,  ModelMap model){
-        List<Booking> bkgList = bkgService.searchBooking(bookingCriteria);
-        for(Booking bkg : bkgList) {
-        	System.out.println(bkg.getBkgNum());
-        }
-        return "success";
+    	bookingCriteria.setBkgNum("");
+    	bookingCriteria.setToCity("MNL");
+    	bookingCriteria.setFromCity("HKG");
+        bookingCriteria.setCntrNum("");
+        
+    	List<Booking> bkgList = bkgService.searchBooking(bookingCriteria);
+    	if(bkgList.size()!=0) {
+	        System.out.println(bkgList.size());
+	        for(Booking bkg : bkgList) {
+	        	System.out.println(bkg.getBkgNum()+";)");
+	        }
+	       
+    	}
+    	else {
+    		 System.out.println("No booking found.");
+    	}
+    	 return "success";
     }
 }
