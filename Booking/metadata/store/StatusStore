@@ -1,0 +1,57 @@
+{
+    "type": "arraystore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "data": [
+            "[",
+            "    {",
+            "        \"Key\": \"Approved\",",
+            "        \"Value\": \"1\"",
+            "    },",
+            "    {",
+            "        \"Key\": \"Pending\",",
+            "        \"Value\": \"0\"",
+            "    }",
+            "]"
+        ],
+        "designer|userClassName": "StatusStore",
+        "model": "StatusModel",
+        "storeId": "StatusStore"
+    },
+    "configAlternates": {
+        "data": "array",
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "MyArrayStore",
+    "designerId": "4b98745f-b8e3-4279-a259-483d60eadeb1",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "name": "MyAjaxProxy",
+            "designerId": "561bea4f-a0cc-44da-b1c7-185e04a25194",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Array",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "name": "MyArrayReader",
+                    "designerId": "ca532d2d-8d72-474f-97f1-a08544937e2b"
+                }
+            ]
+        }
+    ]
+}

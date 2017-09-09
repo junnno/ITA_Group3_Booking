@@ -1,0 +1,73 @@
+{
+    "type": "arraystore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "data": [
+            "[",
+            "    {",
+            "        \"name\": \"Hong Kong\",",
+            "        \"code\": \"HKG\"",
+            "    },",
+            "    {",
+            "        \"name\": \"Long Beach\",",
+            "        \"code\": \"LGB\"",
+            "    },",
+            "    {",
+            "        \"name\": \"Manila\",",
+            "        \"code\": \"MNL\"",
+            "    },",
+            "    {",
+            "        \"name\": \"Singapore\",",
+            "        \"code\": \"SIN\"",
+            "    },",
+            "    {",
+            "        \"name\": \"Busan\",",
+            "        \"code\": \"PUS\"",
+            "    },",
+            "    {",
+            "        \"name\": \"Rotterdam\",",
+            "        \"code\": \"RTM\"",
+            "    }",
+            "]"
+        ],
+        "designer|userClassName": "CityStore",
+        "model": "CityModel",
+        "storeId": "CityStore"
+    },
+    "configAlternates": {
+        "data": "array",
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "MyArrayStore",
+    "designerId": "8227cf19-711f-49b5-8435-8c77f2d60074",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "name": "MyAjaxProxy",
+            "designerId": "15b400a5-1d1d-4f71-8948-3050f5d2762a",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Array",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "name": "MyArrayReader",
+                    "designerId": "c84e7c2b-809b-42b6-bfcc-689ea1a111b0"
+                }
+            ]
+        }
+    ]
+}

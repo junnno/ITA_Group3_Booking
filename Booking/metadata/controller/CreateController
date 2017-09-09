@@ -1,0 +1,46 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "CreateController"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string"
+    },
+    "name": "MyController",
+    "designerId": "8450557d-eaba-431c-bf31-bc3671f73374",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|controlQuery": "#createButton",
+                "designer|params": [
+                    "button",
+                    "e",
+                    "eOpts"
+                ],
+                "designer|targetType": "Ext.button.Button",
+                "fn": "onCreateButtonClick",
+                "name": "click"
+            },
+            "configAlternates": {
+                "designer|controlQuery": "string",
+                "designer|params": "typedarray",
+                "designer|targetType": "view",
+                "fn": "string",
+                "name": "string"
+            },
+            "name": "onCreateButtonClick",
+            "designerId": "36a39b64-bf57-4aa6-ba84-f8232c8e038c"
+        }
+    ]
+}

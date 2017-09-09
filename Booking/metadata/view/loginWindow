@@ -1,0 +1,258 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoShow": true,
+        "closable": false,
+        "designer|userAlias": "loginWindow",
+        "designer|userClassName": "loginWindow",
+        "draggable": false,
+        "flex": 1,
+        "layout": "center",
+        "padding": 20,
+        "placeholderCollapseHideMode": 3,
+        "resizable": false,
+        "title": "",
+        "width": 394
+    },
+    "configAlternates": {
+        "autoShow": "boolean",
+        "closable": "boolean",
+        "designer|initialView": "boolean",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "draggable": "boolean",
+        "height": "auto",
+        "placeholderCollapseHideMode": "number",
+        "resizable": "boolean",
+        "title": "string",
+        "width": "auto",
+        "designer|snapToGrid": "number",
+        "layout": "string",
+        "container|align": "string",
+        "container|pack": "string",
+        "padding": "auto",
+        "flex": "number"
+    },
+    "name": "MyWindow",
+    "designerId": "8594ba12-51d1-4cee-9a1a-347ba2735e2f",
+    "viewControllerInstanceId": "c1800e69-b7d8-4f69-9a6e-4743e7125766",
+    "viewModelInstanceId": "0450d20d-a6fd-46b3-8ce2-957ceb0ba89e",
+    "cn": [
+        {
+            "type": "Ext.Img",
+            "reference": {
+                "name": "dockedItems",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "dock": "top",
+                "flex": 1,
+                "height": 160,
+                "src": "brand.png",
+                "width": 201
+            },
+            "configAlternates": {
+                "dock": "string",
+                "flex": "number",
+                "height": "auto",
+                "src": "uri",
+                "width": "auto"
+            },
+            "name": "MyImg",
+            "designerId": "d5a73020-59e2-4884-82ea-1bf93493f537"
+        },
+        {
+            "type": "Ext.form.field.Text",
+            "reference": {
+                "name": "dockedItems",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|displayName": "username",
+                "dock": "top",
+                "emptyText": "Username",
+                "flex": 1,
+                "itemId": "username",
+                "margin": 10,
+                "size": null
+            },
+            "configAlternates": {
+                "designer|displayName": "string",
+                "dock": "string",
+                "emptyText": "string",
+                "height": "auto",
+                "itemId": "string",
+                "layout|flex": "number",
+                "margin": "auto",
+                "maxHeight": "number",
+                "size": "number",
+                "flex": "number"
+            },
+            "name": "MyTextField1",
+            "designerId": "525bd3c1-f0a6-44ab-b9d3-a32a3dab64a5"
+        },
+        {
+            "type": "Ext.form.field.Text",
+            "reference": {
+                "name": "dockedItems",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|displayName": "password",
+                "dock": "top",
+                "emptyText": "Password",
+                "fieldLabel": "",
+                "flex": 1,
+                "inputType": "password",
+                "itemId": "password",
+                "margin": 10
+            },
+            "configAlternates": {
+                "designer|displayName": "string",
+                "dock": "string",
+                "emptyText": "string",
+                "fieldLabel": "string",
+                "itemId": "string",
+                "layout|flex": "number",
+                "maxHeight": "number",
+                "padding": "auto",
+                "size": "number",
+                "height": "auto",
+                "margin": "auto",
+                "inputType": "string",
+                "flex": "number"
+            },
+            "name": "MyTextField2",
+            "designerId": "d65f5a8a-4762-48fa-9f86-ce3bff53e37d"
+        },
+        {
+            "type": "Ext.toolbar.Toolbar",
+            "reference": {
+                "name": "dockedItems",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "border": 3,
+                "container|pack": "end",
+                "dock": "bottom",
+                "height": 56,
+                "modal": true,
+                "shrinkWrap": 3,
+                "trackMenus": false,
+                "width": 400
+            },
+            "configAlternates": {
+                "dock": "string",
+                "container|pack": "string",
+                "layout|x": "number",
+                "layout|y": "number",
+                "modal": "boolean",
+                "padding": "auto",
+                "shrinkWrap": "number",
+                "trackMenus": "boolean",
+                "border": "auto",
+                "height": "auto",
+                "width": "auto"
+            },
+            "name": "MyToolbar1",
+            "designerId": "e3b53b88-328f-45c7-b0ab-3579cb994c17",
+            "cn": [
+                {
+                    "type": "Ext.toolbar.Fill",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": null
+                    },
+                    "configAlternates": {
+                        "layout|flex": "number"
+                    },
+                    "name": "MyFill1",
+                    "designerId": "574ab6fe-54c9-474e-95a2-58353251f745"
+                },
+                {
+                    "type": "Ext.container.ButtonGroup",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "border": false,
+                        "frame": false,
+                        "layout|flex": null
+                    },
+                    "configAlternates": {
+                        "border": "boolean",
+                        "frame": "boolean",
+                        "layout|flex": "number"
+                    },
+                    "name": "MyButtonGroup1",
+                    "designerId": "6a3df6f9-9063-4b2a-a2bb-24c74bcda1a7",
+                    "cn": [
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "itemId": "mybutton",
+                                "modal": true,
+                                "scale": "medium",
+                                "text": "Reset"
+                            },
+                            "configAlternates": {
+                                "scale": "string",
+                                "text": "string",
+                                "modal": "boolean",
+                                "itemId": "string"
+                            },
+                            "name": "MyButton",
+                            "designerId": "74de8e1d-b125-4a7a-908a-472bb90272d4"
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "enableToggle": true,
+                                "itemId": "mybutton1",
+                                "modal": true,
+                                "pressed": true,
+                                "scale": "medium",
+                                "text": "Login"
+                            },
+                            "configAlternates": {
+                                "scale": "string",
+                                "text": "string",
+                                "modal": "boolean",
+                                "enableToggle": "boolean",
+                                "pressed": "boolean",
+                                "itemId": "string"
+                            },
+                            "name": "MyButton1",
+                            "designerId": "e79a4041-6e5a-40b6-a459-4d0cc0a7f3d9"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
