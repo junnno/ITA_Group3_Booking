@@ -49,10 +49,9 @@ public class BookingController {
     }
 	
     @RequestMapping(value = { "/searchBkg/{bkgNum}" }, method = RequestMethod.GET)
-    public String searchBkgByBkgNum(@PathVariable int bkgNum, ModelMap model) {
+    public String searchBkgByBkgNum(@PathVariable String bkgNum, ModelMap model) {
     	System.out.println("Search Booking by booking number: " + bkgNum);
-        Booking booking = bkgService.searchBkgByBkgNum(String.valueOf(bkgNum));
-        
+        Booking booking = bkgService.searchBkgByBkgNum(bkgNum);
         System.out.println("from:" + booking.getFromCity() + "    to: " + booking.getToCity());
         return "";
     }
@@ -131,7 +130,6 @@ public class BookingController {
     @RequestMapping(value = { "/search" }, method = RequestMethod.POST)
     public String search(@Valid BookingSearchCriteria bookingCriteria,  ModelMap model){
         List<Booking> bkgList = bkgService.searchBooking(bookingCriteria);
-        System.out.println(bkgList.size());
         for(Booking bkg : bkgList) {
         	System.out.println(bkg.getBkgNum());
         }
