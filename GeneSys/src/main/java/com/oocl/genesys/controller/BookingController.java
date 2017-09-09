@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oocl.genesys.criteria.BookingSearchCriteria;
-import com.oocl.genesys.mapper.BookingMapper;
+//import com.oocl.genesys.mapper.BookingMapper;
 import com.oocl.genesys.model.Booking;
 import com.oocl.genesys.model.Container;
 import com.oocl.genesys.service.BookingService;
