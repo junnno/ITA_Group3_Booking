@@ -16,7 +16,34 @@
 Ext.define('Booking.view.MainController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.bkgdtlviewport',
-
+	config : {
+		refs : [ 
+			{
+				ref : 'bkgConId',
+				selector : 'BkgDtlViewport #BkgConId'
+			},
+			{
+				ref : 'bkgShpId',
+				selector : 'BkgDtlViewport #BkgShpId'
+			},
+			{
+				ref : 'bkgFrmCityid',
+				selector : 'createBookingContainerId #BkgFrmCityid'
+			},
+			{
+				ref : 'bkgToCityId',
+				selector : 'createBookingContainerId #BkgToCityId'
+			},
+			{
+				ref : 'cgoNatId',
+				selector : 'createBookingContainerId #CgoNatId'
+			},
+			{
+				ref : 'cgoDescId',
+				selector : 'createBookingContainerId #CgoDescId'
+			},
+		]
+	},
     id: 'MainControllerId',
 
     onCntrInfoAdd: function(button, e, eOpts) {
@@ -158,11 +185,41 @@ Ext.define('Booking.view.MainController', {
     },
 
     onBkgSave: function(button, e, eOpts) {
-        var bkgDetailCmp = Ext.getCmp('bookingDetailContainerId');
-        var bkgValidation = Ext.getCmp('bookingValidationContainerId');
+        //var bkgDetailCmp = Ext.getCmp('bookingDetailContainerId');
+        //var bkgValidation = Ext.getCmp('bookingValidationContainerId');
+        var list = Ext.getStore("CntrStore").data.items;
+        var containers = [];
+        
+        for(var i = 0; i< list.length; i++){
+        	containers.push(list[i].data);
+        }
+        var booking ={
+        	consignee : Ext.getCmp("BkgConId").getValue(),
+        	shipper : Ext.getCmp("BkgShpId").getValue(),
+        	fromCity : Ext.getCmp("BkgFrmCityid").getValue(),
+        	toCity :  Ext.getCmp("BkgToCityId").getValue(),
+        	cargoNature : Ext.getCmp("CgoNatId").getValue().CgoNatId,
+        	description : Ext.getCmp("CgoDescId").getValue(),
+        }
+       
+        Ext.Ajax.request({
+			url : 'booking/testSaveBkg',
+			method : 'POST',
+			params : {
+				booking : booking,
+				containers : containers
+			},
+			scope : this,
+			success : function(response) {
+				console.log("saved!");
+			}
+		});
+       
+       
+        
+        
 
-        console.log(bkgDetailCmp);
-        console.log('test');
+      
     }
 
 });

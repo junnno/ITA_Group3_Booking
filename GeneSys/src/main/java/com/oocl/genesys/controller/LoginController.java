@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,12 @@ public class LoginController {
 
 	@Autowired
 	UserService userService;
-
+	
+	
+	@RequestMapping(value = {"/"}, method= RequestMethod.GET)
+	public void test() {
+		//Ext.create("Booking.view.SearchBookingView").show();
+	}
 	// TODO Change RequestMethod to POST
 	// TODO Add exception handling
 	// TODO Implement user sessions
