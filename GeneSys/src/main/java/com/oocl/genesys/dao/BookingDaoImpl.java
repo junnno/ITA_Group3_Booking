@@ -78,7 +78,8 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 	public List<Booking> searchBooking(BookingSearchCriteria bookingCriteria) {
 		// TODO Auto-generated method stub
 		Criteria criteria = createEntityCriteria();
-		System.out.println(bookingCriteria.getBkgNum());
+		List<Booking> bkgList;
+		System.out.println(bookingCriteria.getCntrNum());
 		
 		if(!bookingCriteria.getBkgNum().equals("")) {
 			criteria.add(Restrictions.eq("bkgNum", bookingCriteria.getBkgNum()));
@@ -92,7 +93,14 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 			criteria.add(Restrictions.eq("toCity", bookingCriteria.getToCity()));
 		}
 		
-		List<Booking> bkgList = criteria.list();
-		return bkgList;
+		if(!bookingCriteria.getCntrNum().equals("")) {
+//			Criteria cntrCriteria = criteria.createCriteria("containerList");
+	        criteria.createCriteria("containerList")
+	        .add(Restrictions.eq("containerNum",bookingCriteria.getCntrNum()));
+		}
+		
+			return (List<Booking>) criteria.list();
+		
+//		return bkgList;
 	}
 }

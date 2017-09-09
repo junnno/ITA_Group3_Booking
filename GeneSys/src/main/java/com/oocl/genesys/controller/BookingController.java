@@ -48,7 +48,7 @@ public class BookingController {
 		return bkgList;
     }
 	
-    @RequestMapping(value = { "/searchBkg/{bkgNum}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/searchBkg/bkgNum={bkgNum}" }, method = RequestMethod.GET)
     public String searchBkgByBkgNum(@PathVariable String bkgNum, ModelMap model) {
     	System.out.println("Search Booking by booking number: " + bkgNum);
         Booking booking = bkgService.searchBkgByBkgNum(bkgNum);
@@ -136,11 +136,17 @@ public class BookingController {
         return "success";
     }
     
-    @RequestMapping(value = { "/search" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/search" }, method = RequestMethod.GET)
     public String search(@Valid BookingSearchCriteria bookingCriteria,  ModelMap model){
-        List<Booking> bkgList = bkgService.searchBooking(bookingCriteria);
+    	bookingCriteria.setBkgNum("1000");
+    	bookingCriteria.setToCity("MNL");
+    	bookingCriteria.setFromCity("HKG");
+        bookingCriteria.setCntrNum("");
+        
+    	List<Booking> bkgList = bkgService.searchBooking(bookingCriteria);
+        System.out.println(bkgList.size());
         for(Booking bkg : bkgList) {
-        	System.out.println(bkg.getBkgNum());
+        	System.out.println(bkg.getBkgNum()+";)");
         }
         return "success";
     }
