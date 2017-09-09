@@ -74,5 +74,11 @@ public class BookingServiceImpl implements BookingService {
 		List<Booking> bkgList = dao.searchBooking(criteria);
 		return bkgList;
 	}
+	
+	@Override
+	public Booking searchBkgByCntrNum(String cntrNum){
+		Booking bkgList = dao.searchBkgByCntrNum(cntrNum);
+		return bkgList; 
+	}
 
 }

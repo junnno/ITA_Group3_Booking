@@ -13,4 +13,5 @@ public interface BookingService {
 	List<Booking> listAllBooking();
 	void updateBkg(Booking bkg);
 	List<Booking> searchBooking(BookingSearchCriteria criteria);
+	Booking searchBkgByCntrNum(String cntrNum);
 }

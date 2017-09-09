@@ -12,5 +12,6 @@ public interface BookingDAO {
 	void updateBkg();
 	List<Booking> listAllBooking();
 	Booking searchBkgByBkgNum(String bkgNum);
+	Booking searchBkgByCntrNum(String cntrNum);
 	List<Booking> searchBooking(BookingSearchCriteria criteria);
 }

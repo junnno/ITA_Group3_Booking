@@ -1,5 +1,6 @@
 package com.oocl.genesys.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="GS_BOOKING")
-public class Booking {
+public class Booking implements Serializable{
 	
 	@Id
 	@Column(name = "BKG_ID", nullable = false)

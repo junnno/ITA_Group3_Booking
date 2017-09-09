@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.oocl.genesys.criteria.BookingSearchCriteria;
 import com.oocl.genesys.model.Booking;
+import com.oocl.genesys.model.Container;
 
 @Repository("bookingDao")
 @Transactional
@@ -56,6 +57,22 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
         criteria.add(Restrictions.eq("bkgNum", bkgNum));
         return (Booking) criteria.uniqueResult();
 	}
+	
+	@Override
+	public Booking searchBkgByCntrNum(String cntrNum) {
+		// TODO Auto-generated method stub
+        
+        Criteria criteria = getSession().createCriteria(Booking.class);
+        Criteria cntrCriteria = criteria.createCriteria("containerList");
+        cntrCriteria.add(Restrictions.eq("containerNum",cntrNum));
+        return (Booking) cntrCriteria.uniqueResult();
+//        List<Booking> bkgList = cntrCriteria.list();
+//        for(Booking bkg:bkgList) {
+//        	System.out.println("Booking number: "+bkg.getBkgNum());
+//        }
+//        return bkgList;
+	}
+	
 
 	@Override
 	public List<Booking> searchBooking(BookingSearchCriteria bookingCriteria) {
