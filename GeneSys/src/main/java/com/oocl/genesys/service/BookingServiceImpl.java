@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oocl.genesys.criteria.BookingSearchCriteria;
 import com.oocl.genesys.dao.BookingDAO;
 import com.oocl.genesys.model.Booking;
 
@@ -65,6 +66,13 @@ public class BookingServiceImpl implements BookingService {
             entity.setStatus(booking.getStatus());
             entity.setToCity(booking.getToCity());
         }
+	}
+
+	@Override
+	public List<Booking> searchBooking(BookingSearchCriteria criteria) {
+		// TODO Auto-generated method stub
+		List<Booking> bkgList = dao.searchBooking(criteria);
+		return bkgList;
 	}
 
 }

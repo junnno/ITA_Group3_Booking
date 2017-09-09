@@ -9,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oocl.genesys.criteria.BookingSearchCriteria;
 import com.oocl.genesys.model.Booking;
 
 @Repository("bookingDao")
@@ -56,4 +57,25 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
         return (Booking) criteria.uniqueResult();
 	}
 
+	@Override
+	public List<Booking> searchBooking(BookingSearchCriteria bookingCriteria) {
+		// TODO Auto-generated method stub
+		Criteria criteria = createEntityCriteria();
+		System.out.println(bookingCriteria.getBkgNum());
+		
+		if(bookingCriteria.getBkgNum()!=null) {
+			criteria.add(Restrictions.eq("bkgNum", bookingCriteria.getBkgNum()));
+		}
+		
+		if(bookingCriteria.getFromCity()!=null) {
+			criteria.add(Restrictions.eq("fromCity", bookingCriteria.getFromCity()));
+		}
+		
+		if(bookingCriteria.getToCity()!=null) {
+			criteria.add(Restrictions.eq("toCity", bookingCriteria.getToCity()));
+		}
+		
+		List<Booking> bkgList = criteria.list();
+		return bkgList;
+	}
 }

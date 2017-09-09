@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oocl.genesys.criteria.BookingSearchCriteria;
 import com.oocl.genesys.model.Booking;
 import com.oocl.genesys.model.Container;
 import com.oocl.genesys.service.BookingService;
@@ -126,5 +127,14 @@ public class BookingController {
         model.addAttribute("success", "Booking # " + bkgNum  + " has been deleted successfully.");
         return "success";
     }
-	
+    
+    @RequestMapping(value = { "/search" }, method = RequestMethod.POST)
+    public String search(@Valid BookingSearchCriteria bookingCriteria,  ModelMap model){
+        List<Booking> bkgList = bkgService.searchBooking(bookingCriteria);
+        System.out.println(bkgList.size());
+        for(Booking bkg : bkgList) {
+        	System.out.println(bkg.getBkgNum());
+        }
+        return "success";
+    }
 }
