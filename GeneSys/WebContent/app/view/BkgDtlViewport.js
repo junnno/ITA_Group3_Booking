@@ -279,6 +279,7 @@ Ext.define('Booking.view.BkgDtlViewport', {
                             items: [
                                 {
                                     xtype: 'checkboxgroup',
+                                    id: 'bkgValidationCbGroupId',
                                     margin: '0 10 0 0',
                                     fieldLabel: 'Validation',
                                     items: [

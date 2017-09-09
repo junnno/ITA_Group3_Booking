@@ -185,29 +185,43 @@ Ext.define('Booking.view.MainController', {
     },
 
     onBkgSave: function(button, e, eOpts) {
-        //var bkgDetailCmp = Ext.getCmp('bookingDetailContainerId');
-        //var bkgValidation = Ext.getCmp('bookingValidationContainerId');
-        var list = Ext.getStore("CntrStore").data.items;
+    	//Container Details
+        var cntrList = Ext.getStore("CntrStore").getRange();
         var containers = [];
-        
-        for(var i = 0; i< list.length; i++){
-        	containers.push(list[i].data);
+        for(var i = 0; i< cntrList.length; i++){
+        	containers.push(cntrList[i].data);
         }
-        var booking ={
-        	consignee : Ext.getCmp("BkgConId").getValue(),
-        	shipper : Ext.getCmp("BkgShpId").getValue(),
-        	fromCity : Ext.getCmp("BkgFrmCityid").getValue(),
-        	toCity :  Ext.getCmp("BkgToCityId").getValue(),
-        	cargoNature : Ext.getCmp("CgoNatId").getValue().CgoNatId,
-        	description : Ext.getCmp("CgoDescId").getValue(),
+        
+        //Booking Validation Details
+        var valWgt = Ext.getCmp('validWgtId').getValue();
+        var appDoc = Ext.getCmp('ApproveDocId').getValue();
+        var goodCus = Ext.getCmp('GoodCusId').getValue();
+        var isBkgApprove = false;
+        
+        if(valWgt && appDoc && goodCus){
+        	isBkgApprove = true;
+        }
+        
+        //Booking Details
+        var booking = {
+        	consignee : Ext.getCmp('BkgConId').getValue(),
+        	shipper : Ext.getCmp('BkgShpId').getValue(),
+        	fromCity : Ext.getCmp('BkgFrmCityid').getValue()==null?'':Ext.getCmp('BkgFrmCityid').getValue(),
+        	toCity :  Ext.getCmp('BkgToCityId').getValue()==null?'':Ext.getCmp('BkgToCityId').getValue(),
+        	cargoNature : Ext.getCmp('CgoNatId').getValue().CgoNatId,
+        	description : Ext.getCmp('CgoDescId').getValue(),
+        	validWgt : valWgt,
+        	approveDoc : appDoc,
+        	goodCustomer : goodCus,
+        	bkgStat : isBkgApprove
         }
        
         Ext.Ajax.request({
 			url : 'booking/testSaveBkg',
 			method : 'POST',
 			params : {
-				booking : booking,
-				containers : containers
+				booking : Ext.util.JSON.encode(booking),
+				containers : Ext.util.JSON.encode(containers)
 			},
 			scope : this,
 			success : function(response) {
