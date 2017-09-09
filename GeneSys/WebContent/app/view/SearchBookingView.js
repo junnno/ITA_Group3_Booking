@@ -74,7 +74,8 @@ Ext.define('Booking.view.SearchBookingView', {
                                 },
                                 {
                                     xtype: 'button',
-                                    itemId: 'mybutton3',
+                                    id: 'searchButton',
+                                    itemId: 'searchButton',
                                     allowDepress: false,
                                     scale: 'medium',
                                     text: 'Search'
@@ -117,15 +118,21 @@ Ext.define('Booking.view.SearchBookingView', {
                                     xtype: 'combobox',
                                     maxWidth: 60,
                                     fieldLabel: 'From',
+                                    displayField: 'name',
                                     forceSelection: true,
-                                    store: 'CityStore'
+                                    queryMode: 'local',
+                                    store: 'CityStore',
+                                    valueField: 'code'
                                 },
                                 {
                                     xtype: 'combobox',
                                     maxWidth: 60,
                                     fieldLabel: 'To',
+                                    displayField: 'name',
                                     forceSelection: true,
-                                    store: 'CityStore'
+                                    queryMode: 'local',
+                                    store: 'CityStore',
+                                    valueField: 'code'
                                 }
                             ]
                         }
@@ -139,6 +146,7 @@ Ext.define('Booking.view.SearchBookingView', {
                     items: [
                         {
                             xtype: 'panel',
+                            flex: 1,
                             bodyBorder: false,
                             bodyPadding: 20,
                             title: 'Booking Details',
@@ -151,6 +159,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                     xtype: 'gridpanel',
                                     titleCollapse: false,
                                     forceFit: true,
+                                    store: 'BkgStore',
                                     columns: [
                                         {
                                             xtype: 'gridcolumn',
