@@ -47,13 +47,13 @@ Ext.define('Booking.controller.LogInController', {
 			scope : this,
 			success : function(response) {
 				var data = Ext.decode(response.responseText);
-//				console.log(data);
-//				if(!data.success)
-//				Ext.Msg.alert('not found', 'olol');
-//				else{
-//					Ext.getCmp("loginWindow").hide();
-//					Ext.create("Booking.view.SearchBookingView").show();
-//				}
+				console.log(data);
+				if(!data.success)
+				Ext.Msg.alert('not found', 'olol');
+				else{
+					Ext.getCmp("loginWindow").hide();
+					Ext.create("Booking.view.SearchBookingView").show();
+				}
 			}
 		});
 	}

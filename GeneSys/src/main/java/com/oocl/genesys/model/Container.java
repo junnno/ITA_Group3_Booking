@@ -24,7 +24,7 @@ public class Container {
     private int container_id;
 	
 	@NotNull
-	@ManyToOne(targetEntity=Booking.class,fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity=Booking.class)
 	@JoinColumn(name="bkg_num", nullable=false)
     private Booking booking;
 	

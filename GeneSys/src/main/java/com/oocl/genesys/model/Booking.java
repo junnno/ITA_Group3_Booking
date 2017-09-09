@@ -31,7 +31,7 @@ public class Booking {
 	
 	@NotNull
     @Column(name = "BKG_NUM", nullable = false)
-	private int bkgNum;
+	private String bkgNum;
 	
 	@NotNull
     @Column(name = "STATUS", nullable = false)
@@ -43,7 +43,7 @@ public class Booking {
     
 	@NotNull
     @Column(name = "IS_APPROVED_DOC", nullable = false)
-    private int isApproved;
+    private int isApprovedDoc;
     
 	@NotNull
     @Column(name = "IS_GOOD_CUSTOMER", nullable = false)
@@ -72,7 +72,7 @@ public class Booking {
 	@Column(name = "IS_DELETED", nullable = true)
     private int isDeleted;
 	
-	@OneToMany(fetch=FetchType.LAZY, targetEntity=Container.class, mappedBy= "booking",cascade={CascadeType.ALL})
+	@OneToMany(fetch=FetchType.EAGER, targetEntity=Container.class, mappedBy= "booking",cascade={CascadeType.ALL})
 	private List<Container> containerList = new ArrayList<Container>();
 	
 	public long getBkgId() {
@@ -91,11 +91,11 @@ public class Booking {
 		this.containerList = containerList;
 	}
 
-	public int getBkgNum() {
+	public String getBkgNum() {
 		return bkgNum;
 	}
 
-	public void setBkgNum(int bkgNum) {
+	public void setBkgNum(String bkgNum) {
 		this.bkgNum = bkgNum;
 	}
 
@@ -115,12 +115,12 @@ public class Booking {
 		this.isValidWeight = isValidWeight;
 	}
 
-	public int getIsApproved() {
-		return isApproved;
+	public int getIsApprovedDoc() {
+		return isApprovedDoc;
 	}
 
-	public void setIsApproved(int isApproved) {
-		this.isApproved = isApproved;
+	public void setIsApprovedDoc(int isApprovedDoc) {
+		this.isApprovedDoc = isApprovedDoc;
 	}
 
 	public int getIsGoodCustomer() {

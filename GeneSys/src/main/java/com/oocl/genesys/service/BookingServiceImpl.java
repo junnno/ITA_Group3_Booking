@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oocl.genesys.criteria.BookingSearchCriteria;
 import com.oocl.genesys.dao.BookingDAO;
 import com.oocl.genesys.model.Booking;
 
@@ -15,17 +16,28 @@ public class BookingServiceImpl implements BookingService {
 	
 	@Autowired
     BookingDAO dao;
+	
 	@Override
 	public void saveBkg(Booking booking) {
 		// TODO Auto-generated method stub
 		dao.saveBkg(booking);
-
+	}
+	
+	@Override
+	public void flushBkg() {
+		// TODO Auto-generated method stub
+		dao.flushBkg();
 	}
 
 	@Override
 	public void deleteBkg(String bkgNum) {
 		// TODO Auto-generated method stub
-		dao.deleteBkg(bkgNum);
+		Booking booking = searchBkgByBkgNum(bkgNum);
+		if(booking!=null) {
+			booking.setIsDeleted(1);
+		}
+		updateBkg(booking);
+//		dao.deleteBkg(bkgNum);
 	}
 
 	@Override
@@ -47,13 +59,20 @@ public class BookingServiceImpl implements BookingService {
 //            entity.setBkgNum(bkg.getBkgNum());
             entity.setConsignee(booking.getConsignee());
             entity.setFromCity(booking.getFromCity());
-            entity.setIsApproved(booking.getIsApproved());
-            entity.setIsGoodCustomer(booking.getIsApproved());
+            entity.setIsApprovedDoc(booking.getIsApprovedDoc());
+            entity.setIsGoodCustomer(booking.getIsGoodCustomer());
             entity.setIsValidWeight(booking.getIsValidWeight());
             entity.setShipper(booking.getShipper());
             entity.setStatus(booking.getStatus());
             entity.setToCity(booking.getToCity());
         }
+	}
+
+	@Override
+	public List<Booking> searchBooking(BookingSearchCriteria criteria) {
+		// TODO Auto-generated method stub
+		List<Booking> bkgList = dao.searchBooking(criteria);
+		return bkgList;
 	}
 
 }

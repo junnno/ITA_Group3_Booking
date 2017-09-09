@@ -13,7 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oocl.genesys.criteria.BookingSearchCriteria;
 import com.oocl.genesys.model.Booking;
 import com.oocl.genesys.model.Container;
 import com.oocl.genesys.service.BookingService;
@@ -33,8 +35,9 @@ public class BookingController {
 		return "";
     }
 	
+	@ResponseBody
 	@RequestMapping(value = { "/listBkg" }, method = RequestMethod.GET)
-    public String listBkg(ModelMap model) {
+	public List<Booking> listBkg(ModelMap model) {
 		System.out.println("List Booking");
 		List<Booking> bkgList = bkgService.listAllBooking();
         for(Booking bkg:bkgList) {
@@ -42,25 +45,24 @@ public class BookingController {
         }
         model.addAttribute("booking", bkgList);
         
-		return "";
+		return bkgList;
     }
 	
     @RequestMapping(value = { "/searchBkg/{bkgNum}" }, method = RequestMethod.GET)
-    public String searchBkgByBkgNum(@PathVariable int bkgNum, ModelMap model) {
+    public String searchBkgByBkgNum(@PathVariable String bkgNum, ModelMap model) {
     	System.out.println("Search Booking by booking number: " + bkgNum);
-        Booking booking = bkgService.searchBkgByBkgNum(String.valueOf(bkgNum));
-        
+        Booking booking = bkgService.searchBkgByBkgNum(bkgNum);
         System.out.println("from:" + booking.getFromCity() + "    to: " + booking.getToCity());
         return "";
     }
 	
-	@RequestMapping(value = { "/saveBkg" }, method = RequestMethod.GET)
-    public String saveBkg(ModelMap model) {
+	@RequestMapping(value = { "/testSaveBkg" }, method = RequestMethod.GET)
+    public String testSaveBkg(ModelMap model) {
 		Booking bkg = new Booking();
-		//bkg.setBkgNum("404100001");
+		bkg.setBkgNum("404100001");
 		bkg.setFromCity("HKG");
 		bkg.setToCity("PUS");
-		bkg.setIsApproved(1);
+		bkg.setIsApprovedDoc(1);
 		bkg.setIsGoodCustomer(1);
 		bkg.setIsValidWeight(1);
 		bkg.setConsignee("Consignee");
@@ -68,6 +70,7 @@ public class BookingController {
 		bkg.setStatus(1);
 		bkg.setContainerList(getContainerList(bkg));
 		
+		bkgService.flushBkg();
 		bkgService.saveBkg(bkg);
 		
 		System.out.println("Booking saved");
@@ -97,32 +100,39 @@ public class BookingController {
 		return cntr;
 	}
 	
-	/*
-     * This method will provide the medium to update an existing employee.
-     */
     @RequestMapping(value = { "/update/{bkgNum}" }, method = RequestMethod.GET)
-    public void updateBooking(@PathVariable int bkgNum, ModelMap model) {
-        Booking booking = bkgService.searchBkgByBkgNum(String.valueOf(bkgNum));
+    public String updateBooking(@PathVariable String bkgNum, ModelMap model) {
+        Booking booking = bkgService.searchBkgByBkgNum(bkgNum);
         model.addAttribute("booking", booking);
         model.addAttribute("update", true);
-//        return "update";
+        return "updateBooking";
     }
      
-    /*
-     * This method will be called on form submission, handling POST request for
-     * updating employee in database. It also validates the user input
-     */
     @RequestMapping(value = { "/update" }, method = RequestMethod.POST)
-    public String updateBooking(@Valid Booking booking, BindingResult result,
-            ModelMap model, @PathVariable String ssn) {
- 
+    public String updateBooking(@Valid Booking booking, BindingResult result, ModelMap model)
+    {
         if (result.hasErrors()) {
+        	System.out.println(result.getAllErrors());
             return "update";
         }
- 
         bkgService.updateBkg(booking);
         model.addAttribute("success", "Booking # " + booking.getBkgNum()  + " updated successfully.");
         return "success";
     }
-	
+    
+    @RequestMapping(value = { "/delete/{bkgNum}" }, method = RequestMethod.GET)
+    public String deleteBooking(@PathVariable String bkgNum, ModelMap model) {
+    	bkgService.deleteBkg(bkgNum);
+        model.addAttribute("success", "Booking # " + bkgNum  + " has been deleted successfully.");
+        return "success";
+    }
+    
+    @RequestMapping(value = { "/search" }, method = RequestMethod.POST)
+    public String search(@Valid BookingSearchCriteria bookingCriteria,  ModelMap model){
+        List<Booking> bkgList = bkgService.searchBooking(bookingCriteria);
+        for(Booking bkg : bkgList) {
+        	System.out.println(bkg.getBkgNum());
+        }
+        return "success";
+    }
 }
