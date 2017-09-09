@@ -14,16 +14,39 @@
  */
 
 Ext.define('Booking.controller.SearchController', {
-    extend: 'Ext.app.Controller',
+	extend : 'Ext.app.Controller',
 
-    control: {
-        "#mybutton3": {
-            click: 'onMybutton3Click'
-        }
-    },
+	control : {
+		"#searchButton" : {
+			click : 'onSearchButtonClick'
+		}
+	},
 
-    onMybutton3Click: function(button, e, eOpts) {
+	onSearchButtonClick : function(button, e, eOpts) {
+		var store = Ext.getStore('BkgStore');
 
-    }
+		Ext.Ajax.request({
+			url : 'booking/listBkg',
+			method : 'POST',
+			datatype : 'json',
+			params : {
+
+			},
+			scope : this,
+			success : function(response) {
+				var data = Ext.decode(response.responseText);
+				Ext.each(data, function(record) {
+					var books = {
+							BkgNum : record.bkgNum,
+				            Shipper : record.shipper,
+				            Consignee : record.consignee,
+				            From : record.fromCity,
+				    		To : record.toCity
+					};
+					store.add(books);
+				});
+			}
+		});
+	}
 
 });

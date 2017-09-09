@@ -163,25 +163,27 @@ Ext.define('Booking.view.SearchBookingView', {
                                     columns: [
                                         {
                                             xtype: 'gridcolumn',
-                                            dataIndex: 'string',
+                                            dataIndex: 'BkgNum',
                                             text: 'Booking Number'
                                         },
                                         {
                                             xtype: 'gridcolumn',
-                                            dataIndex: 'string',
+                                            dataIndex: 'Shipper',
                                             text: 'Shipper'
                                         },
                                         {
                                             xtype: 'gridcolumn',
-                                            dataIndex: 'string',
+                                            dataIndex: 'Consignee',
                                             text: 'Consignee'
                                         },
                                         {
                                             xtype: 'gridcolumn',
+                                            dataIndex: 'From',
                                             text: 'From'
                                         },
                                         {
                                             xtype: 'gridcolumn',
+                                            dataIndex: 'To',
                                             text: 'To'
                                         }
                                     ],
