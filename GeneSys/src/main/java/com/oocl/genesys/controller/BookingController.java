@@ -53,10 +53,18 @@ public class BookingController {
     	System.out.println("Search Booking by booking number: " + bkgNum);
         Booking booking = bkgService.searchBkgByBkgNum(bkgNum);
         System.out.println("from:" + booking.getFromCity() + "    to: " + booking.getToCity());
+        return "success";
+    }
+    
+    @RequestMapping(value = { "/searchBkg/cntrNum={cntrNum}" }, method = RequestMethod.GET)
+    public String searchBkgByCntrNum(@PathVariable String cntrNum, ModelMap model) {
+    	System.out.println("Search Booking by Container number: " + cntrNum);
+    	 Booking booking = bkgService.searchBkgByCntrNum(cntrNum);
+    	 System.out.println("done");
+    	 System.out.println("Booking number: "+booking.getBkgNum());
         return "";
     }
-	
-	@RequestMapping(value = { "/testSaveBkg" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/testSaveBkg" }, method = RequestMethod.GET)
     public String testSaveBkg(ModelMap model) {
 		Booking bkg = new Booking();
 		bkg.setBkgNum("404100001");
@@ -69,6 +77,7 @@ public class BookingController {
 		bkg.setShipper("Shipper");
 		bkg.setStatus(1);
 		bkg.setContainerList(getContainerList(bkg));
+		bkg.setIsDeleted(0);
 		
 		bkgService.flushBkg();
 		bkgService.saveBkg(bkg);
@@ -92,7 +101,7 @@ public class BookingController {
 		cntr.setBooking(bkg);
 		cntr.setCargoDesc("TestBooking");
 		cntr.setCargoNature("GC");
-		cntr.setContainerNum("GENE10100"+i);
+		cntr.setContainerNum("DASH0101"+i);
 		cntr.setContainerType("20GP");
 		cntr.setGrossWeight(123.00);
 		cntr.setNetWeight(123.00);

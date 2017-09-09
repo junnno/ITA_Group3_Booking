@@ -1,5 +1,7 @@
 package com.oocl.genesys.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +18,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="GS_CONTAINER")
-public class Container {
+public class Container implements Serializable{
 
 	@Id
 	@SequenceGenerator(name="gs_container_seq", sequenceName="gs_container_seq", allocationSize = 1)
@@ -25,7 +27,7 @@ public class Container {
 	
 	@NotNull
 	@ManyToOne(targetEntity=Booking.class)
-	@JoinColumn(name="bkg_num", nullable=false)
+	@JoinColumn(name="bkg_num", nullable=false,referencedColumnName="BKG_NUM")
     private Booking booking;
 	
 	@NotNull
