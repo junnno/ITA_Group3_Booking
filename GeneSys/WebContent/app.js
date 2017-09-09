@@ -51,7 +51,7 @@ Ext.application({
     name: 'Booking',
 
     launch: function() {
-        Ext.create('Booking.view.loginWindow', {renderTo: Ext.getBody()});
+        Ext.create('Booking.view.BkgDtlViewport', {renderTo: Ext.getBody()});
     }
 
 });
