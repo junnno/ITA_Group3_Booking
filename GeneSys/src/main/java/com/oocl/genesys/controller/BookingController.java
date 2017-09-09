@@ -97,31 +97,30 @@ public class BookingController {
 		return cntr;
 	}
 	
-	/*
-     * This method will provide the medium to update an existing employee.
-     */
     @RequestMapping(value = { "/update/{bkgNum}" }, method = RequestMethod.GET)
-    public void updateBooking(@PathVariable int bkgNum, ModelMap model) {
-        Booking booking = bkgService.searchBkgByBkgNum(String.valueOf(bkgNum));
+    public String updateBooking(@PathVariable String bkgNum, ModelMap model) {
+        Booking booking = bkgService.searchBkgByBkgNum(bkgNum);
         model.addAttribute("booking", booking);
         model.addAttribute("update", true);
-//        return "update";
+        return "updateBooking";
     }
      
-    /*
-     * This method will be called on form submission, handling POST request for
-     * updating employee in database. It also validates the user input
-     */
     @RequestMapping(value = { "/update" }, method = RequestMethod.POST)
-    public String updateBooking(@Valid Booking booking, BindingResult result,
-            ModelMap model, @PathVariable String ssn) {
- 
+    public String updateBooking(@Valid Booking booking, BindingResult result, ModelMap model)
+    {
         if (result.hasErrors()) {
+        	System.out.println(result.getAllErrors());
             return "update";
         }
- 
         bkgService.updateBkg(booking);
         model.addAttribute("success", "Booking # " + booking.getBkgNum()  + " updated successfully.");
+        return "success";
+    }
+    
+    @RequestMapping(value = { "/delete/{bkgNum}" }, method = RequestMethod.GET)
+    public String deleteBooking(@PathVariable String bkgNum, ModelMap model) {
+    	bkgService.deleteBkg(bkgNum);
+        model.addAttribute("success", "Booking # " + bkgNum  + " has been deleted successfully.");
         return "success";
     }
 	

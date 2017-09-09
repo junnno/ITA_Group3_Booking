@@ -15,6 +15,7 @@ public class BookingServiceImpl implements BookingService {
 	
 	@Autowired
     BookingDAO dao;
+	
 	@Override
 	public void saveBkg(Booking booking) {
 		// TODO Auto-generated method stub
@@ -25,7 +26,12 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public void deleteBkg(String bkgNum) {
 		// TODO Auto-generated method stub
-		dao.deleteBkg(bkgNum);
+		Booking booking = searchBkgByBkgNum(bkgNum);
+		if(booking!=null) {
+			booking.setIsDeleted(1);
+		}
+		updateBkg(booking);
+//		dao.deleteBkg(bkgNum);
 	}
 
 	@Override
