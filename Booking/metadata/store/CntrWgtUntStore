@@ -1,0 +1,57 @@
+{
+    "type": "arraystore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "data": [
+            "[",
+            "    {",
+            "        \"name\": \"Kilogram\",",
+            "        \"code\": \"KG\"",
+            "    },",
+            "    {",
+            "        \"name\": \"Pounds\",",
+            "        \"code\": \"lbs\"",
+            "    }",
+            "]"
+        ],
+        "designer|userClassName": "CntrWgtUntStore",
+        "model": "CntrWgtUntModel",
+        "storeId": "CntrWgtUntStore"
+    },
+    "configAlternates": {
+        "data": "array",
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "CntrTypeStore1",
+    "designerId": "cba93b86-629f-4d50-853e-3af2685fd638",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "name": "MyAjaxProxy",
+            "designerId": "d4a26326-8305-4e71-a93c-7be6a1bb91e6",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Array",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "name": "MyArrayReader",
+                    "designerId": "7810d2a9-9e13-48b6-95bc-9328760fdac0"
+                }
+            ]
+        }
+    ]
+}

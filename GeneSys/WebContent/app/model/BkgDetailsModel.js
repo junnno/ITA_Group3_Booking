@@ -19,6 +19,8 @@ Ext.define('Booking.model.BkgDetailsModel', {
     requires: [
         'Ext.data.field.Field'
     ],
+    
+    idProperty: 'BkgNum',
 
     fields: [
         {

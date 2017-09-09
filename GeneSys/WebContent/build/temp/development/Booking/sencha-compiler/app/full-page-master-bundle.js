@@ -1,2 +1,2 @@
 // @tag full-page
-// @require C:\Users\Monica\Documents\Work\ITA\Repository\ITA_Group3_Booking\BookingView\app.js
+// @require C:\Users\Monica\Documents\Work\ITA\Workspace\Booking\app.js

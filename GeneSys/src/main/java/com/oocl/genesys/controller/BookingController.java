@@ -36,7 +36,7 @@ public class BookingController {
     }
 	
 	@ResponseBody
-	@RequestMapping(value = { "/listBkg" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/listBkg" }, method = RequestMethod.POST)
 	public List<Booking> listBkg(ModelMap model) {
 		System.out.println("List Booking");
 		List<Booking> bkgList = bkgService.listAllBooking();

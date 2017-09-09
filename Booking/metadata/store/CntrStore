@@ -1,0 +1,37 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "data": [
+            "[",
+            "    {",
+            "        \"CntrType\": \"20GP\",",
+            "        \"CntrNet\": 525.14,",
+            "        \"CntrGross\": 522.19,",
+            "        \"CntrUnit\": \"lbs\"",
+            "    },",
+            "    {",
+            "        \"CntrType\": \"20GP\",",
+            "        \"CntrNet\": 434.07,",
+            "        \"CntrGross\": 439.36,",
+            "        \"CntrUnit\": \"lbs\"",
+            "    }",
+            "]"
+        ],
+        "designer|userClassName": "CntrStore",
+        "model": "CntrModel",
+        "storeId": "CntrStore"
+    },
+    "configAlternates": {
+        "data": "array",
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "MyStore",
+    "designerId": "52c80a4b-94ea-462b-9fa1-6f2ec3979d18"
+}

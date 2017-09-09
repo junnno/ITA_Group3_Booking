@@ -16,7 +16,7 @@
 Ext.define('Booking.view.loginWindow', {
     extend: 'Ext.window.Window',
     alias: 'widget.loginWindow',
-
+    id: 'loginWindow',
     requires: [
         'Booking.view.loginWindowViewModel',
         'Ext.Img',
@@ -55,6 +55,7 @@ Ext.define('Booking.view.loginWindow', {
             dock: 'top',
             flex: 1,
             itemId: 'username',
+            id: 'username',
             margin: 10,
             emptyText: 'Username'
         },
@@ -63,6 +64,7 @@ Ext.define('Booking.view.loginWindow', {
             dock: 'top',
             flex: 1,
             itemId: 'password',
+            id: 'password',
             margin: 10,
             fieldLabel: '',
             inputType: 'password',
