@@ -1,10 +1,15 @@
 package com.oocl.genesys.controller;
 
+import java.net.HttpCookie;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -13,9 +18,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oocl.genesys.criteria.BookingSearchCriteria;
+import com.oocl.genesys.mapper.BookingMapper;
 import com.oocl.genesys.model.Booking;
 import com.oocl.genesys.model.Container;
 import com.oocl.genesys.service.BookingService;
@@ -42,6 +49,9 @@ public class BookingController {
 		List<Booking> bkgList = bkgService.listAllBooking();
         for(Booking bkg:bkgList) {
         	System.out.println("Booking Number: " + bkg.getBkgNum());
+        	/*if(bkg.getContainerList().isEmpty()) {
+        		System.out.println(bkg.getContainerList().get(0));
+        	}*/
         }
         model.addAttribute("booking", bkgList);
         
@@ -74,26 +84,43 @@ public class BookingController {
     	 
         return "success";
     }
-    @RequestMapping(value = { "/testSaveBkg" }, method = RequestMethod.GET)
-    public String testSaveBkg(ModelMap model) {
-		Booking bkg = new Booking();
-		bkg.setBkgNum("404100001");
-		bkg.setFromCity("HKG");
-		bkg.setToCity("PUS");
-		bkg.setIsApprovedDoc(1);
-		bkg.setIsGoodCustomer(1);
-		bkg.setIsValidWeight(1);
-		bkg.setConsignee("Consignee");
-		bkg.setShipper("Shipper");
-		bkg.setStatus(1);
-		bkg.setContainerList(getContainerList(bkg));
+    
+    @ResponseBody
+    @RequestMapping(value = { "/testSaveBkg" }, method = {RequestMethod.POST, RequestMethod.GET})
+    public String testSaveBkg(@RequestParam(required=true) String booking, @RequestParam(required=true) String containers
+    		, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+//    	System.out.println(booking+" "+containers);
+    	Object bkgObj = new JSONObject(booking);
+    	JSONObject bkgJo = (JSONObject) bkgObj;
+    	
+    	Booking bkg = new Booking();
+		bkg.setBkgNum(createBkgNum());
+		bkg.setFromCity(bkgJo.getString("fromCity").isEmpty() ? "" : (String)bkgJo.getString("fromCity"));
+		bkg.setToCity(bkgJo.getString("toCity").isEmpty() ? "" : (String)bkgJo.getString("toCity"));
+		bkg.setIsApprovedDoc(bkgJo.getBoolean("approveDoc") ? 1 : 0);
+		bkg.setIsGoodCustomer(bkgJo.getBoolean("goodCustomer") ? 1 : 0);
+		bkg.setIsValidWeight(bkgJo.getBoolean("validWgt") ? 1 : 0);
+		bkg.setConsignee(bkgJo.getString("consignee").isEmpty() ? "" : (String)bkgJo.getString("consignee"));
+		bkg.setShipper(bkgJo.getString("shipper").isEmpty() ? "" : (String)bkgJo.getString("shipper"));
+		bkg.setStatus(bkgJo.getBoolean("bkgStat") ? 1 : 0);
 		bkg.setIsDeleted(0);
+//		bkg.setContainerList(getContainerList(bkg));
+//		bkgService.saveBkg(bkg);
 		
-		bkgService.flushBkg();
-		bkgService.saveBkg(bkg);
-		
-		System.out.println("Booking saved");
-		return "test";
+		System.out.println(bkg.toString());
+		Cookie c = new Cookie("User", "BKG");
+		response.addCookie(c);
+		return "Booking saved";
+    }
+    
+    private String createBkgNum() {
+    	String bkgNum = "";
+    	
+    	for(int i=0; i<10; i++) {
+    		bkgNum += Math.floor(Math.random() * 10);
+    	}
+    	
+    	return bkgNum;
     }
 	
 	private List<Container> getContainerList(Booking bkg) {
