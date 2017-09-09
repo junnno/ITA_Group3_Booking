@@ -63,15 +63,15 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 		Criteria criteria = createEntityCriteria();
 		System.out.println(bookingCriteria.getBkgNum());
 		
-		if(bookingCriteria.getBkgNum()!=null) {
+		if(!bookingCriteria.getBkgNum().equals("")) {
 			criteria.add(Restrictions.eq("bkgNum", bookingCriteria.getBkgNum()));
 		}
 		
-		if(bookingCriteria.getFromCity()!=null) {
+		if(!bookingCriteria.getFromCity().equals("")) {
 			criteria.add(Restrictions.eq("fromCity", bookingCriteria.getFromCity()));
 		}
 		
-		if(bookingCriteria.getToCity()!=null) {
+		if(!bookingCriteria.getToCity().equals("")) {
 			criteria.add(Restrictions.eq("toCity", bookingCriteria.getToCity()));
 		}
 		
