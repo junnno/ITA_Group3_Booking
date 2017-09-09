@@ -1,10 +1,10 @@
 {
-   "name": "Login",
-   "namespace": "Login",
+   "name": "Booking",
+   "namespace": "Booking",
    "version": "1.0.0.0",
    "framework": "ext",
    "toolkit": "classic",
-   "theme": "theme-crisp-b88c55d8-b18f-41c0-bd6c-95b6a18c1a7b",
+   "theme": "theme-crisp-dbadfdd9-d0b9-4357-8de7-8f334fdbec9c",
    "requires": [
       "font-awesome"
    ],
@@ -22,7 +22,7 @@
       }
    },
    "sass": {
-      "namespace": "Login",
+      "namespace": "Booking",
       "generated": {
          "var": "sass/save.scss",
          "src": "sass/save"
@@ -133,5 +133,5 @@
    "ignore": [
       "(^|/)CVS(/?$|/.*?$)"
    ],
-   "id": "2cfde305-e3e9-4333-857a-a49b8b2913bd"
+   "id": "3312f9a6-54a4-4df2-acee-b244b61e1609"
 }

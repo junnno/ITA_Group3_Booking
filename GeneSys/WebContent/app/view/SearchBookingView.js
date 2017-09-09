@@ -100,12 +100,12 @@ Ext.define('Booking.view.SearchBookingView', {
                                 {
                                     xtype: 'combobox',
                                     maxWidth: 60,
-                                    modelValidation: true,
                                     fieldLabel: 'Status',
                                     displayField: 'Key',
                                     forceSelection: true,
                                     queryMode: 'local',
-                                    valueField: 'Value'
+                                    valueField: 'Value',
+                                    store: 'StatusStore'
                                 }
                             ]
                         },
