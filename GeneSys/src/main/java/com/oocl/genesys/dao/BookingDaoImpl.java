@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -98,7 +99,7 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 	        criteria.createCriteria("containerList")
 	        .add(Restrictions.eq("containerNum",bookingCriteria.getCntrNum()));
 		}
-		
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 			return (List<Booking>) criteria.list();
 		
 //		return bkgList;

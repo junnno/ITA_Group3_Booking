@@ -138,7 +138,7 @@ public class BookingController {
     
     @RequestMapping(value = { "/search" }, method = RequestMethod.GET)
     public String search(@Valid BookingSearchCriteria bookingCriteria,  ModelMap model){
-    	bookingCriteria.setBkgNum("1000");
+    	bookingCriteria.setBkgNum("");
     	bookingCriteria.setToCity("MNL");
     	bookingCriteria.setFromCity("HKG");
         bookingCriteria.setCntrNum("");
