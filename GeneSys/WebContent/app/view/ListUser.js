@@ -21,21 +21,22 @@ Ext.define('Booking.view.ListUser', {
         'Booking.view.ListUserViewModel',
         'Ext.Img',
         'Ext.grid.Panel',
-        'Ext.grid.column.Number',
-        'Ext.grid.column.Date',
-        'Ext.grid.column.Boolean',
+        'Ext.grid.column.Column',
         'Ext.view.Table',
         'Ext.toolbar.Toolbar',
-        'Ext.toolbar.Fill',
+        'Ext.container.ButtonGroup',
         'Ext.button.Button'
     ],
 
     viewModel: {
         type: 'listuser'
     },
-    height: 250,
     width: 400,
 
+    layout: {
+        type: 'vbox',
+        align: 'stretch'
+    },
     items: [
         {
             xtype: 'image',
@@ -46,50 +47,91 @@ Ext.define('Booking.view.ListUser', {
             src: 'brand.png'
         },
         {
-            xtype: 'gridpanel',
-            flex: 1,
-            title: 'User List',
-            columns: [
-                {
-                    xtype: 'gridcolumn',
-                    dataIndex: 'string',
-                    text: 'String'
-                },
-                {
-                    xtype: 'numbercolumn',
-                    dataIndex: 'number',
-                    text: 'Number'
-                },
-                {
-                    xtype: 'datecolumn',
-                    dataIndex: 'date',
-                    text: 'Date'
-                },
-                {
-                    xtype: 'booleancolumn',
-                    dataIndex: 'bool',
-                    text: 'Boolean'
-                }
-            ]
-        },
-        {
-            xtype: 'toolbar',
-            dock: 'bottom',
-            flex: 1,
-            ui: 'footer',
+            xtype: 'container',
             layout: {
-                type: 'hbox',
-                pack: 'end'
+                type: 'vbox',
+                align: 'stretch'
             },
             items: [
                 {
-                    xtype: 'tbfill'
-                },
-                {
-                    xtype: 'button',
-                    itemId: 'mybutton2',
-                    scale: 'medium',
-                    text: 'Update'
+                    xtype: 'gridpanel',
+                    flex: 0.5,
+                    title: 'User List',
+                    id:'userList',
+                    itemId:'userList',
+                    forceFit: true,
+                    store: 'UserStore',
+                    columns: [
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'Username',
+                            text: 'Username'
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'Password',
+                            text: 'Password'
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'Role',
+                            text: 'Role'
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'Email',
+                            text: 'Email'
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'FirstName',
+                            text: 'First Name'
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'LastName',
+                            text: 'Last Name'
+                        }
+                    ],
+                    dockedItems: [
+                        {
+                            xtype: 'toolbar',
+                            dock: 'bottom',
+                            ui: 'footer',
+                            layout: {
+                                type: 'hbox',
+                                pack: 'end'
+                            },
+                            items: [
+                                {
+                                    xtype: 'buttongroup',
+                                    border: false,
+                                    frame: false,
+                                    columns: 3,
+                                    items: [
+                                    	{
+                                            xtype: 'button',
+                                            id: 'searchUser',
+                                            itemId: 'searchUser',
+                                            text: 'Search'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            id: 'addUser',
+                                            itemId: 'addUser',
+                                            text: 'Add'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            id: 'deleteUser',
+                                            itemId: 'deleteUser',
+                                            text: 'Delete'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }

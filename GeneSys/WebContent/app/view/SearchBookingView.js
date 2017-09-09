@@ -74,11 +74,25 @@ Ext.define('Booking.view.SearchBookingView', {
                                 },
                                 {
                                     xtype: 'button',
-                                    id: 'searchButton',
-                                    itemId: 'searchButton',
+                                    id: 'createButton',
+                                    itemId: 'createButton',
+                                    allowDepress: false,
+                                    scale: 'medium',
+                                    text: 'Create'
+                                },
+                                {
+                                    xtype: 'button',
+                                    id: 'searchButton1',
+                                    itemId: 'searchButton1',
                                     allowDepress: false,
                                     scale: 'medium',
                                     text: 'Search'
+                                },
+                                {
+                                    xtype: 'button',
+                                    id: 'logOut',
+                                    scale: 'medium',
+                                    text: 'LogOut'
                                 }
                             ]
                         }
@@ -100,12 +114,12 @@ Ext.define('Booking.view.SearchBookingView', {
                                 {
                                     xtype: 'combobox',
                                     maxWidth: 60,
+                                    modelValidation: true,
                                     fieldLabel: 'Status',
                                     displayField: 'Key',
                                     forceSelection: true,
                                     queryMode: 'local',
-                                    valueField: 'Value',
-                                    store: 'StatusStore'
+                                    valueField: 'Value'
                                 }
                             ]
                         },
@@ -173,17 +187,15 @@ Ext.define('Booking.view.SearchBookingView', {
                                         },
                                         {
                                             xtype: 'gridcolumn',
-                                            dataIndex: 'Consignee',
+                                            dataIndex: 'string',
                                             text: 'Consignee'
                                         },
                                         {
                                             xtype: 'gridcolumn',
-                                            dataIndex: 'From',
                                             text: 'From'
                                         },
                                         {
                                             xtype: 'gridcolumn',
-                                            dataIndex: 'To',
                                             text: 'To'
                                         }
                                     ],
@@ -239,25 +251,27 @@ Ext.define('Booking.view.SearchBookingView', {
                                 }
                             ]
                         }
-                    ]
-                },
-                {
-                    xtype: 'toolbar',
-                    dock: 'bottom',
-                    ui: 'footer',
-                    layout: {
-                        type: 'hbox',
-                        pack: 'end'
-                    },
-                    items: [
+                    ],
+                    dockedItems: [
                         {
-                            xtype: 'tbfill'
-                        },
-                        {
-                            xtype: 'button',
-                            itemId: 'mybutton2',
-                            scale: 'medium',
-                            text: 'Update'
+                            xtype: 'toolbar',
+                            dock: 'bottom',
+                            ui: 'footer',
+                            layout: {
+                                type: 'hbox',
+                                pack: 'end'
+                            },
+                            items: [
+                                {
+                                    xtype: 'tbfill'
+                                },
+                                {
+                                    xtype: 'button',
+                                    itemId: 'mybutton2',
+                                    scale: 'medium',
+                                    text: 'Update'
+                                }
+                            ]
                         }
                     ]
                 }

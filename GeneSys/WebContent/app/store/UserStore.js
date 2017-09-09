@@ -25,13 +25,17 @@ Ext.define('Booking.store.UserStore', {
         cfg = cfg || {};
         me.callParent([Ext.apply({
             storeId: 'UserStore',
-            model: 'Booking.model.UserModel',
-            data: [
+            model: 'Booking.model.UserModel'
+           /* data: [
                 {
                     Username: 'quas',
-                    Password: 'est'
+                    Password: 'est',
+                    Role: '1',
+                    Email: 'dgds',
+                    FirstName: 'af',
+                    LastName: 'ret'
                 }
-            ]
+            ]*/
         }, cfg)]);
     }
 });

@@ -26,6 +26,18 @@ Ext.define('Booking.model.UserModel', {
         },
         {
             name: 'Password'
+        },
+        {
+            name: 'Role'
+        },
+        {
+            name: 'Email'
+        },
+        {
+            name: 'FirstName'
+        },
+        {
+            name: 'LastName'
         }
     ]
 });
