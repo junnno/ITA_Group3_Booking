@@ -17,6 +17,34 @@ Ext.define('Booking.view.ListUserViewController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.listuser',
 
+	onSearchUserClick: function() {
+    	Ext.getStore('UserStore').removeAll();
+    	var store = Ext.getStore('UserStore');
+		Ext.Ajax.request({
+			url : 'user/listUser',
+			method : 'POST',
+			datatype : 'json',
+			params : {
+
+			},
+			scope : this,
+			success : function(response) {
+				var data = Ext.decode(response.responseText);
+				Ext.each(data, function(record) {
+					var users = {
+							Username : record.username,
+				            Password : record.password,
+				            Role : record.role,
+				            Email : record.email,
+				    		FirstName : record.firstName,
+				    		LastName : record.lastName
+					};
+					store.add(users);
+				});
+			}
+		});
+    },
+
     onSaveUser : function(data) {
     	console.log(data[0].Username);
 		  Ext.Ajax.request({
@@ -33,6 +61,7 @@ Ext.define('Booking.view.ListUserViewController', {
 				scope : this,
 				success : function(response) {
 					Ext.getCmp("addUserWindowId").close();
+					Ext.Msg.alert("Message", "User successfully saved!");
 					console.log("user saved!");
 				}
 			});	
@@ -53,7 +82,9 @@ Ext.define('Booking.view.ListUserViewController', {
 				scope : this,
 				success : function(response) {
 					Ext.getCmp("updateUserWindowId").close();
-					console.log("user saved!");
+					this.onSearchUserClick();
+					Ext.Msg.alert("Message", "User successfully updated.");
+					console.log("user updated!");
 				}
 			});	
 	},
@@ -199,6 +230,7 @@ Ext.define('Booking.view.ListUserViewController', {
 			},
 			scope : this,
 			success : function(response) {
+				Ext.Msg.alert("Message", "User successfully deleted.");
 				console.log("deleted!");
 			}
 		});
@@ -209,6 +241,7 @@ Ext.define('Booking.view.ListUserViewController', {
 	},
 	
 	onUpdateUser: function(button, e, eOpts) {
+		if(Ext.getCmp("userList").getSelection()[0] != null){ 
 		Ext.getBody().mask();
         Ext.create('Ext.window.Window', {
             title: 'Update User',
@@ -340,7 +373,9 @@ Ext.define('Booking.view.ListUserViewController', {
                 }]
             }]
         }).show();
-	}
+		}
+	},
+
 
 	
 });

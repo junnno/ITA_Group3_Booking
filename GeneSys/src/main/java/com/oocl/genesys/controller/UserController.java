@@ -78,4 +78,12 @@ public class UserController {
     	
 		return "deleted";
     }
+	
+	@ResponseBody
+	@RequestMapping(value = { "/getAuth" }, method = RequestMethod.POST)
+	public int getAuthorization(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) return -1;
+		else return user.getRole();
+    }
 }

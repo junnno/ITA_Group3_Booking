@@ -45,7 +45,6 @@ public class LoginController {
 		List<User> users = userService.getAllUsers();
 		for (User user : users) {
 			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-
 				session.setAttribute("user", user);
 				System.out.print("You are now logged in as ");
 				System.out.println(user.getUsername() +" "+ session.getAttribute("user"));
