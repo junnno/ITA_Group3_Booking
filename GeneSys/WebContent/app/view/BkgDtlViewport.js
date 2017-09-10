@@ -28,6 +28,7 @@ Ext.define('Booking.view.BkgDtlViewport', {
         'Ext.toolbar.Toolbar',
         'Ext.button.Button',
         'Ext.grid.Panel',
+        'Ext.selection.CheckboxModel',
         'Ext.grid.column.Number'
     ],
 
@@ -43,7 +44,7 @@ Ext.define('Booking.view.BkgDtlViewport', {
 
     items: [
         {
-            xtype: 'image',
+        	xtype: 'image',
             dock: 'top',
             height: '',
             maxHeight: 45,
@@ -237,6 +238,9 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                     bodyBorder: true,
                                                     columnLines: true,
                                                     store: 'CntrStore',
+                                                    selModel: {
+                                                        selType: 'checkboxmodel'
+                                                    },
                                                     columns: [
                                                         {
                                                             xtype: 'gridcolumn',
