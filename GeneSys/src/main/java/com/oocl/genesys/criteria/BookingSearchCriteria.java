@@ -6,6 +6,7 @@ public class BookingSearchCriteria {
 	private String toCity;
 	private String bkgNum;
 	private String cntrNum;
+	private String status;
 	
 	public String getFromCity() {
 		return fromCity;
@@ -30,5 +31,11 @@ public class BookingSearchCriteria {
 	}
 	public void setCntrNum(String cntrNum) {
 		this.cntrNum = cntrNum;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

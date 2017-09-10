@@ -198,6 +198,12 @@ public class BookingController {
     @RequestMapping(value = { "/update/{bkgNum}" }, method = RequestMethod.GET)
     public String updateBooking(@PathVariable String bkgNum, ModelMap model) {
         Booking booking = bkgService.searchBkgByBkgNum(bkgNum);
+        if(booking!=null) {
+        	bkgService.updateBkg(booking);
+        }
+        else {
+        	System.out.println("Booking does not exist");
+        }
         model.addAttribute("booking", booking);
         model.addAttribute("update", true);
         return "updateBooking";
@@ -221,25 +227,33 @@ public class BookingController {
         model.addAttribute("success", "Booking # " + bkgNum  + " has been deleted successfully.");
         return "success";
     }
-    
-    @RequestMapping(value = { "/search" }, method = RequestMethod.GET)
-    public String search(@Valid BookingSearchCriteria bookingCriteria,  ModelMap model){
-    	bookingCriteria.setBkgNum("");
-    	bookingCriteria.setToCity("MNL");
-    	bookingCriteria.setFromCity("HKG");
-        bookingCriteria.setCntrNum("");
-        
-    	List<Booking> bkgList = bkgService.searchBooking(bookingCriteria);
+    @ResponseBody
+    @RequestMapping(value = { "/search" }, method = {RequestMethod.POST, RequestMethod.GET})
+    public HashMap<String, Object> search(@Valid String criteria,  ModelMap model){
+    	HashMap<String, Object> response = new HashMap<String, Object>();
+    	BookingSearchCriteria bkgCriteria = new BookingSearchCriteria();
+    	Object criteriaObj = new JSONObject(criteria);
+    	JSONObject critBkg = (JSONObject) criteriaObj;
+    	
+    	bkgCriteria.setBkgNum(critBkg.getString("bkgNum").isEmpty() ? "" : (String)critBkg.getString("bkgNum"));
+    	bkgCriteria.setCntrNum(critBkg.getString("cntrNum").isEmpty() ? "" : (String)critBkg.getString("cntrNum"));
+    	bkgCriteria.setFromCity(critBkg.getString("fromCity").isEmpty() ? "" : (String)critBkg.getString("fromCity"));
+    	bkgCriteria.setToCity(critBkg.getString("toCity").isEmpty() ? "" : (String)critBkg.getString("toCity"));
+    	bkgCriteria.setStatus(critBkg.getString("status").isEmpty() ? "" : (String)critBkg.getString("status"));
+    	List<Booking> bkgList = bkgService.searchBooking(bkgCriteria);
     	if(bkgList.size()!=0) {
 	        System.out.println(bkgList.size());
 	        for(Booking bkg : bkgList) {
 	        	System.out.println(bkg.getBkgNum()+";)");
 	        }
-	       
+	        model.addAttribute("booking", bkgList);
+	        response.put("data", bkgList);
+			response.put("success", true);
+			return response;
     	}
     	else {
     		 System.out.println("No booking found.");
     	}
-    	 return "success";
+    	return response;
     }
 }
