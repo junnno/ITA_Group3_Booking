@@ -31,7 +31,8 @@ Ext.define('Booking.view.BkgDtlViewport', {
         'Ext.selection.CheckboxModel',
         'Ext.grid.column.Number'
     ],
-
+    action: null,
+    bkg: null,
     controller: 'bkgdtlviewport',
     viewModel: {
         type: 'bkgdtlviewport'
@@ -91,6 +92,12 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                     xtype: 'container',
                                                     flex: 1,
                                                     items: [
+                                                    	{
+                                                            xtype: 'textfield',
+                                                            disabled: true,
+                                                            hidden: true,
+                                                            id: 'BkgId'
+                                                        },
                                                         {
                                                             xtype: 'textfield',
                                                             disabled: true,
