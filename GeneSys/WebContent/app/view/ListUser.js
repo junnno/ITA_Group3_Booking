@@ -113,7 +113,7 @@ Ext.define('Booking.view.ListUser', {
                                             xtype: 'button',
                                             id: 'searchUser',
                                             itemId: 'searchUser',
-                                            text: 'Search'
+                                            text: 'List'
                                         },
                                         {
                                             xtype: 'button',

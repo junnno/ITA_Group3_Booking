@@ -49,12 +49,13 @@ Ext.application({
         'ResetController',
         'SearchController',
         'UpdateController',
-        "UserList"
+        "UserList",
+        "ViewUserController"
     ],
     name: 'Booking',
 
     launch: function() {
-        Ext.create('Booking.view.ListUser', {renderTo: Ext.getBody()});
+        Ext.create('Booking.view.SearchBookingView', {renderTo: Ext.getBody()});
     }
 
 });

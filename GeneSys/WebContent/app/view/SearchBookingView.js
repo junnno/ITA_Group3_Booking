@@ -16,6 +16,7 @@
 Ext.define('Booking.view.SearchBookingView', {
     extend: 'Ext.container.Viewport',
     alias: 'widget.searchbookingview',
+    id:'SearchBookingView',
 
     requires: [
         'Booking.view.SearchBookingViewViewModel',
@@ -82,6 +83,14 @@ Ext.define('Booking.view.SearchBookingView', {
                                 },
                                 {
                                     xtype: 'button',
+                                    id: 'userButton',
+                                    itemId: 'userButton',
+                                    allowDepress: false,
+                                    scale: 'medium',
+                                    text: 'User'
+                                },
+                                {
+                                    xtype: 'button',
                                     id: 'searchButton1',
                                     itemId: 'searchButton1',
                                     allowDepress: false,
@@ -92,7 +101,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                     xtype: 'button',
                                     id: 'logOut',
                                     scale: 'medium',
-                                    text: 'LogOut'
+                                    text: 'Logout'
                                 }
                             ]
                         }
