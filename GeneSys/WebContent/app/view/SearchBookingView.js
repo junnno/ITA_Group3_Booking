@@ -72,7 +72,19 @@ Ext.define('Booking.view.SearchBookingView', {
                                      itemId: 'userButton',
                                      allowDepress: false,
                                      scale: 'medium',
-                                     text: 'User'
+                                     text: 'User',
+                                     listeners: {
+                                         'beforerender' : function() {
+                                         	 Ext.Ajax.request({
+                                   				url : 'user/getAuth',
+                                   				method : 'POST',
+                                   				scope : this,
+                                   				success : function(response) {
+                                   					if(response.responseText == "3" || response.responseText == "2") Ext.getCmp('userButton').hide();
+                                   				}
+                                   			});	
+                                         }
+                                     }
                                  },
                             	 {
                                      xtype: 'button',
@@ -132,7 +144,19 @@ Ext.define('Booking.view.SearchBookingView', {
                                     allowDepress: false,
                                     scale: 'medium',
                                     text: 'Update',
-                                    disabled: true
+                                    disabled: true,
+                                    listeners: {
+                                        'beforerender' : function() {
+                                        	 Ext.Ajax.request({
+                                  				url : 'user/getAuth',
+                                  				method : 'POST',
+                                  				scope : this,
+                                  				success : function(response) {
+                                  					if(response.responseText == "3") Ext.getCmp('updateButton').hide();
+                                  				}
+                                  			});	
+                                        }
+                                    }
                                 },
                                 {
                                     xtype: 'button',
@@ -140,7 +164,20 @@ Ext.define('Booking.view.SearchBookingView', {
                                     itemId: 'createButton',
                                     allowDepress: false,
                                     scale: 'medium',
-                                    text: 'Create'
+                                    text: 'Create',
+                                    listeners: {
+                                        'beforerender' : function() {
+                                        	 Ext.Ajax.request({
+                                  				url : 'user/getAuth',
+                                  				method : 'POST',
+                                  				scope : this,
+                                  				success : function(response) {
+                                  					if(response.responseText == "3") Ext.getCmp('createButton').hide();
+                                  				}
+                                  			});	
+                                        }
+                                    }
+                                    
                                 },
                             ]
                         }
