@@ -196,15 +196,17 @@ Ext.define('Booking.view.SearchBookingView', {
                                         },
                                         {
                                             xtype: 'gridcolumn',
-                                            dataIndex: 'string',
+                                            dataIndex: 'Consignee',
                                             text: 'Consignee'
                                         },
                                         {
                                             xtype: 'gridcolumn',
+                                            dataIndex:'From',
                                             text: 'From'
                                         },
                                         {
                                             xtype: 'gridcolumn',
+                                            dataIndex: 'To',
                                             text: 'To'
                                         }
                                     ],
@@ -230,27 +232,32 @@ Ext.define('Booking.view.SearchBookingView', {
                                     columns: [
                                         {
                                             xtype: 'gridcolumn',
-                                            dataIndex: 'string',
+                                            dataIndex: 'CntrNumber',
                                             text: 'Container Number'
                                         },
                                         {
                                             xtype: 'gridcolumn',
+                                            dataIndex: 'CntrTypes',
                                             text: 'Container Type'
                                         },
                                         {
                                             xtype: 'gridcolumn',
+                                            dataIndex: 'GrossWeight',
                                             text: 'Gross Weight'
                                         },
                                         {
                                             xtype: 'gridcolumn',
+                                            dataIndex: 'NetWeight',
                                             text: 'Net Weight'
                                         },
                                         {
                                             xtype: 'gridcolumn',
+                                            dataIndex: 'CargoNature',
                                             text: 'Cargo Nature'
                                         },
                                         {
                                             xtype: 'gridcolumn',
+                                            dataIndex: 'CargoDescription',
                                             text: 'Cargo Description'
                                         }
                                     ],
