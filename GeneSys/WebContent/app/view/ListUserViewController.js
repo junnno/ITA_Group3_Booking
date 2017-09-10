@@ -288,7 +288,7 @@ Ext.define('Booking.view.ListUserViewController', {
                         click: {
                             scope: this,
                             fn: function () {
-                                var cmp = Ext.getCmp('containerId');
+                                var cmp = Ext.getCmp('upContainerId');
                                 var containerCmp = cmp.items.getRange();
                                 var store = Ext.getStore('UserStore');
                                 var errors = [], data = [];
