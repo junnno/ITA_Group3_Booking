@@ -22,12 +22,12 @@ Ext.define('Booking.view.MainController', {
         Ext.getBody().mask();
         Ext.create('Ext.window.Window', {
             title: 'Container Info',
-            //layout: 'fit',
+            // layout: 'fit',
             id: 'CntrInfoWindowAdderId',
             layout: {
                 type: 'vbox',
                 align: 'stretch'
-                //padding: '10'
+                // padding: '10'
             },
             listeners: {
                 close: {
@@ -101,7 +101,7 @@ Ext.define('Booking.view.MainController', {
                                 var errors = [], data = [];
                                 var cntrType, cntrNet, cntrGross, cntrUnit;
 
-                                //Get component errors
+                                // Get component errors
                                 for(var i=0; i<containerCmp.length; i++){
                                     if(!Ext.isEmpty(containerCmp[i].getErrors())){
                                         errors.push(containerCmp[i].getErrors());
@@ -121,7 +121,7 @@ Ext.define('Booking.view.MainController', {
                                     }
                                 }else{
                                     for(var x=0; x<containerCmp.length; x++){
-                                        //data.push(containerCmp[x].getValue());
+                                        // data.push(containerCmp[x].getValue());
                                         if(x===0){
                                             cntrType = containerCmp[x].getValue();
                                         }else if(x===1){
@@ -151,20 +151,20 @@ Ext.define('Booking.view.MainController', {
 
         if(!Ext.isEmpty(selected)){
             store.remove(selected);
-            //To remove all selected
-            //store.removeAll(selected);
+            // To remove all selected
+            // store.removeAll(selected);
         }
     },
 
     onBkgSave: function(button, e, eOpts) {
-    	//Container Details
+    	// Container Details
         var cntrList = Ext.getStore("CntrStore").getRange();
         var containers = [];
         for(var i = 0; i< cntrList.length; i++){
         	containers.push(cntrList[i].data);
         }
         
-        //Booking Validation Details
+        // Booking Validation Details
         var valWgt = Ext.getCmp('validWgtId').getValue();
         var appDoc = Ext.getCmp('ApproveDocId').getValue();
         var goodCus = Ext.getCmp('GoodCusId').getValue();
@@ -174,13 +174,13 @@ Ext.define('Booking.view.MainController', {
         	isBkgApprove = true;
         }
         
-        //Booking Details
+        // Booking Details
         var booking = {
         	consignee : Ext.getCmp('BkgConId').getValue(),
         	shipper : Ext.getCmp('BkgShpId').getValue(),
         	fromCity : Ext.getCmp('BkgFrmCityid').getValue()==null?'':Ext.getCmp('BkgFrmCityid').getValue(),
         	toCity :  Ext.getCmp('BkgToCityId').getValue()==null?'':Ext.getCmp('BkgToCityId').getValue(),
-        	cargoNature : Ext.getCmp('CgoNatId').getValue().CgoNatId,
+        	cargoNature : Ext.isEmpty(Ext.getCmp('CgoNatId').getValue().CgoNatId)?'':Ext.getCmp('CgoNatId').getValue().CgoNatId,
         	description : Ext.getCmp('CgoDescId').getValue(),
         	validWgt : valWgt,
         	approveDoc : appDoc,
@@ -189,7 +189,7 @@ Ext.define('Booking.view.MainController', {
         }
        
         Ext.Ajax.request({
-			url : 'booking/testSaveBkg',
+			url : 'booking/saveBkg',
 			method : 'POST',
 			params : {
 				booking : Ext.util.JSON.encode(booking),
@@ -198,14 +198,52 @@ Ext.define('Booking.view.MainController', {
 			scope : this,
 			success : function(response) {
 				console.log("saved!");
+				var resData = Ext.util.JSON.decode(response.responseText);
+				if(resData.success){
+					// 'test','Booking '+data.bkgNum+' successfuly created.'
+					Ext.create('Ext.window.Window', {
+			            title: 'Booking Number',
+			            // layout: 'fit',
+			            id: 'CreateBkgSuccessWindowId',
+			            layout: {
+			            	type: 'vbox',
+			                align: 'stretch'
+			                // padding: '10'
+			            },
+			            width: 200,
+			            height: 100,
+			            listeners: {
+			                close: {
+			                    scope: this,
+			                    fn: function () {
+			                        console.log('window closing');
+			                        var win = Ext.getCmp('CreateBkgSuccessWindowId');
+			                        win.destroy();
+			                    }
+			                }
+			            },
+			            items: [
+			            	{
+			            		 xtype: 'container',
+			                     id: 'CrtBkgSuccessWindowCntrId',
+			                     padding: '10',
+			                     layout: {
+			                         type: 'vbox',
+			                         align: 'stretch'
+			                     },
+			                     items: [
+			                    	 {
+					            		xtype: 'label',
+					                    text: 'Booking '+resData.bkgNum+' successfuly created.'
+					            		//text: resData.bkgNum
+			                    	 }
+			                    ]
+			            	}
+			            ]
+					}).show();
+				}
 			}
 		});
-       
-       
-        
-        
-
-      
     }
 
 });
