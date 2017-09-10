@@ -195,14 +195,23 @@ Ext.define('Booking.view.SearchBookingView', {
                                     store: 'BkgStore',
                                     listeners : {
                                     	rowclick: function(searchgrid, rowIndex, e) {
-//                                    		var a = Ext.getStore('BkgStore');
-//                                            var record = a.getAt(rowIndex);
-//                                            alert(record.data.id);
                                     		var cmp = Ext.getCmp('bookingGridId');
-                                            this.rowSelection = cmp.getSelection();
+                                    		var containerStore = Ext.getStore('CntrDetailsStore');
+                                    		containerStore.removeAll();
+                                            var selected = cmp.getSelection();
                                             var store = Ext.getStore('BkgStore');
-                                            console.log(this.rowSelection);
-                                            Ext.getCmp('updateButton').setDisabled(false);
+                                            var details = selected[0].data.ContainerDetails;
+                                            Ext.each(details, function(record) {
+                            					var ctrs = {
+                            				            CntrNumber : record.containerNum,
+                            				            CntrTypes : record.containerType,
+                            				            GrossWeight : record.grossWeight,
+                            				            NetWeight : record.netWeight,
+                            				            CargoNature : record.cargoNature,
+                            				            CargoDescription : record.cargoDesc
+                            					};
+                            					containerStore.add(ctrs);
+                            				});
                                             
                                         }
                                      }, 
@@ -251,6 +260,7 @@ Ext.define('Booking.view.SearchBookingView', {
                             items: [
                                 {
                                     xtype: 'gridpanel',
+                                    store: 'CntrDetailsStore',
                                     forceFit: true,
                                     columns: [
                                         {
