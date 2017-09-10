@@ -187,63 +187,146 @@ Ext.define('Booking.view.MainController', {
         	goodCustomer : goodCus,
         	bkgStat : isBkgApprove
         }
-       
-        Ext.Ajax.request({
-			url : 'booking/saveBkg',
-			method : 'POST',
-			params : {
-				booking : Ext.util.JSON.encode(booking),
-				containers : Ext.util.JSON.encode(containers)
-			},
-			scope : this,
-			success : function(response) {
-				console.log("saved!");
-				var resData = Ext.util.JSON.decode(response.responseText);
-				if(resData.success){
-					// 'test','Booking '+data.bkgNum+' successfuly created.'
-					Ext.create('Ext.window.Window', {
-			            title: 'Booking Number',
-			            // layout: 'fit',
-			            id: 'CreateBkgSuccessWindowId',
-			            layout: {
-			            	type: 'vbox',
-			                align: 'stretch'
-			                // padding: '10'
-			            },
-			            width: 200,
-			            height: 100,
-			            listeners: {
-			                close: {
-			                    scope: this,
-			                    fn: function () {
-			                        console.log('window closing');
-			                        var win = Ext.getCmp('CreateBkgSuccessWindowId');
-			                        win.destroy();
-			                    }
-			                }
-			            },
-			            items: [
-			            	{
-			            		 xtype: 'container',
-			                     id: 'CrtBkgSuccessWindowCntrId',
-			                     padding: '10',
-			                     layout: {
-			                         type: 'vbox',
-			                         align: 'stretch'
-			                     },
-			                     items: [
-			                    	 {
-					            		xtype: 'label',
-					                    text: 'Booking '+resData.bkgNum+' successfuly created.'
-					            		//text: resData.bkgNum
-			                    	 }
-			                    ]
-			            	}
-			            ]
-					}).show();
-				}
-			}
-		});
+        
+        //validate booking details
+        console.log(this.validateBookingOnSave(booking, containers));
+        var validateResult = this.validateBookingOnSave(booking, containers);
+        if(validateResult.isSave){
+        	Ext.Ajax.request({
+    			url : 'booking/saveBkg',
+    			method : 'POST',
+    			params : {
+    				booking : Ext.util.JSON.encode(booking),
+    				containers : Ext.util.JSON.encode(containers)
+    			},
+    			scope : this,
+    			success : function(response) {
+    				console.log("saved!");
+    				var resData = Ext.util.JSON.decode(response.responseText);
+    				if(resData.success){
+    					Ext.create('Ext.window.Window', {
+    			            title: 'Booking Number',
+    			            // layout: 'fit',
+    			            id: 'CreateBkgSuccessWindowId',
+    			            layout: {
+    			            	type: 'vbox',
+    			                align: 'stretch'
+    			            },
+    			            width: 200,
+    			            height: 100,
+    			            listeners: {
+    			                close: {
+    			                    scope: this,
+    			                    fn: function () {
+    			                        console.log('window closing');
+    			                        var win = Ext.getCmp('CreateBkgSuccessWindowId');
+    			                        win.destroy();
+    			                    }
+    			                }
+    			            },
+    			            items: [
+    			            	{
+    			            		 xtype: 'container',
+    			                     id: 'CrtBkgSuccessWindowCntrId',
+    			                     padding: '10',
+    			                     layout: {
+    			                         type: 'vbox',
+    			                         align: 'stretch'
+    			                     },
+    			                     items: [
+    			                    	 {
+    					            		xtype: 'label',
+    					                    text: 'Booking '+resData.bkgNum+' successfuly created.'
+    			                    	 }
+    			                    ]
+    			            	}
+    			            ]
+    					}).show();
+    				}
+    			}
+    		});
+        }else{
+        	Ext.create('Ext.window.Window', {
+	            title: 'Validation Result',
+	            id: 'CreateBkgValidateWindowId',
+	            layout: {
+	            	type: 'vbox',
+	                align: 'stretch'
+	            },
+	            width: 200,
+	            height: 100,
+	            listeners: {
+	                close: {
+	                    scope: this,
+	                    fn: function () {
+	                        console.log('window closing');
+	                        var win = Ext.getCmp('CreateBkgValidateWindowId');
+	                        win.destroy();
+	                    }
+	                }
+	            },
+	            items: [
+	            	{
+	            		 xtype: 'container',
+	                     id: 'CrtBkgValidateWindowCntrId',
+	                     padding: '10',
+	                     layout: {
+	                         type: 'vbox',
+	                         align: 'stretch'
+	                     },
+	                     items: [
+	                    	 {
+			            		xtype: 'label',
+			                    text: validateResult.error
+	                    	 }
+	                    ]
+	            	}
+	            ]
+			}).show();
+        }        
+    },
+    
+    validateBookingOnSave: function(booking, containers) {
+    	var bkgValidation = {
+        	isSave : true,
+        	error : ''
+        };
+    	
+    	//validate if empty
+    	if(Ext.isEmpty(booking.consignee)){
+    		bkgValidation.isSave = false;
+    		bkgValidation.error = 'Please complete all required fields!';
+    		return bkgValidation
+    	}else if(Ext.isEmpty(booking.shipper)){
+    		bkgValidation.isSave = false;
+    		bkgValidation.error = 'Please complete all required fields!';
+    		return bkgValidation
+    	}else if(Ext.isEmpty(booking.fromCity)){
+    		bkgValidation.isSave = false;
+    		bkgValidation.error = 'Please complete all required fields!';
+    		return bkgValidation
+    	}else if(Ext.isEmpty(booking.toCity)){
+    		bkgValidation.isSave = false;
+    		bkgValidation.error = 'Please complete all required fields!';
+    		return bkgValidation
+    	}else if(Ext.isEmpty(booking.cargoNature)){
+    		bkgValidation.isSave = false;
+    		bkgValidation.error = 'Please complete all required fields!';
+    		return bkgValidation
+    	}else if(Ext.isEmpty(booking.description)){
+    		bkgValidation.isSave = false;
+    		bkgValidation.error = 'Please complete all required fields!';
+    		return bkgValidation
+    	}
+    	
+    	//validate if from and to city is same
+    	if(booking.fromCity == booking.toCity){
+    		bkgValidation.isSave = false;
+    		bkgValidation.error = 'FROM and TO city must not be the same';
+    		return bkgValidation
+    	}
+    	
+    	return bkgValidation;
     }
 
 });
