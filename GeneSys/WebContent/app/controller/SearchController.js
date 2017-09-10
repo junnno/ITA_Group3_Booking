@@ -19,9 +19,16 @@ Ext.define('Booking.controller.SearchController', {
 	control : {
 		"#searchButton1" : {
 			click : 'onSearchButtonClick'
+		},
+		"#updateButton" : {
+			click : 'onUpdateButtonClick'
 		}
 	},
-
+	onUpdateButtonClick: function(){
+		console.log("hey from china");
+		var bkg = Ext.getCmp('SearchBookingView');
+		console.log(bkg.rowSelection);
+	},
 	onSearchButtonClick : function(button, e, eOpts) {
 		var store = Ext.getStore('BkgStore');
 

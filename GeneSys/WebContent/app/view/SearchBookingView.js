@@ -17,7 +17,7 @@ Ext.define('Booking.view.SearchBookingView', {
     extend: 'Ext.container.Viewport',
     alias: 'widget.searchbookingview',
     id:'SearchBookingView',
-
+    rowSelection: "yow",
     requires: [
         'Booking.view.SearchBookingViewViewModel',
         'Ext.Img',
@@ -80,6 +80,15 @@ Ext.define('Booking.view.SearchBookingView', {
                                     allowDepress: false,
                                     scale: 'medium',
                                     text: 'Create'
+                                },
+                                {
+                                    xtype: 'button',
+                                    id: 'updateButton',
+                                    itemId: 'updateButton',
+                                    allowDepress: false,
+                                    scale: 'medium',
+                                    text: 'Update',
+                                    disabled: true
                                 },
                                 {
                                     xtype: 'button',
@@ -190,10 +199,11 @@ Ext.define('Booking.view.SearchBookingView', {
 //                                            var record = a.getAt(rowIndex);
 //                                            alert(record.data.id);
                                     		var cmp = Ext.getCmp('bookingGridId');
-                                            var selected = cmp.getSelection();
+                                            this.rowSelection = cmp.getSelection();
                                             var store = Ext.getStore('BkgStore');
+                                            console.log(this.rowSelection);
+                                            Ext.getCmp('updateButton').setDisabled(false);
                                             
-                                            alert('hello');
                                         }
                                      }, 
                                     columns: [
@@ -296,7 +306,8 @@ Ext.define('Booking.view.SearchBookingView', {
                                 },
                                 {
                                     xtype: 'button',
-                                    itemId: 'mybutton2',
+                                    id: 'updateBtn',
+                                    itemId: 'updateBtn',
                                     scale: 'medium',
                                     text: 'Update'
                                 }
