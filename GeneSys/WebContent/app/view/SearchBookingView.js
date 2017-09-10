@@ -152,21 +152,25 @@ Ext.define('Booking.view.SearchBookingView', {
                             items: [
                                 {
                                     xtype: 'textfield',
+                                    id:'bkgNum',
                                     fieldLabel: 'Booking'
                                 },
                                 {
                                     xtype: 'textfield',
+                                    id:'cntrNum',
                                     maxWidth: 60,
                                     fieldLabel: 'Container'
                                 },
                                 {
                                     xtype: 'combobox',
+                                    id:'status',
                                     maxWidth: 60,
                                     modelValidation: true,
                                     fieldLabel: 'Status',
                                     displayField: 'Key',
                                     forceSelection: true,
                                     queryMode: 'local',
+                                    store: 'StatusStore',
                                     valueField: 'Value'
                                 }
                             ]
@@ -179,6 +183,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                 {
                                     xtype: 'combobox',
                                     maxWidth: 60,
+                                    id:'fromCity',
                                     fieldLabel: 'From',
                                     displayField: 'name',
                                     forceSelection: true,
@@ -189,6 +194,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                 {
                                     xtype: 'combobox',
                                     maxWidth: 60,
+                                    id:'toCity',
                                     fieldLabel: 'To',
                                     displayField: 'name',
                                     forceSelection: true,
@@ -270,6 +276,11 @@ Ext.define('Booking.view.SearchBookingView', {
                                             xtype: 'gridcolumn',
                                             dataIndex: 'To',
                                             text: 'To'
+                                        },
+                                        {
+                                            xtype: 'gridcolumn',
+                                            dataIndex: 'Status',
+                                            text: 'Status'
                                         }
                                     ],
                                     viewConfig: {
