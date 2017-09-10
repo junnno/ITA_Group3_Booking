@@ -114,7 +114,7 @@ Ext.define('Booking.view.ListUser', {
                                     xtype: 'buttongroup',
                                     border: false,
                                     frame: false,
-                                    columns: 3,
+                                   columns: 4,
                                     items: [
                                     	{
                                             xtype: 'button',
