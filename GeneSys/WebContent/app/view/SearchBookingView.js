@@ -17,7 +17,6 @@ Ext.define('Booking.view.SearchBookingView', {
     extend: 'Ext.container.Viewport',
     alias: 'widget.searchbookingview',
     id:'SearchBookingView',
-    rowSelection: "yow",
     requires: [
         'Booking.view.SearchBookingViewViewModel',
         'Ext.Img',
@@ -200,6 +199,9 @@ Ext.define('Booking.view.SearchBookingView', {
                                     		containerStore.removeAll();
                                             var selected = cmp.getSelection();
                                             var store = Ext.getStore('BkgStore');
+<<<<<<< HEAD
+                                            Ext.getCmp('updateButton').setDisabled(false);
+=======
                                             var details = selected[0].data.ContainerDetails;
                                             Ext.each(details, function(record) {
                             					var ctrs = {
@@ -212,6 +214,7 @@ Ext.define('Booking.view.SearchBookingView', {
                             					};
                             					containerStore.add(ctrs);
                             				});
+>>>>>>> 374382cc3aa0105b9287aa4d60f447ffa1dc7a90
                                             
                                         }
                                      }, 

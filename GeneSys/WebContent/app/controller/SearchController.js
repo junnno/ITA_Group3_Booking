@@ -25,9 +25,8 @@ Ext.define('Booking.controller.SearchController', {
 		}
 	},
 	onUpdateButtonClick: function(){
-		console.log("hey from china");
-		var bkg = Ext.getCmp('SearchBookingView');
-		console.log(bkg.rowSelection);
+		var bkg =Ext.getCmp('bookingGridId').getSelection();
+		Ext.create('Booking.view.BkgDtlViewport',{ action:"update", bkg: bkg}).show();
 	},
 	onSearchButtonClick : function(button, e, eOpts) {
 		var store = Ext.getStore('BkgStore');

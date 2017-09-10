@@ -17,7 +17,11 @@ Ext.define('Booking.view.MainController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.bkgdtlviewport',
     id: 'MainControllerId',
-
+    afterRender: function(){
+    	var x = Ext.getCmp('BkgDtlViewportId');
+    	console.log(x.action);
+    	console.log(x.bkg);
+    },
     onCntrInfoAdd: function(button, e, eOpts) {
         Ext.getBody().mask();
         Ext.create('Ext.window.Window', {
@@ -157,6 +161,15 @@ Ext.define('Booking.view.MainController', {
     },
 
     onBkgSave: function(button, e, eOpts) {
+    	
+    	if(action!=null){
+    		
+    	}
+    	
+    	else{
+    		
+    	}
+    	
     	// Container Details
         var cntrList = Ext.getStore("CntrStore").getRange();
         var containers = [];
