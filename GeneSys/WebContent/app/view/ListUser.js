@@ -133,6 +133,15 @@ Ext.define('Booking.view.ListUser', {
                                         },
                                         {
                                             xtype: 'button',
+                                            id: 'updateUser',
+                                            itemId: 'updateUser',
+                                            text: 'Update',
+                                            listeners: {
+                                            	click: 'onUpdateUser'
+                                            }
+                                        },
+                                        {
+                                            xtype: 'button',
                                             id: 'deleteUser',
                                             itemId: 'deleteUser',
                                             text: 'Delete', 

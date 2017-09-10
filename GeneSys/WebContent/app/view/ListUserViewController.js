@@ -187,6 +187,139 @@ Ext.define('Booking.view.ListUserViewController', {
             store.remove(selected);
         }
 	},
+	
+	onUpdateUser: function(button, e, eOpts) {
+		Ext.getBody().mask();
+        Ext.create('Ext.window.Window', {
+            title: 'Update User',
+            id: 'updateUserWindowId',
+            layout: {
+                type: 'vbox',
+                align: 'stretch'
+            },
+            listeners: {
+                close: {
+                    scope: this,
+                    fn: function () {
+                        Ext.getBody().unmask();
+                    }
+                }
+            },
+            items: [
+            {
+                xtype: 'container',
+                id: 'containerId',
+                padding: '10',
+                layout: {
+                    type: 'vbox',
+                    align: 'stretch'
+                },
+                items: [{
+                    xtype: 'textfield',
+                    fieldLabel: 'Username',
+                    id:'username',
+                    allowBlank: false,
+                    value: Ext.getCmp("userList").getSelection()[0].data.Username
+                },
+                {
+                    xtype: 'textfield',
+                    fieldLabel: 'Password',
+                    allowBlank: false,
+                    value: Ext.getCmp("userList").getSelection()[0].data.Password
+                },
+                {
+                    xtype: 'textfield',
+                    fieldLabel: 'Role',
+                    allowBlank: false,
+                    value: Ext.getCmp("userList").getSelection()[0].data.Role
+                },
+                {
+                    xtype: 'textfield',
+                    fieldLabel: 'Email',
+                    allowBlank: false,
+                    value: Ext.getCmp("userList").getSelection()[0].data.Email
+                },
+                {
+                    xtype: 'textfield',
+                    fieldLabel: 'First Name',
+                    allowBlank: false,
+                    value: Ext.getCmp("userList").getSelection()[0].data.FirstName
+                },
+                {
+                    xtype: 'textfield',
+                    fieldLabel: 'Last Name',
+                    allowBlank: false,
+                    value: Ext.getCmp("userList").getSelection()[0].data.LastName
+                }]
+            },
+            {
+                xtype: 'container',
+                padding: '0 0 10 10',
+                layout: {
+                    type: 'hbox',
+                    align: 'stretch'
+                },
+                items: [{
+                    xtype: 'button',
+                    text: 'Update',
+                    id: 'updateUser',
+                    listeners: {
+                        click: {
+                            scope: this,
+                            fn: function () {
+                                var cmp = Ext.getCmp('containerId');
+                                var containerCmp = cmp.items.getRange();
+                                var store = Ext.getStore('UserStore');
+                                var errors = [], data = [];
+                                var username, password, role, email, firstname, lastname;
+
+                                //Get component errors
+                                for(var i=0; i<containerCmp.length; i++){
+                                    if(!Ext.isEmpty(containerCmp[i].getErrors())){
+                                        errors.push(containerCmp[i].getErrors());
+                                    }
+                                }
+                                if(errors.length > 0 ){
+                                    var isMissingField = false;
+                                    errors.forEach(function(i){
+                                        if(i=='This field is required'){
+                                            isMissingField = true;
+                                        }
+                                    });
+                                    if(isMissingField){
+                                        Ext.MessageBox.alert('Waring!','Please fill up all fields to add!');
+                                    }else{
+                                        Ext.MessageBox.alert('Waring!','Please correct all invalid fields!');
+                                    }
+                                }else{
+                                    for(var x=0; x<containerCmp.length; x++){
+                                        //data.push(containerCmp[x].getValue());
+                                        if(x===0){
+                                        	username = containerCmp[x].getValue();
+                                        }else if(x===1){
+                                            password = containerCmp[x].getValue();
+                                        }else if(x===2){
+                                            role = containerCmp[x].getValue();
+                                        }else if(x===3){
+                                            email = containerCmp[x].getValue();
+                                        }else if(x===4){
+                                            firstname = containerCmp[x].getValue();
+                                        }else if(x===5){
+                                            lastname = containerCmp[x].getValue();
+                                        }
+                                    }
+                                    data.push({Username:username, Password:password,
+                                    Role:role, Email:email, FirstName:firstname, LastName:lastname});
+                                    store.add(data);
+                                    this.onSaveUser(data);
+                                }
+                            }
+                        }
+                    }
+                }]
+            }]
+        }).show();
+	}
 
 	
 });
