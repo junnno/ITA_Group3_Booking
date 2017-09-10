@@ -68,19 +68,19 @@ Ext.define('Booking.view.SearchBookingView', {
                             items: [
                             	 {
                                      xtype: 'button',
-                                     id: 'searchButton',
-                                     itemId: 'searchButton',
-                                     allowDepress: false,
-                                     scale: 'medium',
-                                     text: 'Booking'
-                                 },
-                                 {
-                                     xtype: 'button',
                                      id: 'userButton',
                                      itemId: 'userButton',
                                      allowDepress: false,
                                      scale: 'medium',
                                      text: 'User'
+                                 },
+                            	 {
+                                     xtype: 'button',
+                                     id: 'searchButton',
+                                     itemId: 'searchButton',
+                                     allowDepress: false,
+                                     scale: 'medium',
+                                     text: 'Booking'
                                  },
                                  {
                                      xtype: 'button',
