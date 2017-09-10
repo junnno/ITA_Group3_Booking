@@ -16,7 +16,27 @@
 Ext.define('Booking.view.ListUserViewController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.listuser',
-    
+
+    onSaveUser : function(data) {
+    	console.log(data[0].Username);
+		  Ext.Ajax.request({
+				url : 'user/addUser',
+				method : 'POST',
+				params : {
+		        	username : data[0].Username==null?'':data[0].Username,
+	            	password : data[0].Password==null?'':data[0].Password,
+	            	role :data[0].Role==null?'':data[0].Role,
+	            	email : data[0].Email==null?'':data[0].Email,
+	            	firstName : data[0].FirstName==null?'':data[0].FirstName,
+	            	lastName : data[0].LastName==null?'':data[0].LastName,
+				},
+				scope : this,
+				success : function(response) {
+					console.log("user saved!");
+				}
+			});	
+	},
+
     onAddUser: function(button, e, eOpts) {
         Ext.getBody().mask();
         Ext.create('Ext.window.Window', {
@@ -85,6 +105,7 @@ Ext.define('Booking.view.ListUserViewController', {
                 items: [{
                     xtype: 'button',
                     text: 'Add',
+                    id: 'saveUser',
                     listeners: {
                         click: {
                             scope: this,
@@ -133,6 +154,7 @@ Ext.define('Booking.view.ListUserViewController', {
                                     data.push({Username:username, Password:password,
                                     Role:role, Email:email, FirstName:firstname, LastName:lastname});
                                     store.add(data);
+                                    this.onSaveUser(data);
                                 }
                             }
                         }
@@ -146,9 +168,25 @@ Ext.define('Booking.view.ListUserViewController', {
 		var cmp = Ext.getCmp('userList');
         var selected = cmp.getSelection();
         var store = Ext.getStore('UserStore');
-
+        console.log(selected[0].data);
+        
+        
+        Ext.Ajax.request({
+			url : 'user/deleteUser',
+			method : 'POST',
+			params : {
+				userParam : Ext.util.JSON.encode(selected[0].data),
+			},
+			scope : this,
+			success : function(response) {
+				console.log("deleted!");
+			}
+		});
+       
         if(!Ext.isEmpty(selected)){
             store.remove(selected);
         }
-	}
+	},
+
+	
 });

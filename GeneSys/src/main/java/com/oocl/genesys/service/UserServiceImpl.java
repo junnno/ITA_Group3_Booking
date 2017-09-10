@@ -99,9 +99,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser() {
+	public void deleteUser(User user) {
 		try {
-			User user = userDAO.getUserByUsername("genesys");
 			userDAO.deleteUser(user);
 			System.out.println("User has been deleted.");
 		} catch (Exception e) {

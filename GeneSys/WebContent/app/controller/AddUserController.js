@@ -16,14 +16,36 @@
 Ext.define('Booking.controller.AddUserController', {
     extend: 'Ext.app.Controller',
 
-    control: {
-        "#addUser": {
-            click: 'addUserClick'
-        }
-    },
-
-    addUserClick: function(button, e, eOpts) {
-
-    }
+//    control: {
+//        "#saveUser":{
+//        	click: 'addUserClick'
+//        }
+//    },
+//
+//    addUserClick: function(button, e, eOpts) {
+//    	//User Details from Store
+////        var userList = Ext.getStore("UserStore").getRange();
+////        var users = [];
+////        for(var i = 0; i< userList.length; i++){
+////        	users.push(userList[i].data);
+////        }
+////        
+//        Ext.Ajax.request({
+//			url : 'user/addUser',
+//			method : 'POST',
+//			params : {
+//	        	username : Ext.getCmp('userNameField').getValue()==null?'':Ext.getCmp('userNameField').getValue(),
+//            	password : Ext.getCmp('passwordField').getValue()==null?'':Ext.getCmp('passwordField').getValue(),
+//            	role : Ext.getCmp('roleField').getValue()==null?'':Ext.getCmp('roleField').getValue(),
+//            	email :  Ext.getCmp('emailField').getValue()==null?'':Ext.getCmp('emailField').getValue(),
+//            	firstName : Ext.getCmp('firsNameField').getValue()==null?'':Ext.getCmp('firstNameField').getValue(),
+//            	lastName : Ext.getCmp('lastNameField').getValue()==null?'':Ext.getCmp('lastNameField').getValue(),
+//			},
+//			scope : this,
+//			success : function(response) {
+//				console.log("user saved!");
+//			}
+//		});
+//    }
 
 });

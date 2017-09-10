@@ -66,31 +66,37 @@ Ext.define('Booking.view.ListUser', {
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'Username',
+                            id: 'userNameField',
                             text: 'Username'
                         },
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'Password',
+                            id: 'passwordField',
                             text: 'Password'
                         },
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'Role',
+                            id: 'roleField',
                             text: 'Role'
                         },
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'Email',
+                            id: 'emailField',
                             text: 'Email'
                         },
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'FirstName',
+                            id: 'firstNameField',
                             text: 'First Name'
                         },
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'LastName',
+                            id: 'lastNameField',
                             text: 'Last Name'
                         }
                     ],

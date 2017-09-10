@@ -2,8 +2,11 @@ package com.oocl.genesys.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -25,13 +28,13 @@ public class UserController {
 	UserService userService;
 	
 	@ResponseBody
-	@RequestMapping(value = { "/addUser" }, method = RequestMethod.GET)
-	public User createUser(@RequestParam(required = true) String username, @RequestParam(required = true) String password, @RequestParam(required = true) String firstName, @RequestParam(required = true) String lastName, @RequestParam(required = true) String email, @RequestParam(required = true) int role, HttpSession session) {
-		User user = (User) session.getAttribute("user");
-		if(user == null) return null;
-	
+	@RequestMapping(value = { "/addUser" }, method = RequestMethod.POST)
+	public String createUser(@RequestParam(required = true) String username, @RequestParam(required = true) String password, @RequestParam(required = true) String firstName, @RequestParam(required = true) String lastName, @RequestParam(required = true) String email, @RequestParam(required = true) int role, HttpSession session) {
+		//User user = (User) session.getAttribute("user");
+		//if(user == null) return null;
+		System.out.println(username + "" + password + "" + firstName +  ""+lastName+""+email+""+role );
 		userService.createUser(username, password, firstName, lastName, email, role);
-		return user;
+		return "something";
 	}
 	
 	@ResponseBody
@@ -45,5 +48,21 @@ public class UserController {
         model.addAttribute("user", userList);
         
 		return userList;
+    }
+	
+	@ResponseBody
+	@RequestMapping(value = { "/deleteUser" }, method = RequestMethod.POST)
+	public String deleteUser(@RequestParam(required=true) String userParam, HttpServletRequest request, HttpServletResponse response) {
+//    	System.out.println(booking+" "+containers);
+    	Object userObject = new JSONObject(userParam);
+    	JSONObject userJSONObject = (JSONObject) userObject;
+    	
+    	String username = (String) userJSONObject.getString("Username");
+    	if(userService.checkIfUserExists(username)) {
+    		User user = userService.getUserByUsername(username);
+    		userService.deleteUser(user);
+    	}
+    	
+		return "deleted";
     }
 }
