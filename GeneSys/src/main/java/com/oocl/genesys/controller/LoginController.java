@@ -64,6 +64,7 @@ public class LoginController {
 		System.out.println(user.getUsername() +" "+ session.getAttribute("user"));
 		session.removeAttribute("user");
 		System.out.println("Test : "+ session.getAttribute("user"));
+		System.out.println("logged out");
 		return "Successfully logged out";
 	}
 

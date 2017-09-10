@@ -25,7 +25,16 @@ Ext.define('Booking.controller.LogOutController', {
     },
 
     onLogOutClick: function(button, e, eOpts) {
-
+    	Ext.Ajax.request({
+			url : 'logout',
+			params : {
+			},
+			scope : this,
+			success : function(response) {
+				alert('You have successfully logged out');
+				window.location.reload();
+				}
+		});
     }
 
 });

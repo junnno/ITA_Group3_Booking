@@ -46,6 +46,7 @@ Ext.application({
     ],
     controllers: [
         'LogInController',
+        'LogOutController',
         'ResetController',
         'SearchController',
         'UpdateController',
