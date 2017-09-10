@@ -16,6 +16,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="GS_CONTAINER")
 public class Container implements Serializable{
@@ -25,6 +28,7 @@ public class Container implements Serializable{
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gs_container_seq")
     private int container_id;
 	
+	@JsonIgnore
 	@NotNull
 	@ManyToOne(targetEntity=Booking.class)
 	@JoinColumn(name="bkg_num", nullable=false,referencedColumnName="BKG_NUM")

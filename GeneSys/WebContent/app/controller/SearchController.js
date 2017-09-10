@@ -17,7 +17,7 @@ Ext.define('Booking.controller.SearchController', {
 	extend : 'Ext.app.Controller',
 
 	control : {
-		"#searchButton" : {
+		"#searchButton1" : {
 			click : 'onSearchButtonClick'
 		}
 	},
