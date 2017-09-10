@@ -144,7 +144,7 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                             xtype: 'combobox',
                                                             id: 'BkgToCityId',
                                                             fieldLabel: 'To City',
-                                                            displayField: 'name',
+                                                            displayField: 'code',
                                                             forceSelection: true,
                                                             queryMode: 'local',
                                                             store: 'CityStore',

@@ -41,6 +41,14 @@ Ext.define('Booking.view.MainController', {
                     fn: function () {
                         Ext.getBody().unmask();
                     }
+                },
+                show: {
+                    scope: this,
+                    fn: function () {
+                        var cntrUnit = Ext.getCmp('containrWgtUnitId');
+                        var unitStore = cntrUnit.getStore().getRange();
+                        cntrUnit.setValue(unitStore[0].data.code)
+                    }
                 }
             },
             items: [
@@ -64,6 +72,7 @@ Ext.define('Booking.view.MainController', {
                 },
                 {
                     xtype: 'numberfield',
+                    id: 'containrNetWgtId',
                     fieldLabel: 'Container Net Weight',
                     maxValue: 999999.99,
                     minValue: 0,
@@ -71,6 +80,7 @@ Ext.define('Booking.view.MainController', {
                 },
                 {
                     xtype: 'numberfield',
+                    id: 'containrGrossWgtId',
                     fieldLabel: 'Container Gross Weight',
                     maxValue: 999999.99,
                     minValue: 0,
@@ -78,13 +88,45 @@ Ext.define('Booking.view.MainController', {
                 },
                 {
                     xtype: 'combobox',
+                    id: 'containrWgtUnitId',
                     fieldLabel: 'Container Weight Unit',
                     allowBlank: false,
                     displayField: 'name',
                     forceSelection: true,
                     queryMode: 'local',
                     store: 'CntrWgtUntStore',
-                    valueField: 'code'
+                    valueField: 'code',
+                    listeners: {
+                        select: {
+                            scope: this,
+                            fn: function() {
+                              var containrUnitCmp = Ext.getCmp('containrWgtUnitId');
+                              var containrUnitVal = containrUnitCmp.getValue();
+                              var grossCmp = Ext.getCmp('containrGrossWgtId');
+                              var grossVal = grossCmp.getValue();
+                              var netCmp = Ext.getCmp('containrNetWgtId');
+                              var netVal = netCmp.getValue();
+                              
+                              console.log(containrUnitVal + ' ' + grossVal + ' ' + netVal);
+                              //KG to pounds (1KG -> 2.204lbs)
+                              if(containrUnitVal == 'KG'){
+                                  if(!Ext.isEmpty(grossVal)){
+                                      grossCmp.setValue((grossVal*2.204));
+                                  }
+                                  if(!Ext.isEmpty(netVal)){
+                                      netCmp.setValue((netVal*2.204));
+                                  }
+                              }else if(containrUnitVal == 'lbs'){
+                                  if(!Ext.isEmpty(grossVal)){
+                                      grossCmp.setValue((grossVal/2.204));
+                                  }
+                                  if(!Ext.isEmpty(netVal)){
+                                      netCmp.setValue((netVal/2.204));
+                                  }
+                              }
+                            }
+                        }
+                    }
                 }]
             },
             {
@@ -163,13 +205,6 @@ Ext.define('Booking.view.MainController', {
     },
 
     onBkgSave: function(button, e, eOpts) {
-    	
-    	if(action!=null){
-    		
-    	}else{
-    		
-    	}
-    	
     	// Container Details
         var cntrList = Ext.getStore("CntrStore").getRange();
         var containers = [];
