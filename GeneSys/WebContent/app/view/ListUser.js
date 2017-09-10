@@ -39,14 +39,71 @@ Ext.define('Booking.view.ListUser', {
         align: 'stretch'
     },
     items: [
-        {
-            xtype: 'image',
-            dock: 'top',
-            height: '',
-            maxHeight: 80,
-            maxWidth: 200,
-            src: 'brand.png'
-        },
+    	{
+            xtype: 'container',
+            items: [
+                {
+                    xtype: 'container',
+                    layout: {
+                        type: 'hbox',
+                        align: 'stretch'
+                    },
+                    items: [
+                    	{
+                            xtype: 'image',
+                            flex: 1,
+                            dock: 'top',
+                            height: '',
+                            maxHeight: 80,
+                            maxWidth: 200,
+                            src: 'brand.png'
+                        },
+                        {
+                            xtype: 'toolbar',
+                            flex: 1,
+                            layout: {
+                                type: 'hbox',
+                                pack: 'end'
+                            },
+                            items: [
+                            	 {
+                                     xtype: 'button',
+                                     id: 'userButton1',
+                                     itemId: 'userButton1',
+                                     allowDepress: false,
+                                     scale: 'medium',
+                                     text: 'User',
+                                     listeners: {
+                                         'beforerender' : function() {
+                                         	 Ext.Ajax.request({
+                                   				url : 'user/getAuth',
+                                   				method : 'POST',
+                                   				scope : this,
+                                   				success : function(response) {
+                                   					if(response.responseText == "3" || response.responseText == "2") Ext.getCmp('userButton').hide();
+                                   				}
+                                   			});	
+                                         }
+                                     }
+                                 },
+                            	 {
+                                     xtype: 'button',
+                                     id: 'searchButton2',
+                                     itemId: 'searchButton2',
+                                     allowDepress: false,
+                                     scale: 'medium',
+                                     text: 'Booking'
+                                 },
+                                 {
+                                     xtype: 'button',
+                                     id: 'logOut2',
+                                     scale: 'medium',
+                                     text: 'Logout'
+                                 }
+                            ]
+                        }
+                    ]
+                }]},
         {
             xtype: 'container',
             layout: {
