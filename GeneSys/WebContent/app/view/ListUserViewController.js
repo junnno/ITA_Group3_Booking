@@ -77,7 +77,7 @@ Ext.define('Booking.view.ListUserViewController', {
             items: [
             {
                 xtype: 'container',
-                id: 'containerId',
+                id: 'adContainerId',
                 padding: '10',
                 layout: {
                     type: 'vbox',
@@ -86,7 +86,7 @@ Ext.define('Booking.view.ListUserViewController', {
                 items: [{
                     xtype: 'textfield',
                     fieldLabel: 'Username',
-                    id:'username',
+                    id:'adUsername',
                     allowBlank: false
                 },
                 {
@@ -125,12 +125,12 @@ Ext.define('Booking.view.ListUserViewController', {
                 items: [{
                     xtype: 'button',
                     text: 'Add',
-                    id: 'saveUser',
+                    id: 'adSaveUser',
                     listeners: {
                         click: {
                             scope: this,
                             fn: function () {
-                                var cmp = Ext.getCmp('containerId');
+                                var cmp = Ext.getCmp('adContainerId');
                                 var containerCmp = cmp.items.getRange();
                                 var store = Ext.getStore('UserStore');
                                 var errors = [], data = [];
@@ -228,7 +228,7 @@ Ext.define('Booking.view.ListUserViewController', {
             items: [
             {
                 xtype: 'container',
-                id: 'containerId',
+                id: 'upContainerId',
                 padding: '10',
                 layout: {
                     type: 'vbox',
@@ -237,7 +237,7 @@ Ext.define('Booking.view.ListUserViewController', {
                 items: [{
                     xtype: 'textfield',
                     fieldLabel: 'Username',
-                    id:'username',
+                    id:'upUsername',
                     disabled : true,
                     allowBlank: false,
                     value: Ext.getCmp("userList").getSelection()[0].data.Username
