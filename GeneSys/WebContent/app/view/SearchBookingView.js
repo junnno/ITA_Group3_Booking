@@ -54,8 +54,8 @@ Ext.define('Booking.view.SearchBookingView', {
                             flex: 1,
                             dock: 'top',
                             height: '',
-                            maxHeight: 45,
-                            maxWidth: 100,
+                            maxHeight: 80,
+                            maxWidth: 200,
                             src: 'brand.png'
                         },
                         {
@@ -215,6 +215,7 @@ Ext.define('Booking.view.SearchBookingView', {
                         {
                             xtype: 'panel',
                             flex: 1,
+                            layout: 'fit',
                             bodyBorder: false,
                             bodyPadding: 20,
                             title: 'Booking Details',
@@ -284,7 +285,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                         }
                                     ],
                                     viewConfig: {
-                                        height: 100
+                                        height: 400
                                     }
                                 }
                             ]
@@ -336,35 +337,12 @@ Ext.define('Booking.view.SearchBookingView', {
                                         }
                                     ],
                                     viewConfig: {
-                                        height: 105
+                                        height: 400
                                     }
                                 }
                             ]
                         }
-                    ]/*,
-                    dockedItems: [
-                        {
-                            xtype: 'toolbar',
-                            dock: 'bottom',
-                            ui: 'footer',
-                            layout: {
-                                type: 'hbox',
-                                pack: 'end'
-                            },
-                            items: [
-                                {
-                                    xtype: 'tbfill'
-                                },
-                                {
-                                    xtype: 'button',
-                                    id: 'updateBtn',
-                                    itemId: 'updateBtn',
-                                    scale: 'medium',
-                                    text: 'Update'
-                                }
-                            ]
-                        }
-                    ]*/
+                    ]
                 }
             ]
         }

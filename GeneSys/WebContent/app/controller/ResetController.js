@@ -17,13 +17,14 @@ Ext.define('Booking.controller.ResetController', {
     extend: 'Ext.app.Controller',
 
     control: {
-        "#mybutton": {
-            click: 'onMybuttonClick'
+        "#resetLoginButton": {
+            click: 'onResetLoginButtonClick'
         }
     },
 
-    onMybuttonClick: function(button, e, eOpts) {
-
+    onResetLoginButtonClick: function(button, e, eOpts) {
+    	Ext.getCmp("username").setValue("");
+    	Ext.getCmp("password").setValue("");
     }
 
 });
