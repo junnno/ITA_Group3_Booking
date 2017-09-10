@@ -17,6 +17,12 @@ Ext.define('Booking.view.MainController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.bkgdtlviewport',
     id: 'MainControllerId',
+    
+    afterRender: function(){
+    	var x = Ext.getCmp('BkgDtlViewportId');
+    	console.log(x.action);
+    	console.log(x.bkg);
+    },
 
     onCntrInfoAdd: function(button, e, eOpts) {
         Ext.getBody().mask();
@@ -157,6 +163,13 @@ Ext.define('Booking.view.MainController', {
     },
 
     onBkgSave: function(button, e, eOpts) {
+    	
+    	if(action!=null){
+    		
+    	}else{
+    		
+    	}
+    	
     	// Container Details
         var cntrList = Ext.getStore("CntrStore").getRange();
         var containers = [];
@@ -204,85 +217,13 @@ Ext.define('Booking.view.MainController', {
     				console.log("saved!");
     				var resData = Ext.util.JSON.decode(response.responseText);
     				if(resData.success){
-    					Ext.create('Ext.window.Window', {
-    			            title: 'Booking Number',
-    			            // layout: 'fit',
-    			            id: 'CreateBkgSuccessWindowId',
-    			            layout: {
-    			            	type: 'vbox',
-    			                align: 'stretch'
-    			            },
-    			            width: 200,
-    			            height: 100,
-    			            listeners: {
-    			                close: {
-    			                    scope: this,
-    			                    fn: function () {
-    			                        console.log('window closing');
-    			                        var win = Ext.getCmp('CreateBkgSuccessWindowId');
-    			                        win.destroy();
-    			                    }
-    			                }
-    			            },
-    			            items: [
-    			            	{
-    			            		 xtype: 'container',
-    			                     id: 'CrtBkgSuccessWindowCntrId',
-    			                     padding: '10',
-    			                     layout: {
-    			                         type: 'vbox',
-    			                         align: 'stretch'
-    			                     },
-    			                     items: [
-    			                    	 {
-    					            		xtype: 'label',
-    					                    text: 'Booking '+resData.bkgNum+' successfuly created.'
-    			                    	 }
-    			                    ]
-    			            	}
-    			            ]
-    					}).show();
+    					Ext.Msg.alert('Booking Number','Booking '+resData.bkgNum+' successfuly created.');
     				}
     			}
     		});
         }else{
-        	Ext.create('Ext.window.Window', {
-	            title: 'Validation Result',
-	            id: 'CreateBkgValidateWindowId',
-	            layout: {
-	            	type: 'vbox',
-	                align: 'stretch'
-	            },
-	            width: 200,
-	            height: 100,
-	            listeners: {
-	                close: {
-	                    scope: this,
-	                    fn: function () {
-	                        console.log('window closing');
-	                        var win = Ext.getCmp('CreateBkgValidateWindowId');
-	                        win.destroy();
-	                    }
-	                }
-	            },
-	            items: [
-	            	{
-	            		 xtype: 'container',
-	                     id: 'CrtBkgValidateWindowCntrId',
-	                     padding: '10',
-	                     layout: {
-	                         type: 'vbox',
-	                         align: 'stretch'
-	                     },
-	                     items: [
-	                    	 {
-			            		xtype: 'label',
-			                    text: validateResult.error
-	                    	 }
-	                    ]
-	            	}
-	            ]
-			}).show();
+        	
+        	Ext.Msg.alert('Validation Result',validateResult.error);
         }        
     },
     

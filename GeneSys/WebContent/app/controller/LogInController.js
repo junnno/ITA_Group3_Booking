@@ -49,7 +49,7 @@ Ext.define('Booking.controller.LogInController', {
 				var data = Ext.decode(response.responseText);
 				console.log(data);
 				if(!data.success)
-				Ext.Msg.alert('not found', 'olol');
+				Ext.Msg.alert('Invalid Login', 'Please enter the correct Username/Password!');
 				else{
 					Ext.getCmp("loginWindow").hide();
 					Ext.create("Booking.view.SearchBookingView").show();

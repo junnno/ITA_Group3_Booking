@@ -7,6 +7,7 @@ Ext.define('Booking.controller.UserList', {
         }
     },
     onSearchUserClick: function(component, eOpts) {
+    	Ext.getStore('UserStore').removeAll();
     	var store = Ext.getStore('UserStore');
 		Ext.Ajax.request({
 			url : 'user/listUser',

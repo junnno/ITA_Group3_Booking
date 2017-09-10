@@ -31,7 +31,8 @@ Ext.define('Booking.view.BkgDtlViewport', {
         'Ext.selection.CheckboxModel',
         'Ext.grid.column.Number'
     ],
-
+    action: null,
+    bkg: null,
     controller: 'bkgdtlviewport',
     viewModel: {
         type: 'bkgdtlviewport'
@@ -91,6 +92,12 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                     xtype: 'container',
                                                     flex: 1,
                                                     items: [
+                                                    	{
+                                                            xtype: 'textfield',
+                                                            disabled: true,
+                                                            hidden: true,
+                                                            id: 'BkgId'
+                                                        },
                                                         {
                                                             xtype: 'textfield',
                                                             disabled: true,
@@ -137,7 +144,7 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                             xtype: 'combobox',
                                                             id: 'BkgToCityId',
                                                             fieldLabel: 'To City',
-                                                            displayField: 'code',
+                                                            displayField: 'name',
                                                             forceSelection: true,
                                                             queryMode: 'local',
                                                             store: 'CityStore',
@@ -232,7 +239,7 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                     height: 180,
                                                     id: 'CntrInfoGridId',
                                                     margin: '0 0 10 0',
-                                                    maxHeight: 240,
+                                                    maxHeight: 400,
                                                     padding: '',
                                                     scrollable: true,
                                                     bodyBorder: true,

@@ -50,7 +50,8 @@ Ext.application({
         'SearchController',
         'UpdateController',
         "UserList",
-        "ViewUserController"
+        "ViewUserController",
+        "CreateBookingController"
     ],
     name: 'Booking',
 

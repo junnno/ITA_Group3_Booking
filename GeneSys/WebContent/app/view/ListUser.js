@@ -43,8 +43,8 @@ Ext.define('Booking.view.ListUser', {
             xtype: 'image',
             dock: 'top',
             height: '',
-            maxHeight: 45,
-            maxWidth: 100,
+            maxHeight: 80,
+            maxWidth: 200,
             src: 'brand.png'
         },
         {
@@ -56,7 +56,7 @@ Ext.define('Booking.view.ListUser', {
             items: [
                 {
                     xtype: 'gridpanel',
-                    flex: 0.5,
+                    flex: 1,
                     title: 'User List',
                     id:'userList',
                     itemId:'userList',
@@ -114,7 +114,7 @@ Ext.define('Booking.view.ListUser', {
                                     xtype: 'buttongroup',
                                     border: false,
                                     frame: false,
-                                    columns: 3,
+                                   columns: 4,
                                     items: [
                                     	{
                                             xtype: 'button',

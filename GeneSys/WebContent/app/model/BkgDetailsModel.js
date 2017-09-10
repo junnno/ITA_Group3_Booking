@@ -39,6 +39,9 @@ Ext.define('Booking.model.BkgDetailsModel', {
             name: 'To'
         },
         {
+            name: 'Status'
+        },
+        {
         	name: 'ContainerDetails'
         }
     ]

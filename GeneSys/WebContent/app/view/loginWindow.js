@@ -95,7 +95,8 @@ Ext.define('Booking.view.loginWindow', {
                         {
                             xtype: 'button',
                             modal: true,
-                            itemId: 'mybutton',
+                            itemId: 'resetLoginButton',
+                            id: 'resetLoginButton',
                             scale: 'medium',
                             text: 'Reset'
                         },

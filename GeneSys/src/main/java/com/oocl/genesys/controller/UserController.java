@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oocl.genesys.mapper.UserMapper;
 import com.oocl.genesys.model.Booking;
 import com.oocl.genesys.model.User;
 import com.oocl.genesys.service.UserService;
@@ -30,10 +31,22 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = { "/addUser" }, method = RequestMethod.POST)
 	public String createUser(@RequestParam(required = true) String username, @RequestParam(required = true) String password, @RequestParam(required = true) String firstName, @RequestParam(required = true) String lastName, @RequestParam(required = true) String email, @RequestParam(required = true) int role, HttpSession session) {
-		//User user = (User) session.getAttribute("user");
-		//if(user == null) return null;
+//		User user = (User) session.getAttribute("user");
+//		if(user == null) return null;
 		System.out.println(username + "" + password + "" + firstName +  ""+lastName+""+email+""+role );
 		userService.createUser(username, password, firstName, lastName, email, role);
+		return "something";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/updateUser" }, method = RequestMethod.POST)
+	public String updateUser(@RequestParam(required = true) String username, @RequestParam(required = true) String password, @RequestParam(required = true) String firstName, @RequestParam(required = true) String lastName, @RequestParam(required = true) String email, @RequestParam(required = true) int role, HttpSession session) {
+//		User user = (User) session.getAttribute("user");
+//		if(user == null) return null;
+		User user = userService.getUserByUsername(username);
+		user = UserMapper.set(user, username, password, firstName, lastName, email, role);
+		System.out.println("Controller : " + user.getId());
+		userService.updateUser(user);
 		return "something";
 	}
 	

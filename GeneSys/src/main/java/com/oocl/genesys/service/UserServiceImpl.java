@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import com.oocl.genesys.mapper.UserMapper;
 import com.oocl.genesys.model.User;
 
 @Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
@@ -21,12 +23,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateUser(User user) {
 		User entity = userDAO.getUserById(user.getId());
+		//System.out.println("DAO + " + entity.getId());
 		if (entity != null) {
 			entity.setFirstName(user.getFirstName());
 			entity.setLastName(user.getLastName());
 			entity.setEmail(user.getEmail());
 			entity.setRole(user.getRole());
+			entity.setPassword(user.getPassword());
 		}
+		
 	}
 
 	// TODO : Add NPE handlers!
