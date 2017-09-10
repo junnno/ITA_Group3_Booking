@@ -41,7 +41,8 @@ Ext.define('Booking.controller.SearchController', {
 				            Shipper : record.shipper,
 				            Consignee : record.consignee,
 				            From : record.fromCity,
-				    		To : record.toCity
+				    		To : record.toCity,
+				    		ContainerDetails : record.containerList
 					};
 					store.add(books);
 				});

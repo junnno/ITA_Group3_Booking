@@ -37,6 +37,9 @@ Ext.define('Booking.model.BkgDetailsModel', {
         },
         {
             name: 'To'
+        },
+        {
+        	name: 'ContainerDetails'
         }
     ]
 });

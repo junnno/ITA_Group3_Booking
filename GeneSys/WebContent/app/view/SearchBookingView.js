@@ -180,9 +180,22 @@ Ext.define('Booking.view.SearchBookingView', {
                             items: [
                                 {
                                     xtype: 'gridpanel',
+                                    id : 'bookingGridId',
                                     titleCollapse: false,
                                     forceFit: true,
                                     store: 'BkgStore',
+                                    listeners : {
+                                    	rowclick: function(searchgrid, rowIndex, e) {
+//                                    		var a = Ext.getStore('BkgStore');
+//                                            var record = a.getAt(rowIndex);
+//                                            alert(record.data.id);
+                                    		var cmp = Ext.getCmp('bookingGridId');
+                                            var selected = cmp.getSelection();
+                                            var store = Ext.getStore('BkgStore');
+                                            
+                                            alert('hello');
+                                        }
+                                     }, 
                                     columns: [
                                         {
                                             xtype: 'gridcolumn',
