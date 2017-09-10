@@ -16,34 +16,6 @@
 Ext.define('Booking.view.MainController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.bkgdtlviewport',
-	config : {
-		refs : [ 
-			{
-				ref : 'bkgConId',
-				selector : 'BkgDtlViewport #BkgConId'
-			},
-			{
-				ref : 'bkgShpId',
-				selector : 'BkgDtlViewport #BkgShpId'
-			},
-			{
-				ref : 'bkgFrmCityid',
-				selector : 'createBookingContainerId #BkgFrmCityid'
-			},
-			{
-				ref : 'bkgToCityId',
-				selector : 'createBookingContainerId #BkgToCityId'
-			},
-			{
-				ref : 'cgoNatId',
-				selector : 'createBookingContainerId #CgoNatId'
-			},
-			{
-				ref : 'cgoDescId',
-				selector : 'createBookingContainerId #CgoDescId'
-			},
-		]
-	},
     id: 'MainControllerId',
 
     onCntrInfoAdd: function(button, e, eOpts) {
