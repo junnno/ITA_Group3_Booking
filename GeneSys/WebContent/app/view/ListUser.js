@@ -19,6 +19,7 @@ Ext.define('Booking.view.ListUser', {
 
     requires: [
         'Booking.view.ListUserViewModel',
+        'Booking.view.ListUserViewController',
         'Ext.Img',
         'Ext.grid.Panel',
         'Ext.grid.column.Column',
@@ -27,7 +28,7 @@ Ext.define('Booking.view.ListUser', {
         'Ext.container.ButtonGroup',
         'Ext.button.Button'
     ],
-
+    controller:'listuser',
     viewModel: {
         type: 'listuser'
     },
@@ -119,7 +120,10 @@ Ext.define('Booking.view.ListUser', {
                                             xtype: 'button',
                                             id: 'addUser',
                                             itemId: 'addUser',
-                                            text: 'Add'
+                                            text: 'Add',
+                                            listeners: {
+                                            	click: 'onAddUser'
+                                            }
                                         },
                                         {
                                             xtype: 'button',
