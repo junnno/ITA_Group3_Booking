@@ -129,13 +129,6 @@ Ext.define('Booking.view.ListUserViewController', {
                                         }else if(x===5){
                                             lastname = containerCmp[x].getValue();
                                         }
-                                	/*username = Ext.getCmp('username').getValue();
-                                	password = Ext.getCmp('username').getValue();
-                                	role = Ext.getCmp('username').getValue();
-                                	email = Ext.getCmp('username').getValue();
-                                	firstname = Ext.getCmp('username').getValue();
-                                	lastname = Ext.getCmp('username').getValue();
-                                	*/
                                     }
                                     data.push({Username:username, Password:password,
                                     Role:role, Email:email, FirstName:firstname, LastName:lastname});
@@ -147,5 +140,15 @@ Ext.define('Booking.view.ListUserViewController', {
                 }]
             }]
         }).show();
-    }
+    },
+
+	onDeleteUser: function(button, e, eOpts) {
+		var cmp = Ext.getCmp('userList');
+        var selected = cmp.getSelection();
+        var store = Ext.getStore('UserStore');
+
+        if(!Ext.isEmpty(selected)){
+            store.remove(selected);
+        }
+	}
 });
