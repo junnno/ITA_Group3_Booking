@@ -38,6 +38,9 @@ Ext.define('Booking.model.CntrDetailsModel', {
         },
         {
             name: 'CargoDescription'
+        },
+        {
+        	name: 'unit'
         }
     ]
 });

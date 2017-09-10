@@ -202,11 +202,21 @@ Ext.define('Booking.view.SearchBookingView', {
                                             var store = Ext.getStore('BkgStore');
                                             var details = selected[0].data.ContainerDetails;
                                             Ext.each(details, function(record) {
+                                            	var unit;
+                                            	if(record.unit == 1) {
+                                            		unit = "kg"
+                                            	} else {
+                                            		unit = "lbs";
+                                           
+                                            	}
+                                            	
+                                            	var grossWeight = record.grossWeight + unit;
+                                            	var netWeight = record.netWeight + unit;
                             					var ctrs = {
                             				            CntrNumber : record.containerNum,
                             				            CntrTypes : record.containerType,
-                            				            GrossWeight : record.grossWeight,
-                            				            NetWeight : record.netWeight,
+                            				            GrossWeight : grossWeight,
+                            				            NetWeight : netWeight,
                             				            CargoNature : record.cargoNature,
                             				            CargoDescription : record.cargoDesc
                             					};
