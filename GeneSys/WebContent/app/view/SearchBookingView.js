@@ -37,61 +37,16 @@ Ext.define('Booking.view.SearchBookingView', {
     scrollable: 'vertical',
     width: 400,
     layout: 'fit',
-    
+
     items: [
-    	{
-            xtype: 'container',
-            items: [
-                {
-                    xtype: 'container',
-                    layout: {
-                        type: 'hbox',
-                        align: 'stretch'
-                    },
-                    items: [
-                    	{
-                            xtype: 'image',
-                            flex: 1,
-                            dock: 'top',
-                            height: '',
-                            maxHeight: 45,
-                            maxWidth: 100,
-                            src: 'brand.png'
-                        },
-                        {
-                            xtype: 'toolbar',
-                            flex: 1,
-                            layout: {
-                                type: 'hbox',
-                                pack: 'end'
-                            },
-                            items: [
-                            	 {
-                                     xtype: 'button',
-                                     id: 'searchButton',
-                                     itemId: 'searchButton',
-                                     allowDepress: false,
-                                     scale: 'medium',
-                                     text: 'Booking'
-                                 },
-                                 {
-                                     xtype: 'button',
-                                     id: 'userButton',
-                                     itemId: 'userButton',
-                                     allowDepress: false,
-                                     scale: 'medium',
-                                     text: 'User'
-                                 },
-                                 {
-                                     xtype: 'button',
-                                     id: 'logOut',
-                                     scale: 'medium',
-                                     text: 'Logout'
-                                 }
-                            ]
-                        }
-                    ]
-                },
+        {
+            xtype: 'image',
+            dock: 'top',
+            height: '',
+            maxHeight: 45,
+            maxWidth: 100,
+            src: 'brand.png'
+        },
         {
             xtype: 'container',
             layout: {
@@ -119,11 +74,11 @@ Ext.define('Booking.view.SearchBookingView', {
                                 },
                                 {
                                     xtype: 'button',
-                                    id: 'searchButton1',
-                                    itemId: 'searchButton1',
+                                    id: 'createButton',
+                                    itemId: 'createButton',
                                     allowDepress: false,
                                     scale: 'medium',
-                                    text: 'Search'
+                                    text: 'Create'
                                 },
                                 {
                                     xtype: 'button',
@@ -136,12 +91,26 @@ Ext.define('Booking.view.SearchBookingView', {
                                 },
                                 {
                                     xtype: 'button',
-                                    id: 'createButton',
-                                    itemId: 'createButton',
+                                    id: 'userButton',
+                                    itemId: 'userButton',
                                     allowDepress: false,
                                     scale: 'medium',
-                                    text: 'Create'
+                                    text: 'User'
                                 },
+                                {
+                                    xtype: 'button',
+                                    id: 'searchButton1',
+                                    itemId: 'searchButton1',
+                                    allowDepress: false,
+                                    scale: 'medium',
+                                    text: 'Search'
+                                },
+                                {
+                                    xtype: 'button',
+                                    id: 'logOut',
+                                    scale: 'medium',
+                                    text: 'Logout'
+                                }
                             ]
                         }
                     ],
@@ -230,7 +199,9 @@ Ext.define('Booking.view.SearchBookingView', {
                                     		containerStore.removeAll();
                                             var selected = cmp.getSelection();
                                             var store = Ext.getStore('BkgStore');
+<<<<<<< HEAD
                                             Ext.getCmp('updateButton').setDisabled(false);
+=======
                                             var details = selected[0].data.ContainerDetails;
                                             Ext.each(details, function(record) {
                             					var ctrs = {
@@ -243,6 +214,8 @@ Ext.define('Booking.view.SearchBookingView', {
                             					};
                             					containerStore.add(ctrs);
                             				});
+>>>>>>> 374382cc3aa0105b9287aa4d60f447ffa1dc7a90
+                                            
                                         }
                                      }, 
                                     columns: [
@@ -330,7 +303,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                 }
                             ]
                         }
-                    ]/*,
+                    ],
                     dockedItems: [
                         {
                             xtype: 'toolbar',
@@ -353,11 +326,10 @@ Ext.define('Booking.view.SearchBookingView', {
                                 }
                             ]
                         }
-                    ]*/
+                    ]
                 }
             ]
         }
     ]
-    	}
-        ]
+
 });
