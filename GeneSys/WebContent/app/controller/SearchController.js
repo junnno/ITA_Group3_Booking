@@ -15,7 +15,6 @@
 
 Ext.define('Booking.controller.SearchController', {
 	extend : 'Ext.app.Controller',
-
 	control : {
 		"#searchButton1" : {
 			click : 'onSearchButtonClick'
@@ -25,33 +24,54 @@ Ext.define('Booking.controller.SearchController', {
 		}
 	},
 	onUpdateButtonClick: function(){
-		var bkg=Ext.getCmp('bookingGridId').getSelection();
+		var bkg =Ext.getCmp('bookingGridId').getSelection();
 		Ext.create('Booking.view.BkgDtlViewport',{ action:"update", bkg: bkg}).show();
 	},
 	onSearchButtonClick : function(button, e, eOpts) {
 		var store = Ext.getStore('BkgStore');
-
+		var criteria = {
+	        	bkgNum : Ext.getCmp('bkgNum').getValue(),
+	        	cntrNum : Ext.getCmp('cntrNum').getValue(),
+	        	fromCity : Ext.getCmp('fromCity').getValue()==null?'':Ext.getCmp('fromCity').getValue(),
+	            toCity :  Ext.getCmp('toCity').getValue()==null?'':Ext.getCmp('toCity').getValue(),
+	            status :  Ext.getCmp('status').getValue()==null?'':Ext.getCmp('status').getValue()
+		}
+		
+		
 		Ext.Ajax.request({
-			url : 'booking/listBkg',
+			url : 'booking/search',
 			method : 'POST',
 			datatype : 'json',
 			params : {
-
+				criteria: Ext.util.JSON.encode(criteria)
 			},
 			scope : this,
 			success : function(response) {
 				var data = Ext.decode(response.responseText);
-				Ext.each(data, function(record) {
-					var books = {
-							BkgNum : record.bkgNum,
-				            Shipper : record.shipper,
-				            Consignee : record.consignee,
-				            From : record.fromCity,
-				    		To : record.toCity,
-				    		ContainerDetails : record.containerList
-					};
-					store.add(books);
-				});
+				console.log(data);
+				store.removeAll();
+				if(!data.success){
+					
+					var noRec = { BkgNum: 'No Record found'};
+					store.add(noRec);
+				}
+				else{
+					Ext.each(data.data, function(record) {
+						var stat
+						if (record.status==1) stat = 'Approved';
+						else stat = 'Pending';
+						var bkg = {
+								BkgNum : record.bkgNum,
+					            Shipper : record.shipper,
+					            Consignee : record.consignee,
+					            From : record.fromCity,
+					    		To : record.toCity,
+					    		Status : stat,
+					    		ContainerDetails : record.containerList
+						};
+						store.add(bkg);
+					});
+				}
 			}
 		});
 	}
