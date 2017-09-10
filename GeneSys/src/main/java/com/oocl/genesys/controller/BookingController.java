@@ -2,6 +2,7 @@ package com.oocl.genesys.controller;
 
 import java.net.HttpCookie;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -86,63 +88,110 @@ public class BookingController {
     }
     
     @ResponseBody
-    @RequestMapping(value = { "/testSaveBkg" }, method = {RequestMethod.POST, RequestMethod.GET})
-    public String testSaveBkg(@RequestParam(required=true) String booking, @RequestParam(required=true) String containers
+    @RequestMapping(value = { "/saveBkg" }, method = {RequestMethod.POST, RequestMethod.GET})
+    public HashMap<String, Object> testSaveBkg(@RequestParam(required=true) String booking, @RequestParam(required=true) String containers
     		, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-//    	System.out.println(booking+" "+containers);
-    	Object bkgObj = new JSONObject(booking);
-    	JSONObject bkgJo = (JSONObject) bkgObj;
+    	HashMap<String, Object> res = new HashMap<String, Object>();
+    	Object bkgObj = null;
+    	JSONArray cntrObj = null;
+    	JSONObject bkgJo = null;
+    	Booking bkg = null;
     	
-    	Booking bkg = new Booking();
-		bkg.setBkgNum(createBkgNum());
-		bkg.setFromCity(bkgJo.getString("fromCity").isEmpty() ? "" : (String)bkgJo.getString("fromCity"));
-		bkg.setToCity(bkgJo.getString("toCity").isEmpty() ? "" : (String)bkgJo.getString("toCity"));
-		bkg.setIsApprovedDoc(bkgJo.getBoolean("approveDoc") ? 1 : 0);
-		bkg.setIsGoodCustomer(bkgJo.getBoolean("goodCustomer") ? 1 : 0);
-		bkg.setIsValidWeight(bkgJo.getBoolean("validWgt") ? 1 : 0);
-		bkg.setConsignee(bkgJo.getString("consignee").isEmpty() ? "" : (String)bkgJo.getString("consignee"));
-		bkg.setShipper(bkgJo.getString("shipper").isEmpty() ? "" : (String)bkgJo.getString("shipper"));
-		bkg.setStatus(bkgJo.getBoolean("bkgStat") ? 1 : 0);
-		bkg.setIsDeleted(0);
-//		bkg.setContainerList(getContainerList(bkg));
-//		bkgService.saveBkg(bkg);
+    	//JSON parser for bkg object
+    	if(!booking.isEmpty()) {
+    		bkgObj = new JSONObject(booking);
+        	bkgJo = (JSONObject) bkgObj;
+    	}
+    	
+    	//JSON parser for cntr object
+    	if(!containers.isEmpty()) {
+    		cntrObj = new JSONArray(containers);
+        	//cntrJo = (JSONObject) cntrObj;
+    	}
+    	
+    	if(bkgJo != null) {
+    		bkg = new Booking();
+    		bkg.setBkgNum(createBkgNum());
+    		bkg.setFromCity(bkgJo.getString("fromCity").isEmpty() ? "" : (String)bkgJo.getString("fromCity"));
+    		bkg.setToCity(bkgJo.getString("toCity").isEmpty() ? "" : (String)bkgJo.getString("toCity"));
+    		bkg.setIsApprovedDoc(bkgJo.getBoolean("approveDoc") ? 1 : 0);
+    		bkg.setIsGoodCustomer(bkgJo.getBoolean("goodCustomer") ? 1 : 0);
+    		bkg.setIsValidWeight(bkgJo.getBoolean("validWgt") ? 1 : 0);
+    		bkg.setConsignee(bkgJo.getString("consignee").isEmpty() ? "" : (String)bkgJo.getString("consignee"));
+    		bkg.setShipper(bkgJo.getString("shipper").isEmpty() ? "" : (String)bkgJo.getString("shipper"));
+    		bkg.setStatus(bkgJo.getBoolean("bkgStat") ? 1 : 0);
+    		bkg.setIsDeleted(0);
+    		if(cntrObj.length() > 0) {
+    			bkg.setContainerList(getContainerList(bkg, bkgJo, cntrObj));
+    		}
+    		bkgService.saveBkg(bkg);
+    		res.put("bkgNum", bkg.getBkgNum());
+    		res.put("success", true);
+    		res.put("error", "");
+    		//return "Booking saved";
+    		return res;
+    	}
 		
-		System.out.println(bkg.toString());
-		Cookie c = new Cookie("User", "BKG");
+		Cookie c = new Cookie("Cookie", "ThisISACookie");
 		response.addCookie(c);
-		return "Booking saved";
+		
+		res.put("success", false);
+		res.put("error", "Required booking details not filled up");
+		//return "Booking not saved!";
+		return res;
     }
     
     private String createBkgNum() {
-    	String bkgNum = "";
+    	String num = "";
     	
     	for(int i=0; i<10; i++) {
-    		bkgNum += Math.floor(Math.random() * 10);
+    		num += (int)Math.floor(Math.random() * 10);
     	}
     	
-    	return bkgNum;
+    	return num;
+    }
+    
+    private String createCntrNum() {
+    	String num = "OOLU";
+    	
+    	for(int i=0; i<6; i++) {
+    		num += (int)Math.floor(Math.random() * 10);
+    	}
+    	
+    	return num;
     }
 	
-	private List<Container> getContainerList(Booking bkg) {
+	private List<Container> getContainerList(Booking bkg, JSONObject bkgJo, JSONArray cntrObj) {
 		List<Container> cntr = new ArrayList<Container>();
-		int loop = 3;
-		for(int i=0; i<loop; i++) {
-			cntr.add(getContainer(bkg, (i+1)));
+		
+		for(int i=0; i<cntrObj.length(); i++) {
+			cntr.add(getContainer(bkg, bkgJo, cntrObj.getJSONObject(i)));
 		}
 		
 		return cntr;
 	}
+	
+	//Function for checking unique cntr number 
+	private String getCntrNum() {
+		String cntrNum = createCntrNum();
+		
+		if(false/*object NOT empty*/) {
+			getCntrNum();
+		}
+		
+		return cntrNum;
+	}
 
-	private static Container getContainer(Booking bkg, int i) {
+	private Container getContainer(Booking bkg, JSONObject bkgJo, JSONObject cntrJo) {
 		Container cntr = new Container();
 		cntr.setBooking(bkg);
-		cntr.setCargoDesc("TestBooking");
-		cntr.setCargoNature("GC");
-		cntr.setContainerNum("DASH0101"+i);
-		cntr.setContainerType("20GP");
-		cntr.setGrossWeight(123.00);
-		cntr.setNetWeight(123.00);
-		cntr.setUnit(1);
+		cntr.setCargoDesc(bkgJo.getString("description").isEmpty() ? "" : (String)bkgJo.getString("description"));
+		cntr.setCargoNature(bkgJo.getString("cargoNature").isEmpty() ? "" : (String)bkgJo.getString("cargoNature"));
+		cntr.setContainerNum(getCntrNum());
+		cntr.setContainerType(cntrJo.getString("CntrType").isEmpty() ? "" : (String)cntrJo.getString("CntrType"));
+		cntr.setGrossWeight(cntrJo.get("CntrGross").toString().equals("null") ? 0.0 : cntrJo.getDouble("CntrGross"));
+		cntr.setNetWeight(cntrJo.get("CntrNet").toString().equals("null") ? 0.0 : cntrJo.getDouble("CntrNet"));
+		cntr.setUnit(cntrJo.get("CntrUnit").toString().equals("KG") ? 1 : 0);
 		return cntr;
 	}
 	
