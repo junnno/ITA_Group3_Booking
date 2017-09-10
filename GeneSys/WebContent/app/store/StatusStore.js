@@ -34,8 +34,8 @@ Ext.define('Booking.store.StatusStore', {
                     Value: '1'
                 },
                 {
-                    Key: 'Pending',
-                    Value: '0'
+                	Key: 'Pending',
+                	Value: '0'
                 }
             ],
             proxy: {

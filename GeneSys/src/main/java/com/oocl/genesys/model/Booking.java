@@ -19,6 +19,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="GS_BOOKING")
@@ -72,7 +75,7 @@ public class Booking implements Serializable{
 
 	@Column(name = "IS_DELETED", nullable = true)
     private int isDeleted;
-	
+
 	@OneToMany(fetch=FetchType.EAGER, targetEntity=Container.class, mappedBy= "booking",cascade={CascadeType.ALL})
 	private List<Container> containerList = new ArrayList<Container>();
 	
