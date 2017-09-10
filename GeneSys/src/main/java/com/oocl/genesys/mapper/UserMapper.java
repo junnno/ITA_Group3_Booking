@@ -17,4 +17,16 @@ public class UserMapper {
 		return user;
 		
 	}
+
+	public static User set(User user, String username, String password, String firstName, String lastName, String email,
+			int role) {
+		// TODO Auto-generated method stub
+		user.setEmail(email);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setRole(role);
+		return user;
+	}
 }

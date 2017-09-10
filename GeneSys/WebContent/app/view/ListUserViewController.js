@@ -32,11 +32,31 @@ Ext.define('Booking.view.ListUserViewController', {
 				},
 				scope : this,
 				success : function(response) {
+					Ext.getCmp("addUserWindowId").close();
 					console.log("user saved!");
 				}
 			});	
 	},
-
+    onSaveUpdateUser : function(data) {
+    	console.log(data[0].Username);
+		  Ext.Ajax.request({
+				url : 'user/updateUser',
+				method : 'POST',
+				params : {
+		        	username : data[0].Username==null?'':data[0].Username,
+	            	password : data[0].Password==null?'':data[0].Password,
+	            	role :data[0].Role==null?'':data[0].Role,
+	            	email : data[0].Email==null?'':data[0].Email,
+	            	firstName : data[0].FirstName==null?'':data[0].FirstName,
+	            	lastName : data[0].LastName==null?'':data[0].LastName,
+				},
+				scope : this,
+				success : function(response) {
+					Ext.getCmp("updateUserWindowId").close();
+					console.log("user saved!");
+				}
+			});	
+	},
     onAddUser: function(button, e, eOpts) {
         Ext.getBody().mask();
         Ext.create('Ext.window.Window', {
@@ -218,6 +238,7 @@ Ext.define('Booking.view.ListUserViewController', {
                     xtype: 'textfield',
                     fieldLabel: 'Username',
                     id:'username',
+                    disabled : true,
                     allowBlank: false,
                     value: Ext.getCmp("userList").getSelection()[0].data.Username
                 },
@@ -262,7 +283,7 @@ Ext.define('Booking.view.ListUserViewController', {
                 items: [{
                     xtype: 'button',
                     text: 'Update',
-                    id: 'updateUser',
+                    id: 'updateUserButton',
                     listeners: {
                         click: {
                             scope: this,
@@ -311,7 +332,7 @@ Ext.define('Booking.view.ListUserViewController', {
                                     data.push({Username:username, Password:password,
                                     Role:role, Email:email, FirstName:firstname, LastName:lastname});
                                     store.add(data);
-                                    this.onSaveUser(data);
+                                    this.onSaveUpdateUser(data);
                                 }
                             }
                         }
