@@ -44,10 +44,18 @@ Ext.define('Booking.view.ListUserViewController', {
 			success : function(response) {
 				var data = Ext.decode(response.responseText);
 				Ext.each(data, function(record) {
+					var userRole = 'User';
+					if(record.role == 1){
+						userRole = 'Admin';
+					}else if(record.role == 2){
+						userRole = 'CSV';
+					}else if(record.role == 3){
+						userRole = 'User';
+					}
 					var users = {
 							Username : record.username,
 				            Password : record.password,
-				            Role : record.role,
+				            Role : userRole,
 				            Email : record.email,
 				    		FirstName : record.firstName,
 				    		LastName : record.lastName
@@ -139,9 +147,15 @@ Ext.define('Booking.view.ListUserViewController', {
                     allowBlank: false
                 },
                 {
-                    xtype: 'textfield',
+                	xtype: 'combobox',
                     fieldLabel: 'Role',
-                    allowBlank: false
+                    id: 'AddUsrRoleListId',
+                    allowBlank: false,
+                    displayField: 'name',
+                    forceSelection: true,
+                    queryMode: 'local',
+                    store: 'UserRoleStore',
+                    valueField: 'code'
                 },
                 {
                     xtype: 'textfield',
@@ -269,6 +283,20 @@ Ext.define('Booking.view.ListUserViewController', {
                     fn: function () {
                         Ext.getBody().unmask();
                     }
+                },
+                show: {
+                    scope: this,
+                    fn: function () {
+                    	var userList = Ext.getCmp("userList").getSelection()[0].data.Role;
+                        var userListCmp = Ext.getCmp('UpdUsrRoleListId');
+                        if(userList=='Admin'){
+                        	userListCmp.setValue(1);
+                        }else if(userList=='CSV'){
+                        	userListCmp.setValue(2);
+                        }else if(userList=='User'){
+                        	userListCmp.setValue(3);
+                        }
+                    }
                 }
             },
             items: [
@@ -295,10 +323,15 @@ Ext.define('Booking.view.ListUserViewController', {
                     value: Ext.getCmp("userList").getSelection()[0].data.Password
                 },
                 {
-                    xtype: 'textfield',
+                    xtype: 'combobox',
                     fieldLabel: 'Role',
+                    id: 'UpdUsrRoleListId',
                     allowBlank: false,
-                    value: Ext.getCmp("userList").getSelection()[0].data.Role
+                    displayField: 'name',
+                    forceSelection: true,
+                    queryMode: 'local',
+                    store: 'UserRoleStore',
+                    valueField: 'code'
                 },
                 {
                     xtype: 'textfield',
