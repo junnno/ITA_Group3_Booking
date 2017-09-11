@@ -222,6 +222,8 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                         {
                                                             xtype: 'button',
                                                             text: 'Update',
+                                                            id: 'updateCntrDtlId',
+                                                            disabled: true,
                                                             listeners: {
                                                                 click: 'onCntrInfoUpd'
                                                             }
@@ -251,6 +253,20 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                     store: 'CntrStore',
                                                     selModel: {
                                                         selType: 'checkboxmodel'
+                                                    },
+                                                    listeners:{
+                                                    	rowclick: {
+                                                    		scope: this,
+                                                    		fn: function(){
+                                                    			var gridSel = Ext.getCmp('CntrInfoGridId').getSelection();
+                                                    			if(gridSel.length == 1){
+                                                    				Ext.getCmp('updateCntrDtlId').setDisabled(false);
+                                                    			}else{
+                                                    				Ext.getCmp('updateCntrDtlId').setDisabled(true);
+                                                    			}
+                                                    			console.log('click');
+                                                    		}
+                                                    	}
                                                     },
                                                     columns: [
                                                         {
