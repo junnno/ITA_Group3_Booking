@@ -389,7 +389,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                   				method : 'POST',
                                   				scope : this,
                                   				success : function(response) {
-                                  					if(response.responseText == "3") Ext.getCmp('createButton').hide();
+                                  					if(response.responseText == "3") Ext.getCmp('deleteButton').hide();
                                   				}
                                   			});	
                                         }
