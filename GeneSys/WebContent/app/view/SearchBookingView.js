@@ -276,11 +276,6 @@ Ext.define('Booking.view.SearchBookingView', {
                                             var store = Ext.getStore('BkgStore');
                                             var details = selected[0].data.ContainerDetails;
                                             
-                                            if(selected.length == 1){
-                                            	Ext.getCmp('updateButton').setDisabled(false);
-                                            }else{
-                                            	Ext.getCmp('updateButton').setDisabled(true);
-                                            }
                                             Ext.each(details, function(record) {
                                             	var unit;
                                             	if(record.unit == 1) {
@@ -302,6 +297,16 @@ Ext.define('Booking.view.SearchBookingView', {
                             					};
                             					containerStore.add(ctrs);
                             				});
+                                        },
+                                        selectionChange: function( searchgrid, selected, eOpts ){
+                                        	var selected = Ext.getCmp('bookingGridId').getSelection().length;
+                                        	
+                                        	if(selected!=1){
+                                            	Ext.getCmp('updateButton').setDisabled(true);
+                                        	}
+                                        	else{
+                                            	Ext.getCmp('updateButton').setDisabled(false);
+                                        	}
                                         }
                                      }, 
                                      selModel: {
