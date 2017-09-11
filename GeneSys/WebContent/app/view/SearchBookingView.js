@@ -274,28 +274,27 @@ Ext.define('Booking.view.SearchBookingView', {
                                     		containerStore.removeAll();
                                             var selected = cmp.getSelection();
                                             var store = Ext.getStore('BkgStore');
-                                            var details = selected[0].data.ContainerDetails;
-                                            
-                                            Ext.each(details, function(record) {
-                                            	var unit;
-                                            	if(record.unit == 1) {
-                                            		unit = "kg"
-                                            	} else {
-                                            		unit = "lbs";
-                                           
-                                            	}
-                                            	
-                                            	var grossWeight = record.grossWeight + unit;
-                                            	var netWeight = record.netWeight + unit;
-                            					var ctrs = {
-                            				            CntrNumber : record.containerNum,
-                            				            CntrTypes : record.containerType,
-                            				            GrossWeight : grossWeight,
-                            				            NetWeight : netWeight,
-                            				            CargoNature : record.cargoNature,
-                            				            CargoDescription : record.cargoDesc
-                            					};
-                            					containerStore.add(ctrs);
+                                            Ext.each(selected, function(record) {
+                                            	var records = record.data.ContainerDetails;
+                                            	Ext.each(records, function(recorded) {
+                                            		var unit;
+                                                	if(recorded.unit == 1) {
+                                                		unit = "kg"
+                                                	} else {
+                                                		unit = "lbs";
+                                                	}
+                                            		var grossWeight = recorded.grossWeight + unit;
+                                                	var netWeight = recorded.netWeight + unit;
+                                					var ctrs = {
+                                				            CntrNumber : recorded.containerNum,
+                                				            CntrTypes : recorded.containerType,
+                                				            GrossWeight : grossWeight,
+                                				            NetWeight : netWeight,
+                                				            CargoNature : recorded.cargoNature,
+                                				            CargoDescription : recorded.cargoDesc
+                                					};
+                                					containerStore.add(ctrs);
+                                            	});
                             				});
                                         },
                                         selectionChange: function( searchgrid, selected, eOpts ){
