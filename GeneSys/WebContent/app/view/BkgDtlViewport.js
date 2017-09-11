@@ -16,7 +16,7 @@
 Ext.define('Booking.view.BkgDtlViewport', {
     extend: 'Ext.container.Viewport',
     alias: 'widget.bkgdtlviewport',
-
+    id:'BkgDltViewportViewId',
     requires: [
         'Booking.view.BkgDtlViewportViewModel',
         'Booking.view.MainController',
@@ -144,7 +144,7 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                             xtype: 'combobox',
                                                             id: 'BkgToCityId',
                                                             fieldLabel: 'To City',
-                                                            displayField: 'code',
+                                                            displayField: 'name',
                                                             forceSelection: true,
                                                             queryMode: 'local',
                                                             store: 'CityStore',
@@ -316,6 +316,13 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                     text: 'Save',
                                     listeners: {
                                         click: 'onBkgSave'
+                                    }
+                                },
+                                {
+                                    xtype: 'button',
+                                    text: 'Cancel',
+                                    listeners: {
+                                        click: 'onBkgCancel'
                                     }
                                 }
                             ]
