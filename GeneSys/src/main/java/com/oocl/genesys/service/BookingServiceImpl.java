@@ -68,12 +68,40 @@ public class BookingServiceImpl implements BookingService {
             entity.setShipper(booking.getShipper());
             entity.setStatus(booking.getStatus());
             entity.setToCity(booking.getToCity());
-            entity.getContainerList().clear();
             
             for(Container newBkgContainer : booking.getContainerList()) {
-            	entity.getContainerList().add(newBkgContainer);
+            	boolean exist = false;
+            	for(Container entityBkgContainer: entity.getContainerList()) {
+            		if(newBkgContainer.getContainerNum().equals(entityBkgContainer.getContainerNum())) {
+            			exist = true;
+            			entityBkgContainer.setCargoDesc(newBkgContainer.getCargoDesc());
+            			entityBkgContainer.setCargoNature(newBkgContainer.getCargoNature());
+            			entityBkgContainer.setContainerType(newBkgContainer.getContainerType());
+            			entityBkgContainer.setGrossWeight(newBkgContainer.getGrossWeight());
+            			entityBkgContainer.setNetWeight(newBkgContainer.getNetWeight());
+            			entityBkgContainer.setUnit(newBkgContainer.getUnit());
+            			continue;
+            		}
+            	}
+            	if(!exist) {
+                	entity.getContainerList().add(newBkgContainer);
+            	}
             }
 
+        	List<Container> toRemove = new ArrayList<Container>();
+            for(Container entityBkgContainer: entity.getContainerList()) {
+            	boolean remove = true;
+            	for(Container newBkgContainer : booking.getContainerList()) {
+            		if(entityBkgContainer.getContainerNum().equals(newBkgContainer.getContainerNum())){
+            			remove = false;
+            			continue;
+            		}
+            	}
+            	if(remove) {
+            		toRemove.add(entityBkgContainer);
+            	}
+            }
+            entity.getContainerList().removeAll(toRemove);
         }
 	}
 
