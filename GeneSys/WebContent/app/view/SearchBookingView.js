@@ -254,7 +254,8 @@ Ext.define('Booking.view.SearchBookingView', {
                             xtype: 'panel',
                             flex: 1,
                             layout: 'auto',
-                            bodyBorder: false,
+                            bodyBorder: true,
+                            frame: true,
                             bodyPadding: 20,
                             title: 'Booking Details',
                             tabConfig: {
@@ -265,6 +266,9 @@ Ext.define('Booking.view.SearchBookingView', {
                                 {
                                     xtype: 'gridpanel',
                                     id : 'bookingGridId',
+                                    border: true,
+                                    frame: true,
+                                    columnLines: true,
                                     titleCollapse: false,
                                     forceFit: true,
                                     store: 'BkgStore',
@@ -379,7 +383,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                     scale: 'medium',
                                     text: 'Delete',
                                     listeners: {
-                                        /*'beforerender' : function() {
+                                        'beforerender' : function() {
                                         	 Ext.Ajax.request({
                                   				url : 'user/getAuth',
                                   				method : 'POST',
@@ -388,7 +392,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                   					if(response.responseText == "3") Ext.getCmp('createButton').hide();
                                   				}
                                   			});	
-                                        }*/
+                                        }
                                     }
                                 },
                             ]

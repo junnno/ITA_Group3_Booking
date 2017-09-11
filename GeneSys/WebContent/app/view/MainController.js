@@ -49,7 +49,7 @@ Ext.define('Booking.view.MainController', {
         	cntrInfoGridId.store.removeAll();
         	
         	for(i=0; i<containers.length; i++){
-        		unit = containers[i].unit=='0' ? 'lbs' : 'kg';
+        		unit = containers[i].unit=='0' ? 'lbs' : 'KG';
         		data = { CntrType: containers[i].containerType, CntrNet: containers[i].grossWeight, CntrGross: containers[i].grossWeight, CntrUnit: unit, CntrNumber: containers[i].containerNum};
         		cntrInfoGridId.store.add(data);
         	}
@@ -400,6 +400,7 @@ Ext.define('Booking.view.MainController', {
                                         	}
                                         }
                                         cntrGrid.refresh();
+                                        Ext.getCmp('CntrInfoWindowUpdaterId').close();
                                     }
                                 }
                             }
