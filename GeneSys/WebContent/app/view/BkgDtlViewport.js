@@ -95,12 +95,6 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                     	{
                                                             xtype: 'textfield',
                                                             disabled: true,
-                                                            hidden: true,
-                                                            id: 'BkgId'
-                                                        },
-                                                        {
-                                                            xtype: 'textfield',
-                                                            disabled: true,
                                                             id: 'BkgNumId',
                                                             fieldLabel: 'Booking #'
                                                         },
@@ -172,25 +166,29 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                     xtype: 'radiofield',
                                                     id: 'gcCgoNatId',
                                                     boxLabel: 'GC',
-                                                    inputValue: 'GC'
+                                                    inputValue: 'GC',
+                                                	name: 'cgoNat'
                                                 },
                                                 {
                                                     xtype: 'radiofield',
                                                     id: 'dgCgoNatId',
                                                     boxLabel: 'DG',
-                                                    inputValue: 'DG'
+                                                    inputValue: 'DG',
+                                                	name: 'cgoNat'
                                                 },
                                                 {
                                                     xtype: 'radiofield',
                                                     id: 'rfCgoNatId',
                                                     boxLabel: 'RF',
-                                                    inputValue: 'RF'
+                                                    inputValue: 'RF',
+                                                	name: 'cgoNat'
                                                 },
                                                 {
                                                     xtype: 'radiofield',
                                                     id: 'awCgoNatId',
                                                     boxLabel: 'AW',
-                                                    inputValue: 'AW'
+                                                    inputValue: 'AW',
+                                                	name: 'cgoNat'
                                                 }
                                             ]
                                         },

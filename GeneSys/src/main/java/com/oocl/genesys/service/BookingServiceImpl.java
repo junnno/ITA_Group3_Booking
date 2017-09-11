@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.oocl.genesys.criteria.BookingSearchCriteria;
 import com.oocl.genesys.dao.BookingDAO;
 import com.oocl.genesys.model.Booking;
+import com.oocl.genesys.model.Container;
 
 @Service("bookingService")
 @Transactional
@@ -79,6 +80,13 @@ public class BookingServiceImpl implements BookingService {
 	public Booking searchBkgByCntrNum(String cntrNum){
 		Booking bkgList = dao.searchBkgByCntrNum(cntrNum);
 		return bkgList; 
+	}
+
+	@Override
+	public Container getContainer(Booking bkg, String cntrNum) {
+		// TODO Auto-generated method stub
+		Container container = dao.getContainer(bkg, cntrNum);
+		return container;
 	}
 
 }
