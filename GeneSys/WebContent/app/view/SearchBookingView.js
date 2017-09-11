@@ -274,8 +274,13 @@ Ext.define('Booking.view.SearchBookingView', {
                                     		containerStore.removeAll();
                                             var selected = cmp.getSelection();
                                             var store = Ext.getStore('BkgStore');
-                                            Ext.getCmp('updateButton').setDisabled(false);
                                             var details = selected[0].data.ContainerDetails;
+                                            
+                                            if(selected.length == 1){
+                                            	Ext.getCmp('updateButton').setDisabled(false);
+                                            }else{
+                                            	Ext.getCmp('updateButton').setDisabled(true);
+                                            }
                                             Ext.each(details, function(record) {
                                             	var unit;
                                             	if(record.unit == 1) {
