@@ -72,6 +72,12 @@ public class BookingServiceImpl implements BookingService {
             	for(Container entityBkgContainer: entity.getContainerList()) {
             		if(newBkgContainer.getContainerNum().equals(entityBkgContainer.getContainerNum())) {
             			exist = true;
+            			entityBkgContainer.setCargoDesc(newBkgContainer.getCargoDesc());
+            			entityBkgContainer.setCargoNature(newBkgContainer.getCargoNature());
+            			entityBkgContainer.setContainerType(newBkgContainer.getContainerType());
+            			entityBkgContainer.setGrossWeight(newBkgContainer.getGrossWeight());
+            			entityBkgContainer.setNetWeight(newBkgContainer.getNetWeight());
+            			entityBkgContainer.setUnit(newBkgContainer.getUnit());
             			continue;
             		}
             	}
