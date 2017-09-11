@@ -66,6 +66,19 @@ public class BookingServiceImpl implements BookingService {
             entity.setShipper(booking.getShipper());
             entity.setStatus(booking.getStatus());
             entity.setToCity(booking.getToCity());
+            
+            for(Container newBkgContainer : booking.getContainerList()) {
+            	boolean exist = false;
+            	for(Container entityBkgContainer: entity.getContainerList()) {
+            		if(newBkgContainer.getContainerNum().equals(entityBkgContainer.getContainerNum())) {
+            			exist = true;
+            			continue;
+            		}
+            	}
+            	if(!exist) {
+                	entity.getContainerList().add(newBkgContainer);
+            	}
+            }
         }
 	}
 

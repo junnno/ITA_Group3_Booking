@@ -316,32 +316,26 @@ Ext.define('Booking.view.MainController', {
     	if(Ext.isEmpty(booking.consignee)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
-    		console.log("hey1");
     		return bkgValidation
     	}else if(Ext.isEmpty(booking.shipper)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
-    		console.log("hey2");
     		return bkgValidation
     	}else if(Ext.isEmpty(booking.fromCity)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
-    		console.log("hey3");
     		return bkgValidation
     	}else if(Ext.isEmpty(booking.toCity)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
-    		console.log("hey4");
     		return bkgValidation
     	}else if(Ext.isEmpty(booking.cargoNature)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
-    		console.log("hey5");
     		return bkgValidation
     	}else if(Ext.isEmpty(booking.description)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
-    		console.log("hey6");
     		return bkgValidation
     	}
     	
