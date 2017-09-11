@@ -16,7 +16,7 @@
 Ext.define('Booking.view.BkgDtlViewport', {
     extend: 'Ext.container.Viewport',
     alias: 'widget.bkgdtlviewport',
-    //id:'BkgDltViewportViewId',
+    id: 'BkgDtlViewportId',
     requires: [
         'Booking.view.BkgDtlViewportViewModel',
         'Booking.view.MainController',
@@ -39,7 +39,6 @@ Ext.define('Booking.view.BkgDtlViewport', {
     },
     flex: 1,
     height: 250,
-    id: 'BkgDtlViewportId',
     width: 400,
     layout: 'fit',
 
