@@ -271,11 +271,20 @@ public class BookingController {
     public void updateBooking(Booking booking) {
         bkgService.updateBkg(booking);
     }
-    
-    @RequestMapping(value = { "/delete/{bkgNum}" }, method = RequestMethod.GET)
-    public String deleteBooking(@PathVariable String bkgNum, ModelMap model) {
-    	bkgService.deleteBkg(bkgNum);
-        model.addAttribute("success", "Booking # " + bkgNum  + " has been deleted successfully.");
+    @ResponseBody
+    @RequestMapping(value = { "/delete" }, method ={RequestMethod.POST, RequestMethod.GET})
+    public String deleteBooking(@Valid String bkgNums, ModelMap model) {
+    	List<String> bkgList = new ArrayList();
+    	String[] x = bkgNums.split(" ");
+    	
+    	for(String n: x) {
+    		System.out.println("delete: " + n);
+    		bkgService.deleteBkg(n);
+    	}
+    	
+//    	System.out.println("delete");
+//    	bkgService.deleteBkg(bkgNum);
+//        model.addAttribute("success", "Booking # " + bkgNum  + " has been deleted successfully.");
         return "success";
     }
     @ResponseBody

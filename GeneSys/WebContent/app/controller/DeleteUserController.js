@@ -23,7 +23,18 @@ Ext.define('Booking.controller.DeleteUserController', {
     },
 
     onDeleteUserClick: function(button, e, eOpts) {
-
+    	Ext.Ajax.request({
+			url : 'booking/search',
+			method : 'POST',
+			datatype : 'json',
+			params : {
+				criteria: Ext.util.JSON.encode(criteria)
+			},
+			scope : this,
+			success : function(response) {
+				
+			
+			}
+    	});
     }
-
 });

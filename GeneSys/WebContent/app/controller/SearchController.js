@@ -21,7 +21,32 @@ Ext.define('Booking.controller.SearchController', {
 		},
 		"#updateButton" : {
 			click : 'onUpdateButtonClick'
+		},
+		"#deleteButton":{
+			click : 'onDeleteButtonClick'
 		}
+	},
+	onDeleteButtonClick : function(button, e, eOpts) {
+		var cmp = Ext.getCmp('bookingGridId');
+        var selected = cmp.getSelection();
+        var bkgNums="";
+        Ext.each(selected, function(record) {
+        	bkgNums += record.id+" ";
+        });
+        console.log(bkgNums);
+		Ext.Ajax.request({
+			url : 'booking/delete',
+			method : 'POST',
+			datatype : 'String',
+			params : {
+				bkgNums
+			},
+			scope : this,
+			success : function(response) {
+				
+			}
+		});
+		this.onSearchButtonClick();
 	},
 	onUpdateButtonClick: function(){
 		var bkg =Ext.getCmp('bookingGridId').getSelection();
@@ -29,6 +54,7 @@ Ext.define('Booking.controller.SearchController', {
 	},
 	onSearchButtonClick : function(button, e, eOpts) {
 		var store = Ext.getStore('BkgStore');
+		store.removeAll();
 		var criteria = {
 	        	bkgNum : Ext.getCmp('bkgNum').getValue(),
 	        	cntrNum : Ext.getCmp('cntrNum').getValue(),

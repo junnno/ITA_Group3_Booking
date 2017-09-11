@@ -79,6 +79,8 @@ public class BookingDaoImpl extends AbstractDAO<Integer, Booking> implements Boo
 	public List<Booking> searchBooking(BookingSearchCriteria bookingCriteria) {
 		// TODO Auto-generated method stub
 		Criteria criteria = createEntityCriteria();
+
+		criteria.add(Restrictions.eq("isDeleted", 0));
 		
 		if(!bookingCriteria.getBkgNum().equals("")) {
 			criteria.add(Restrictions.eq("bkgNum", bookingCriteria.getBkgNum()));

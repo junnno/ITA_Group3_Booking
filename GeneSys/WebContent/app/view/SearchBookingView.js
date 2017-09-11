@@ -301,6 +301,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                      }, 
                                      selModel: {
                                          selType: 'checkboxmodel'
+                                        
                                      },
                                     columns: [
                                         {
@@ -362,7 +363,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                 },
                                 {
                                     xtype: 'button',
-                                    id: 'deleteButtonId',
+                                    id: 'deleteButton',
                                     itemId: 'deleteButton',
                                     allowDepress: false,
                                     scale: 'medium',

@@ -34,6 +34,7 @@ public class BookingServiceImpl implements BookingService {
 	public void deleteBkg(String bkgNum) {
 		// TODO Auto-generated method stub
 		Booking booking = searchBkgByBkgNum(bkgNum);
+		System.out.println("deleting" + bkgNum);
 		if(booking!=null) {
 			booking.setIsDeleted(1);
 		}
