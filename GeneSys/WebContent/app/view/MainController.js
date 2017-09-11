@@ -228,7 +228,7 @@ Ext.define('Booking.view.MainController', {
         var cmp = Ext.getCmp('CntrInfoGridId');
         var selected = cmp.getSelection();
         var store = Ext.getStore('CntrStore');
-
+        
         if(!Ext.isEmpty(selected)){
             store.remove(selected);
             // To remove all selected
@@ -336,6 +336,10 @@ Ext.define('Booking.view.MainController', {
     	}else if(Ext.isEmpty(booking.description)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
+    		return bkgValidation
+    	}else if(containers.length<1){
+    		bkgValidation.isSave = false;
+    		bkgValidation.error = 'Please enter at least one container! We can\'t ship nothing!';
     		return bkgValidation
     	}
     	

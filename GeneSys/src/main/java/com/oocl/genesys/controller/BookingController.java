@@ -174,14 +174,10 @@ public class BookingController {
     		bkg.setShipper(bkgJo.getString("shipper").isEmpty() ? "" : (String)bkgJo.getString("shipper"));
     		bkg.setStatus(bkgJo.getBoolean("bkgStat") ? 1 : 0);
     		bkg.setIsDeleted(0);
+    		bkg.getContainerList().clear();
     		
     		if(cntrObj.length() > 0) {
     			bkg.setContainerList(getContainerList(bkg, bkgJo, cntrObj));
-    		}
-    		
-    		for(Container container : bkg.getContainerList()) {
-    			System.out.println(container.getBooking().getBkgNum());
-    			System.out.println(container.getContainerNum());
     		}
     		
     		bkgService.updateBkg(bkg);

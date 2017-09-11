@@ -1,5 +1,6 @@
 package com.oocl.genesys.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,25 +68,12 @@ public class BookingServiceImpl implements BookingService {
             entity.setShipper(booking.getShipper());
             entity.setStatus(booking.getStatus());
             entity.setToCity(booking.getToCity());
+            entity.getContainerList().clear();
             
             for(Container newBkgContainer : booking.getContainerList()) {
-            	boolean exist = false;
-            	for(Container entityBkgContainer: entity.getContainerList()) {
-            		if(newBkgContainer.getContainerNum().equals(entityBkgContainer.getContainerNum())) {
-            			exist = true;
-            			entityBkgContainer.setCargoDesc(newBkgContainer.getCargoDesc());
-            			entityBkgContainer.setCargoNature(newBkgContainer.getCargoNature());
-            			entityBkgContainer.setContainerType(newBkgContainer.getContainerType());
-            			entityBkgContainer.setGrossWeight(newBkgContainer.getGrossWeight());
-            			entityBkgContainer.setNetWeight(newBkgContainer.getNetWeight());
-            			entityBkgContainer.setUnit(newBkgContainer.getUnit());
-            			continue;
-            		}
-            	}
-            	if(!exist) {
-                	entity.getContainerList().add(newBkgContainer);
-            	}
+            	entity.getContainerList().add(newBkgContainer);
             }
+
         }
 	}
 

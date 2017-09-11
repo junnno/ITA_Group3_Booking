@@ -73,7 +73,7 @@ public class Booking implements Serializable{
 	@Column(name = "IS_DELETED", nullable = true)
     private int isDeleted;
 	
-	@OneToMany(fetch=FetchType.EAGER, targetEntity=Container.class, mappedBy= "booking",cascade={CascadeType.ALL})
+	@OneToMany(fetch=FetchType.EAGER, targetEntity=Container.class, mappedBy= "booking",cascade={CascadeType.ALL}, orphanRemoval = true)
 	private List<Container> containerList = new ArrayList<Container>();
 	
 	public long getBkgId() {
