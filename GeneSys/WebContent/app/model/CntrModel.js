@@ -32,6 +32,9 @@ Ext.define('Booking.model.CntrModel', {
         },
         {
             name: 'CntrUnit'
+        },
+        {
+        	name: 'CntrNumber'
         }
     ]
 });

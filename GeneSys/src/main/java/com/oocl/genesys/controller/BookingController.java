@@ -89,7 +89,7 @@ public class BookingController {
     
     @ResponseBody
     @RequestMapping(value = { "/saveBkg" }, method = {RequestMethod.POST, RequestMethod.GET})
-    public HashMap<String, Object> testSaveBkg(@RequestParam(required=true) String booking, @RequestParam(required=true) String containers
+    public HashMap<String, Object> saveBkg(@RequestParam(required=true) String booking, @RequestParam(required=true) String containers
     		, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
     	HashMap<String, Object> res = new HashMap<String, Object>();
     	Object bkgObj = null;
@@ -141,6 +141,62 @@ public class BookingController {
 		return res;
     }
     
+    @ResponseBody
+    @RequestMapping(value = { "/updateBkg" }, method = {RequestMethod.POST})
+    public HashMap<String, Object> updateBkg(@RequestParam(required=true) String booking, @RequestParam(required=true) String containers
+    		, ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+    	HashMap<String, Object> res = new HashMap<String, Object>();
+    	Object bkgObj = null;
+    	JSONArray cntrObj = null;
+    	JSONObject bkgJo = null;
+    	
+    	//JSON parser for bkg object
+    	if(!booking.isEmpty()) {
+    		bkgObj = new JSONObject(booking);
+        	bkgJo = (JSONObject) bkgObj;
+    	}
+    	
+    	//JSON parser for cntr object
+    	if(!containers.isEmpty()) {
+    		cntrObj = new JSONArray(containers);
+        	//cntrJo = (JSONObject) cntrObj;
+    	}
+
+    	Booking bkg = bkgService.searchBkgByBkgNum(bkgJo.getString("bkgNum"));
+    	
+    	if(bkg!=null && bkgJo!=null) {
+    		bkg.setFromCity(bkgJo.getString("fromCity").isEmpty() ? "" : (String)bkgJo.getString("fromCity"));
+    		bkg.setToCity(bkgJo.getString("toCity").isEmpty() ? "" : (String)bkgJo.getString("toCity"));
+    		bkg.setIsApprovedDoc(bkgJo.getBoolean("approveDoc") ? 1 : 0);
+    		bkg.setIsGoodCustomer(bkgJo.getBoolean("goodCustomer") ? 1 : 0);
+    		bkg.setIsValidWeight(bkgJo.getBoolean("validWgt") ? 1 : 0);
+    		bkg.setConsignee(bkgJo.getString("consignee").isEmpty() ? "" : (String)bkgJo.getString("consignee"));
+    		bkg.setShipper(bkgJo.getString("shipper").isEmpty() ? "" : (String)bkgJo.getString("shipper"));
+    		bkg.setStatus(bkgJo.getBoolean("bkgStat") ? 1 : 0);
+    		bkg.setIsDeleted(0);
+    		
+    		if(cntrObj.length() > 0) {
+    			bkg.setContainerList(getContainerList(bkg, bkgJo, cntrObj));
+    		}
+    		
+    		for(Container container : bkg.getContainerList()) {
+    			System.out.println(container.getBooking().getBkgNum());
+    			System.out.println(container.getContainerNum());
+    		}
+    		
+    		bkgService.updateBkg(bkg);
+    		
+    		res.put("bkgNum", bkg.getBkgNum());
+    		res.put("success", true);
+    		res.put("error", "");
+    		
+    		return res;
+    	}
+		res.put("success", false);
+		res.put("error", "Required booking details not filled up");
+		return res;
+    }
+    
     private String createBkgNum() {
     	String num = "";
     	
@@ -167,7 +223,6 @@ public class BookingController {
 		for(int i=0; i<cntrObj.length(); i++) {
 			cntr.add(getContainer(bkg, bkgJo, cntrObj.getJSONObject(i)));
 		}
-		
 		return cntr;
 	}
 	
@@ -183,11 +238,15 @@ public class BookingController {
 	}
 
 	private Container getContainer(Booking bkg, JSONObject bkgJo, JSONObject cntrJo) {
-		Container cntr = new Container();
+		Container cntr;
+		cntr = bkgService.getContainer(bkg, cntrJo.getString("CntrNumber"));
+		if(cntr==null) {
+			cntr = new Container();
+			cntr.setContainerNum(getCntrNum());
+		}
 		cntr.setBooking(bkg);
 		cntr.setCargoDesc(bkgJo.getString("description").isEmpty() ? "" : (String)bkgJo.getString("description"));
 		cntr.setCargoNature(bkgJo.getString("cargoNature").isEmpty() ? "" : (String)bkgJo.getString("cargoNature"));
-		cntr.setContainerNum(getCntrNum());
 		cntr.setContainerType(cntrJo.getString("CntrType").isEmpty() ? "" : (String)cntrJo.getString("CntrType"));
 		cntr.setGrossWeight(cntrJo.get("CntrGross").toString().equals("null") ? 0.0 : cntrJo.getDouble("CntrGross"));
 		cntr.setNetWeight(cntrJo.get("CntrNet").toString().equals("null") ? 0.0 : cntrJo.getDouble("CntrNet"));
@@ -209,16 +268,8 @@ public class BookingController {
         return "updateBooking";
     }
      
-    @RequestMapping(value = { "/update" }, method = RequestMethod.POST)
-    public String updateBooking(@Valid Booking booking, BindingResult result, ModelMap model)
-    {
-        if (result.hasErrors()) {
-        	System.out.println(result.getAllErrors());
-            return "update";
-        }
+    public void updateBooking(Booking booking) {
         bkgService.updateBkg(booking);
-        model.addAttribute("success", "Booking # " + booking.getBkgNum()  + " updated successfully.");
-        return "success";
     }
     
     @RequestMapping(value = { "/delete/{bkgNum}" }, method = RequestMethod.GET)

@@ -17,11 +17,43 @@ Ext.define('Booking.view.MainController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.bkgdtlviewport',
     id: 'MainControllerId',
-    
+    action: null,
+    bkgNum: null,
     afterRender: function(){
-    	var x = Ext.getCmp('BkgDtlViewportId');
-    	console.log(x.action);
-    	console.log(x.bkg);
+    	var bkgView = Ext.getCmp('BkgDtlViewportId');
+    	if(bkgView.action=="update"){
+    		var bkg = bkgView.bkg[0].data;
+    		this.action = bkgView.action;
+        	console.log(bkg);
+        	
+        	var bkgNum = Ext.getCmp('BkgNumId');
+        	var bkgConId = Ext.getCmp('BkgConId');
+        	var bkgShpId = Ext.getCmp('BkgShpId');
+        	var bkgFrmCityid = Ext.getCmp('BkgFrmCityid');
+        	var bkgToCityId = Ext.getCmp('BkgToCityId');
+        	var cgoNatId = Ext.getCmp('CgoNatId');
+        	var cgoDescId = Ext.getCmp('CgoDescId');
+        	var cntrInfoGridId = Ext.getCmp('CntrInfoGridId');
+        	
+//        	console.log(cgoNatId);
+        	var containers = bkg.ContainerDetails;
+        	var cgoNat = { 'cgoNat' : bkg.ContainerDetails[0].cargoNature };
+        	console.log(containers);
+        	bkgNum.setValue(bkg.BkgNum);
+        	bkgConId.setValue(bkg.Consignee);
+        	bkgShpId.setValue(bkg.Shipper);
+        	bkgFrmCityid.setValue(bkg.From);
+        	bkgToCityId.setValue(bkg.To);
+        	cgoNatId.setValue(cgoNat);
+        	cgoDescId.setValue(containers[0].cargoDesc);
+        	cntrInfoGridId.store.removeAll();
+        	
+        	for(i=0; i<containers.length; i++){
+        		unit = containers[i].unit=='0' ? 'lbs' : 'kg';
+        		data = { CntrType: containers[i].containerType, CntrNet: containers[i].grossWeight, CntrGross: containers[i].grossWeight, CntrUnit: unit, CntrNumber: containers[i].containerNum};
+        		cntrInfoGridId.store.add(data);
+        	}
+    	}
     },
 
     onCntrInfoAdd: function(button, e, eOpts) {
@@ -163,9 +195,9 @@ Ext.define('Booking.view.MainController', {
                                         }
                                     });
                                     if(isMissingField){
-                                        Ext.MessageBox.alert('Waring!','Please fill up all fields to add!');
+                                        Ext.MessageBox.alert('Warning!','Please fill up all fields to add!');
                                     }else{
-                                        Ext.MessageBox.alert('Waring!','Please correct all invalid fields!');
+                                        Ext.MessageBox.alert('Warning!','Please correct all invalid fields!');
                                     }
                                 }else{
                                     for(var x=0; x<containerCmp.length; x++){
@@ -181,7 +213,7 @@ Ext.define('Booking.view.MainController', {
                                         }
                                     }
                                     data.push({CntrType:cntrType, CntrNet:cntrNet,
-                                    CntrGross:cntrGross, CntrUnit:cntrUnit});
+                                    CntrGross:cntrGross, CntrUnit:cntrUnit, CntrNumber: ''});
                                     store.add(data);
                                 }
                             }
@@ -222,13 +254,14 @@ Ext.define('Booking.view.MainController', {
         	isBkgApprove = true;
         }
         
+        
         // Booking Details
         var booking = {
         	consignee : Ext.getCmp('BkgConId').getValue(),
         	shipper : Ext.getCmp('BkgShpId').getValue(),
         	fromCity : Ext.getCmp('BkgFrmCityid').getValue()==null?'':Ext.getCmp('BkgFrmCityid').getValue(),
         	toCity :  Ext.getCmp('BkgToCityId').getValue()==null?'':Ext.getCmp('BkgToCityId').getValue(),
-        	cargoNature : Ext.isEmpty(Ext.getCmp('CgoNatId').getValue().CgoNatId)?'':Ext.getCmp('CgoNatId').getValue().CgoNatId,
+        	cargoNature : Ext.isEmpty(Ext.getCmp('CgoNatId').getValue().cgoNat)?'':Ext.getCmp('CgoNatId').getValue().cgoNat,
         	description : Ext.getCmp('CgoDescId').getValue(),
         	validWgt : valWgt,
         	approveDoc : appDoc,
@@ -236,12 +269,18 @@ Ext.define('Booking.view.MainController', {
         	bkgStat : isBkgApprove
         }
         
+        if(this.action=="update"){
+        	booking.bkgNum = Ext.getCmp('BkgNumId').getValue();
+            console.log("bkg num");
+            console.log(booking.bkgNum);
+        }
+        
         //validate booking details
         console.log(this.validateBookingOnSave(booking, containers));
         var validateResult = this.validateBookingOnSave(booking, containers);
         if(validateResult.isSave){
         	Ext.Ajax.request({
-    			url : 'booking/saveBkg',
+    			url : (this.action==null ? 'booking/saveBkg' : 'booking/updateBkg'),
     			method : 'POST',
     			params : {
     				booking : Ext.util.JSON.encode(booking),
@@ -252,7 +291,12 @@ Ext.define('Booking.view.MainController', {
     				console.log("saved!");
     				var resData = Ext.util.JSON.decode(response.responseText);
     				if(resData.success){
-    					Ext.Msg.alert('Booking Number','Booking '+resData.bkgNum+' successfuly created.');
+    					if(this.action==null){
+        					Ext.Msg.alert('Booking Number','Booking #'+resData.bkgNum+' has been created successfuly.');
+    					}
+    					else{
+        					Ext.Msg.alert('Booking Number','Booking #'+resData.bkgNum+' has been successfuly updated.');
+    					}
     				}
     			}
     		});
@@ -272,26 +316,32 @@ Ext.define('Booking.view.MainController', {
     	if(Ext.isEmpty(booking.consignee)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
+    		console.log("hey1");
     		return bkgValidation
     	}else if(Ext.isEmpty(booking.shipper)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
+    		console.log("hey2");
     		return bkgValidation
     	}else if(Ext.isEmpty(booking.fromCity)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
+    		console.log("hey3");
     		return bkgValidation
     	}else if(Ext.isEmpty(booking.toCity)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
+    		console.log("hey4");
     		return bkgValidation
     	}else if(Ext.isEmpty(booking.cargoNature)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
+    		console.log("hey5");
     		return bkgValidation
     	}else if(Ext.isEmpty(booking.description)){
     		bkgValidation.isSave = false;
     		bkgValidation.error = 'Please complete all required fields!';
+    		console.log("hey6");
     		return bkgValidation
     	}
     	

@@ -137,7 +137,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                     scale: 'medium',
                                     text: 'Search'
                                 },
-                                {
+                                /*{
                                     xtype: 'button',
                                     id: 'updateButton',
                                     itemId: 'updateButton',
@@ -157,7 +157,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                   			});	
                                         }
                                     }
-                                },
+                                },*/
                                 {
                                     xtype: 'button',
                                     id: 'createButton',
@@ -252,7 +252,7 @@ Ext.define('Booking.view.SearchBookingView', {
                         {
                             xtype: 'panel',
                             flex: 1,
-                            layout: 'fit',
+                            layout: 'auto',
                             bodyBorder: false,
                             bodyPadding: 20,
                             title: 'Booking Details',
@@ -299,6 +299,9 @@ Ext.define('Booking.view.SearchBookingView', {
                             				});
                                         }
                                      }, 
+                                     selModel: {
+                                         selType: 'checkboxmodel'
+                                     },
                                     columns: [
                                         {
                                             xtype: 'gridcolumn',
@@ -334,7 +337,49 @@ Ext.define('Booking.view.SearchBookingView', {
                                     viewConfig: {
                                         height: 400
                                     }
-                                }
+                                },
+                                {
+                                    xtype: 'button',
+                                    id: 'updateButton',
+                                    itemId: 'updateButton',
+                                    allowDepress: false,
+                                    scale: 'medium',
+                                    margin: '0 10 0 0',
+                                    text: 'Update',
+                                    disabled: true,
+                                    listeners: {
+                                        'beforerender' : function() {
+                                        	 Ext.Ajax.request({
+                                  				url : 'user/getAuth',
+                                  				method : 'POST',
+                                  				scope : this,
+                                  				success : function(response) {
+                                  					if(response.responseText == "3") Ext.getCmp('updateButton').hide();
+                                  				}
+                                  			});	
+                                        }
+                                    }
+                                },
+                                {
+                                    xtype: 'button',
+                                    id: 'deleteButtonId',
+                                    itemId: 'deleteButton',
+                                    allowDepress: false,
+                                    scale: 'medium',
+                                    text: 'Delete',
+                                    listeners: {
+                                        /*'beforerender' : function() {
+                                        	 Ext.Ajax.request({
+                                  				url : 'user/getAuth',
+                                  				method : 'POST',
+                                  				scope : this,
+                                  				success : function(response) {
+                                  					if(response.responseText == "3") Ext.getCmp('createButton').hide();
+                                  				}
+                                  			});	
+                                        }*/
+                                    }
+                                },
                             ]
                         },
                         {
