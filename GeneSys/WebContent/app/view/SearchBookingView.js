@@ -72,7 +72,7 @@ Ext.define('Booking.view.SearchBookingView', {
                                      itemId: 'userButton',
                                      allowDepress: false,
                                      scale: 'medium',
-                                     text: 'User',
+                                     text: 'Users',
                                      listeners: {
                                          'beforerender' : function() {
                                          	 Ext.Ajax.request({
