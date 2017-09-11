@@ -16,7 +16,7 @@
 Ext.define('Booking.view.ListUser', {
     extend: 'Ext.container.Viewport',
     alias: 'widget.listuser',
-
+    id: 'ListUserView',
     requires: [
         'Booking.view.ListUserViewModel',
         'Booking.view.ListUserViewController',
