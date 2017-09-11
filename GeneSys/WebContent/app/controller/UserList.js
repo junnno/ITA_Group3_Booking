@@ -20,10 +20,18 @@ Ext.define('Booking.controller.UserList', {
 			success : function(response) {
 				var data = Ext.decode(response.responseText);
 				Ext.each(data, function(record) {
+					var userRole = 'User';
+					if(record.role == 1){
+						userRole = 'Admin';
+					}else if(record.role == 2){
+						userRole = 'CSV';
+					}else if(record.role == 3){
+						userRole = 'User';
+					}
 					var users = {
 							Username : record.username,
 				            Password : record.password,
-				            Role : record.role,
+				            Role : userRole,
 				            Email : record.email,
 				    		FirstName : record.firstName,
 				    		LastName : record.lastName
