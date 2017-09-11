@@ -17,6 +17,19 @@ Ext.define('Booking.view.ListUserViewController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.listuser',
     
+    onSearchBookingView : function(button, e, eOpts) {
+    	/*Ext.Ajax.request({
+			url : 'logout',
+			params : {
+			},
+			scope : this,
+			success : function(response) {
+				Ext.Msg.alert('Logout','You have successfully logged out');
+				setTimeout(function() { window.location.reload(); }, 3000);
+				}
+		});*/
+    },
+    
     onLogOutClick: function(button, e, eOpts) {
     	Ext.Ajax.request({
 			url : 'logout',
