@@ -27,7 +27,7 @@ Ext.define('Booking.store.CntrDetailsStore', {
             storeId: 'CntrDetailsStore',
             model: 'Booking.model.CntrDetailsModel',
             data: [
-                {
+                /*{
                     CntrNumber: 'alias',
                     CntrTypes: 'unde',
                     GrossWeight: 'eius',
@@ -42,7 +42,7 @@ Ext.define('Booking.store.CntrDetailsStore', {
                     NetWeight: 'vitae',
                     CargoNature: 'pariatur',
                     CargoDescription: 'tempore'
-                }
+                }*/
             ]
         }, cfg)]);
     }

@@ -347,6 +347,11 @@ Ext.define('Booking.view.MainController', {
     	}
     	
     	return bkgValidation;
+    },
+    
+    onBkgCancel: function(button, e, eOpts) {
+    	Ext.getCmp('SearchBookingView').show();
+    	Ext.getCmp('BkgDtlViewportId').destroy();
     }
 
 });

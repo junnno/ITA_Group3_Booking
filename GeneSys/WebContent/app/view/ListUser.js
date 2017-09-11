@@ -93,7 +93,10 @@ Ext.define('Booking.view.ListUser', {
                                      itemId: 'searchButton2',
                                      allowDepress: false,
                                      scale: 'medium',
-                                     text: 'Booking'
+                                     text: 'Booking',
+                                     listeners: {
+                                    	 click: 'onSearchBookingView'
+                                     }
                                  },
                                  {
                                      xtype: 'button',
