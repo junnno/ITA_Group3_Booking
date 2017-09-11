@@ -51,9 +51,7 @@ Ext.define('Booking.controller.SearchController', {
 				console.log(data);
 				store.removeAll();
 				if(!data.success){
-					
-					var noRec = { BkgNum: 'No Record found'};
-					store.add(noRec);
+					Ext.getCmp('bookingGridId').body.setText('No Record found');
 				}
 				else{
 					Ext.each(data.data, function(record) {
