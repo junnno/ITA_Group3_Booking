@@ -63,6 +63,7 @@ Ext.define('Booking.controller.LogOutController', {
                     	 {
                     		 xtype: 'button',
                              text: 'Confirm',
+                             margin: '10 0 0 0',
                              listeners: {
                                  click: {
                                 	 scope: this,

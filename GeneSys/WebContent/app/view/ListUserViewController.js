@@ -61,6 +61,7 @@ Ext.define('Booking.view.ListUserViewController', {
                     	 {
                     		 xtype: 'button',
                              text: 'Confirm',
+                             margin: '10 0 0 0',
                              listeners: {
                                  click: {
                                 	 scope: this,
