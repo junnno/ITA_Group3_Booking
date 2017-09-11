@@ -223,6 +223,192 @@ Ext.define('Booking.view.MainController', {
             }]
         }).show();
     },
+    
+    onCntrInfoUpd: function(button, e, eOpts) {
+    	if(Ext.isEmpty(Ext.getCmp("CntrInfoGridId").getSelection())){
+    		Ext.Msg.alert('Alert', 'Please select a record to update');
+    	}else{
+    		Ext.getBody().mask();
+            Ext.create('Ext.window.Window', {
+                title: 'Container Info',
+                // layout: 'fit',
+                id: 'CntrInfoWindowUpdaterId',
+                layout: {
+                    type: 'vbox',
+                    align: 'stretch'
+                    // padding: '10'
+                },
+                listeners: {
+                    close: {
+                        scope: this,
+                        fn: function () {
+                            Ext.getBody().unmask();
+                        }
+                    },
+                    show: {
+                        scope: this,
+                        fn: function () {
+                        	var selected = Ext.getCmp('CntrInfoGridId').getSelection()[0];
+                        	console.log(selected);
+                        	var cntrSzeTyp = Ext.getCmp('containrSizeTypeId');
+                        	cntrSzeTyp.setValue(selected.data.CntrType);
+                            var cntrUnit = Ext.getCmp('containrWgtUnitId');
+                            cntrUnit.setValue(selected.data.CntrUnit);
+                        }
+                    }
+                },
+                items: [
+                {
+                    xtype: 'container',
+                    id: 'CntrInfoWndowId',
+                    padding: '10',
+                    layout: {
+                        type: 'vbox',
+                        align: 'stretch'
+                    },
+                    items: [{
+                        xtype: 'combobox',
+                        id: 'containrSizeTypeId',
+                        fieldLabel: 'Container Type',
+                        allowBlank: false,
+                        displayField: 'code',
+                        forceSelection: true,
+                        queryMode: 'local',
+                        store: 'CntrTypeStore',
+                        valueField: 'code'
+                    },
+                    {
+                        xtype: 'numberfield',
+                        id: 'containrNetWgtId',
+                        fieldLabel: 'Container Net Weight',
+                        maxValue: 999999.99,
+                        minValue: 0,
+                        value: Ext.getCmp("CntrInfoGridId").getSelection()[0].data.CntrNet,
+                        decimalPrecision: 2
+                    },
+                    {
+                        xtype: 'numberfield',
+                        id: 'containrGrossWgtId',
+                        fieldLabel: 'Container Gross Weight',
+                        maxValue: 999999.99,
+                        minValue: 0,
+                        value: Ext.getCmp("CntrInfoGridId").getSelection()[0].data.CntrGross,
+                        decimalPrecision: 2
+                    },
+                    {
+                        xtype: 'combobox',
+                        id: 'containrWgtUnitId',
+                        fieldLabel: 'Container Weight Unit',
+                        allowBlank: false,
+                        displayField: 'name',
+                        forceSelection: true,
+                        queryMode: 'local',
+                        store: 'CntrWgtUntStore',
+                        valueField: 'code',
+                        listeners: {
+                            select: {
+                                scope: this,
+                                fn: function() {
+                                  var containrUnitCmp = Ext.getCmp('containrWgtUnitId');
+                                  var containrUnitVal = containrUnitCmp.getValue();
+                                  var grossCmp = Ext.getCmp('containrGrossWgtId');
+                                  var grossVal = grossCmp.getValue();
+                                  var netCmp = Ext.getCmp('containrNetWgtId');
+                                  var netVal = netCmp.getValue();
+                                  
+                                  console.log(containrUnitVal + ' ' + grossVal + ' ' + netVal);
+                                  //KG to pounds (1KG -> 2.204lbs)
+                                  if(containrUnitVal == 'KG'){
+                                      if(!Ext.isEmpty(grossVal)){
+                                          grossCmp.setValue((grossVal*2.204));
+                                      }
+                                      if(!Ext.isEmpty(netVal)){
+                                          netCmp.setValue((netVal*2.204));
+                                      }
+                                  }else if(containrUnitVal == 'lbs'){
+                                      if(!Ext.isEmpty(grossVal)){
+                                          grossCmp.setValue((grossVal/2.204));
+                                      }
+                                      if(!Ext.isEmpty(netVal)){
+                                          netCmp.setValue((netVal/2.204));
+                                      }
+                                  }
+                                }
+                            }
+                        }
+                    }]
+                },
+                {
+                    xtype: 'container',
+                    padding: '0 0 10 10',
+                    layout: {
+                        type: 'hbox',
+                        align: 'stretch'
+                    },
+                    items: [{
+                        xtype: 'button',
+                        text: 'Save',
+                        listeners: {
+                            click: {
+                                scope: this,
+                                fn: function () {
+                                	//Window component
+                                    var cmp = Ext.getCmp('CntrInfoWndowId');
+                                    var containerCmp = cmp.items.getRange();
+                                    
+                                    //Grid panel component
+                                	var cntrGrid = Ext.getCmp('CntrInfoGridId').getView();
+                                	var sel = cntrGrid.getSelection();
+                                    var cntrGridStore = cntrGrid.getStore().getRange();
+                                    
+                                    var errors = [], data = [];
+                                    var cntrType, cntrNet, cntrGross, cntrUnit;
+
+                                    // Get component errors
+                                    for(var i=0; i<containerCmp.length; i++){
+                                        if(!Ext.isEmpty(containerCmp[i].getErrors())){
+                                            errors.push(containerCmp[i].getErrors());
+                                        }
+                                    }
+                                    if(errors.length > 0 ){
+                                        var isMissingField = false;
+                                        errors.forEach(function(i){
+                                            if(i=='This field is required'){
+                                                isMissingField = true;
+                                            }
+                                        });
+                                        if(isMissingField){
+                                            Ext.MessageBox.alert('Warning!','Please fill up all fields to add!');
+                                        }else{
+                                            Ext.MessageBox.alert('Warning!','Please correct all invalid fields!');
+                                        }
+                                    }else{                                        
+                                        for(var x=0; x<cntrGridStore.length; x++){
+                                        	if(cntrGridStore[x].get('id') == sel[0].get('id')){
+                                        		for(var y=0; y<containerCmp.length; y++){
+                                                    // data.push(containerCmp[x].getValue());
+                                                    if(y==0){
+                                                    	cntrGridStore[x].data.CntrType =  containerCmp[y].getValue();
+                                                    }else if(y==1){
+                                                    	cntrGridStore[x].data.CntrNet =  containerCmp[y].getValue();
+                                                    }else if(y==2){
+                                                    	cntrGridStore[x].data.CntrGross =  containerCmp[y].getValue();
+                                                    }else if(y==3){
+                                                    	cntrGridStore[x].data.CntrUnit =  containerCmp[y].getValue();
+                                                    }
+                                                }
+                                        	}
+                                        }
+                                        cntrGrid.refresh();
+                                    }
+                                }
+                            }
+                        }
+                    }]
+                }]
+            }).show();
+    	}
+    },
 
     onCntrInfoDel: function(button, e, eOpts) {
         var cmp = Ext.getCmp('CntrInfoGridId');
