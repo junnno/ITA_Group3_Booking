@@ -33,7 +33,7 @@ Ext.define('Booking.controller.LogOutController', {
 			success : function(response) {
 				 Ext.Msg.alert('Logout','You have successfully logged out');
 //				alert('You have successfully logged out');
-				setTimeout(function() { window.location.reload(); }, 3000);
+				setTimeout(function() { window.location.reload(); }, 1000);
 				
 				}
 		});

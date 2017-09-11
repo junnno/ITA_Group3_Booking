@@ -30,7 +30,7 @@ Ext.define('Booking.view.ListUserViewController', {
 			scope : this,
 			success : function(response) {
 				Ext.Msg.alert('Logout','You have successfully logged out');
-				setTimeout(function() { window.location.reload(); }, 3000);
+				setTimeout(function() { window.location.reload(); }, 1000);
 				}
 		});
     },
