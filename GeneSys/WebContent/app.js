@@ -27,7 +27,8 @@ Ext.application({
         'CntrWgtUntModel',
         'BkgDetailsModel',
         'CntrDetailsModel',
-        'UserModel'
+        'UserModel',
+        'UserRoleModel'
     ],
     stores: [
         'CityStore',
@@ -37,7 +38,8 @@ Ext.application({
         'BkgStore',
         'CntrDetailsStore',
         'StatusStore',
-        'UserStore'
+        'UserStore',
+        'UserRoleStore'
     ],
     views: [
         'BkgDtlViewport',
