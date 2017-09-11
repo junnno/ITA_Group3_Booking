@@ -43,7 +43,7 @@ Ext.define('Booking.controller.SearchController', {
 			},
 			scope : this,
 			success : function(response) {
-				
+				Ext.Msg.alert('Message','Selected booking: ' + bkgNums +' successfully deleted!');
 			}
 		});
 		this.onSearchButtonClick();
