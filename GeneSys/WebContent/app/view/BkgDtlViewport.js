@@ -221,6 +221,13 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                         },
                                                         {
                                                             xtype: 'button',
+                                                            text: 'Update',
+                                                            listeners: {
+                                                                click: 'onCntrInfoUpd'
+                                                            }
+                                                        },
+                                                        {
+                                                            xtype: 'button',
                                                             text: 'Remove',
                                                             listeners: {
                                                                 click: 'onCntrInfoDel'
@@ -311,6 +318,7 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                 {
                                     xtype: 'button',
                                     text: 'Save',
+                                    margin: '0 10 0 0',
                                     listeners: {
                                         click: 'onBkgSave'
                                     }
