@@ -25,18 +25,66 @@ Ext.define('Booking.controller.LogOutController', {
     },
 
     onLogOutClick: function(button, e, eOpts) {
-    	Ext.Ajax.request({
-			url : 'logout',
-			params : {
-			},
-			scope : this,
-			success : function(response) {
-				 Ext.Msg.alert('Logout','You have successfully logged out');
-//				alert('You have successfully logged out');
-				setTimeout(function() { window.location.reload(); }, 1000);
-				
-				}
-		});
+    	Ext.getBody().mask();
+    	Ext.create('Ext.window.Window', {
+            title: 'User Logout',
+            id: 'LogoutWndowId',
+            layout: {
+            	type: 'vbox',
+                align: 'stretch'
+            },
+            width: 250,
+            height: 100,
+            listeners: {
+                close: {
+                    scope: this,
+                    fn: function () {
+                    	Ext.getBody().unmask();
+                    	window.location.reload();
+                        var win = Ext.getCmp('LogoutWndowId');
+                        win.destroy();
+                    }
+                }
+            },
+            items: [
+            	{
+            		 xtype: 'container',
+                     id: 'LogoutWndowContainrId',
+                     padding: '10',
+                     layout: {
+                         type: 'vbox',
+                         align: 'stretch'
+                     },
+                     items: [
+                    	 {
+		            		xtype: 'label',
+		                    text: 'You have successfully logged out.'
+                    	 },
+                    	 {
+                    		 xtype: 'button',
+                             text: 'Confirm',
+                             listeners: {
+                                 click: {
+                                	 scope: this,
+                                	 fn: function(){
+                                		Ext.Ajax.request({
+                                  			url : 'logout',
+                                  			params : { },
+                                  			scope : this,
+                                  			success : function(response) {
+                                  				//setTimeout(function() { window.location.reload(); }, 1000);
+                                  				Ext.getCmp('LogoutWndowId').close();
+                                  				window.location.reload();
+                                  			}
+                                      	});
+                                	 }
+                                 }
+                             }
+                    	 }
+                    ]
+            	}
+            ]
+		}).show();
     }
 
 });
