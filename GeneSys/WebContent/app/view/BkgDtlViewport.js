@@ -40,17 +40,26 @@ Ext.define('Booking.view.BkgDtlViewport', {
     flex: 1,
     height: 250,
     width: 400,
-    layout: 'fit',
-
+    //layout: 'fit',
+    layout: {
+    	type: 'vbox',
+    	align: 'stretch'
+    },
     items: [
-        {
-        	xtype: 'image',
-            dock: 'top',
-            height: '',
-            maxHeight: 45,
-            maxWidth: 100,
-            src: 'brand.png'
-        },
+    	{
+            xtype: 'container',
+            layout: 'auto',
+            items: [
+            	{
+                    xtype: 'image',
+                    flex: 1,
+                    maxHeight: 80,
+                    maxWidth: 200,
+                    padding: 10,
+                    src: 'brand2.png'
+                },
+            ]
+    	},
         {
             xtype: 'container',
             flex: 1,

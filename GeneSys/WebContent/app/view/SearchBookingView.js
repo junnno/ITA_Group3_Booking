@@ -56,7 +56,8 @@ Ext.define('Booking.view.SearchBookingView', {
                             height: '',
                             maxHeight: 80,
                             maxWidth: 200,
-                            src: 'brand.png'
+                            padding: 10,
+                            src: 'brand2.png'
                         },
                         {
                             xtype: 'toolbar',
