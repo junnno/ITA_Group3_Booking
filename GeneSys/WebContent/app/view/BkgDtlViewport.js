@@ -16,7 +16,7 @@
 Ext.define('Booking.view.BkgDtlViewport', {
     extend: 'Ext.container.Viewport',
     alias: 'widget.bkgdtlviewport',
-    id:'BkgDltViewportViewId',
+    //id:'BkgDltViewportViewId',
     requires: [
         'Booking.view.BkgDtlViewportViewModel',
         'Booking.view.MainController',

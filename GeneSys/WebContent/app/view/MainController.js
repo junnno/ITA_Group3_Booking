@@ -357,7 +357,7 @@ Ext.define('Booking.view.MainController', {
     
     onBkgCancel: function(button, e, eOpts) {
     	Ext.getCmp('SearchBookingView').show();
-    	Ext.getCmp('BkgDltViewportViewId').destroy();
+    	Ext.getCmp('BkgDtlViewportId').destroy();
     }
 
 });
