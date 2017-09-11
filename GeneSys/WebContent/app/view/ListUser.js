@@ -20,6 +20,7 @@ Ext.define('Booking.view.ListUser', {
     requires: [
         'Booking.view.ListUserViewModel',
         'Booking.view.ListUserViewController',
+        'Booking.controller.LogOutController',
         'Ext.Img',
         'Ext.grid.Panel',
         'Ext.grid.column.Column',
@@ -98,7 +99,23 @@ Ext.define('Booking.view.ListUser', {
                                      xtype: 'button',
                                      id: 'logOut2',
                                      scale: 'medium',
-                                     text: 'Logout'
+                                     text: 'Logout',
+                                     listeners: {
+                                    	 click: 'onLogOutClick'
+                                    	/* click: function(button, e, eOpts) {
+                                    		 console.log("enter");
+                                    	    	Ext.Ajax.request({
+                                    				url : 'logout',
+                                    				params : {
+                                    				},
+                                    				scope : this,
+                                    				success : function(response) {
+                                    					alert('You have successfully logged out');
+                                    					window.location.reload();
+                                    					}
+                                    			});
+                                    	    }*/
+                                     }
                                  }
                             ]
                         }
