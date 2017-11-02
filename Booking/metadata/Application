@@ -1,0 +1,47 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "controllers": [
+            "LogInController",
+            "ResetController",
+            "SearchController",
+            "UpdateController",
+            "CreateController"
+        ],
+        "models": [
+            "CityModel",
+            "CntrModel",
+            "CntrTypeModel",
+            "CntrWgtUntModel",
+            "BkgDetailsModel",
+            "CntrDetailsModel"
+        ],
+        "name": "Booking",
+        "stores": [
+            "CityStore",
+            "CntrStore",
+            "CntrTypeStore",
+            "CntrWgtUntStore",
+            "BkgStore",
+            "CntrDetailsStore"
+        ],
+        "views": [
+            "BkgDtlViewport",
+            "ListUser"
+        ]
+    },
+    "configAlternates": {
+        "models": "typedarray",
+        "name": "string",
+        "stores": "typedarray",
+        "views": "typedarray",
+        "controllers": "typedarray"
+    },
+    "name": "Application",
+    "designerId": "application"
+}

@@ -9,8 +9,6 @@ public interface UserService {
 
 	List<User> getAllUsers();
 
-	void deleteUser();
-
 	boolean checkIfEmailExists(String email);
 
 	boolean checkIfUserExists(String username);
@@ -20,4 +18,6 @@ public interface UserService {
 	User getUserById(int id);
 
 	void createUser(String username, String password, String firstName, String lastName, String email, int role);
+
+	void deleteUser(User user);
 }

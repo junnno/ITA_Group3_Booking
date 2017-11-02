@@ -1,0 +1,19 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "bkgdtlviewport",
+        "designer|userClassName": "MainController",
+        "id": "MainControllerId"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "id": "string"
+    },
+    "designerId": "21882a0b-43f6-4876-b9d8-843aedbab534"
+}

@@ -1,0 +1,41 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "data": [
+            "[",
+            "    {",
+            "        \"CntrNumber\": \"alias\",",
+            "        \"CntrTypes\": \"unde\",",
+            "        \"GrossWeight\": \"eius\",",
+            "        \"NetWeight\": \"quam\",",
+            "        \"CargoNature\": \"perspiciatis\",",
+            "        \"CargoDescription\": \"quia\"",
+            "    },",
+            "    {",
+            "        \"CntrNumber\": \"esse\",",
+            "        \"CntrTypes\": \"dolorem\",",
+            "        \"GrossWeight\": \"aut\",",
+            "        \"NetWeight\": \"vitae\",",
+            "        \"CargoNature\": \"pariatur\",",
+            "        \"CargoDescription\": \"tempore\"",
+            "    }",
+            "]"
+        ],
+        "designer|userClassName": "CntrDetailsStore",
+        "model": "CntrDetailsModel",
+        "storeId": "CntrDetailsStore"
+    },
+    "configAlternates": {
+        "data": "array",
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "MyStore",
+    "designerId": "a510d062-4e2c-44d2-a986-5f483c3ecdba"
+}

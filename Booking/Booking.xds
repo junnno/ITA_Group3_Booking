@@ -1,0 +1,81 @@
+{
+    "name": "Booking",
+    "settings": {
+        "cmd": {
+            "license": "commercial",
+            "cmdVersion": "6.5.1.240",
+            "frameworkVersion": "6.5.0.775"
+        },
+        "urlPrefixTemplate": "http://localhost:{port}/{path}",
+        "urlPrefix": "http://localhost:49849/",
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Auto Expand",
+                "builtIn": true,
+                "height": null,
+                "width": null
+            }
+        },
+        "exportPath": "C:/Users/Monica/Documents/Work/ITA/Workspace/GeneSys/Publish",
+        "spacesToIndent": 4,
+        "sdkPath": "",
+        "lineEnding": "CRLF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "buildShouldOverwriteIndex": true,
+        "generateArchitectVersion": true
+    },
+    "xdsVersion": "4.2.2",
+    "xdsBuild": 282,
+    "schemaVersion": 1,
+    "upgradeVersion": 310000000001,
+    "framework": "ext65",
+    "viewOrderMap": {
+        "view": [
+            "c4090921-ed20-4e30-b1a1-9c3b9153af88",
+            "865486a3-d088-4526-865a-03a9f1f9dec2",
+            "c17d3466-7f19-47c7-af6d-8e601fbaca36",
+            "0450d20d-a6fd-46b3-8ce2-957ceb0ba89e",
+            "c1800e69-b7d8-4f69-9a6e-4743e7125766",
+            "8594ba12-51d1-4cee-9a1a-347ba2735e2f",
+            "f80affec-8fc8-4232-884a-7cba748d6bd7",
+            "dbad230a-49b8-43b8-b924-540cda25a998",
+            "21882a0b-43f6-4876-b9d8-843aedbab534",
+            "b8d4697f-7023-4287-a94d-a2bc56083e93",
+            "311c3baf-bea2-457d-8ba3-59c3dcb4a96a",
+            "2412fc77-2e20-40f1-a3ed-183e526ade2b"
+        ],
+        "store": [
+            "4b98745f-b8e3-4279-a259-483d60eadeb1",
+            "8227cf19-711f-49b5-8435-8c77f2d60074",
+            "109962ed-c4b3-4046-92ad-5453ff4307ba",
+            "cba93b86-629f-4d50-853e-3af2685fd638",
+            "52c80a4b-94ea-462b-9fa1-6f2ec3979d18",
+            "b1e8915b-6274-48f9-bdb7-f59c9a792671",
+            "a510d062-4e2c-44d2-a986-5f483c3ecdba"
+        ],
+        "controller": [
+            "73146d9a-3a15-4e7e-9882-626445a61382",
+            "bb2da04a-b943-4089-8b1f-ce4e1e2f3997",
+            "a47b7677-a339-4216-ae49-36a364e68467",
+            "84d10c34-c64e-424f-af6f-06598a1dbc69",
+            "8450557d-eaba-431c-bf31-bc3671f73374"
+        ],
+        "model": [
+            "e517d381-1f2b-4264-b4ef-f46af2367681",
+            "c37bf4b7-296f-4251-ad72-9874556e37f6",
+            "3932191f-bff6-4397-839d-d8e71353da54",
+            "3734ffc8-f979-4518-8626-0d7909809657",
+            "daa56bd5-006b-4a75-bfb2-0a768c906276",
+            "3ed90c20-47f2-41b6-8047-0549f22b899e",
+            "61c7d4cd-3ff0-40b7-90cb-0a4a447fbdfc"
+        ],
+        "resource": [
+            "a269e47b-3928-43aa-9b12-83a5dfc3021a",
+            "dbadfdd9-d0b9-4357-8de7-8f334fdbec9c"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

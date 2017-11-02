@@ -16,7 +16,7 @@
 Ext.define('Booking.view.loginWindow', {
     extend: 'Ext.window.Window',
     alias: 'widget.loginWindow',
-
+    id: 'loginWindow',
     requires: [
         'Booking.view.loginWindowViewModel',
         'Ext.Img',
@@ -40,21 +40,33 @@ Ext.define('Booking.view.loginWindow', {
     closable: false,
     placeholderCollapseHideMode: 3,
     title: '',
-
+    
     dockedItems: [
-        {
-            xtype: 'image',
-            dock: 'top',
-            flex: 1,
-            height: 160,
-            width: 201,
-            src: 'brand.png'
-        },
+    	 {
+         	xtype: 'container',
+         	flex: 1,
+         	layout: {
+         		type: 'auto',
+         		//align: 'center'
+         	},
+             items: [
+             	{
+             		margin: '0 0 10 15',
+             		xtype: 'image',
+             		flex: 1,
+                     //  dock: 'top',
+                       height: 100,
+                       width: 310,
+                       src: 'brand2.png'
+             	}
+             ]
+         },
         {
             xtype: 'textfield',
             dock: 'top',
             flex: 1,
             itemId: 'username',
+            id: 'username',
             margin: 10,
             emptyText: 'Username'
         },
@@ -63,6 +75,7 @@ Ext.define('Booking.view.loginWindow', {
             dock: 'top',
             flex: 1,
             itemId: 'password',
+            id: 'password',
             margin: 10,
             fieldLabel: '',
             inputType: 'password',
@@ -93,7 +106,8 @@ Ext.define('Booking.view.loginWindow', {
                         {
                             xtype: 'button',
                             modal: true,
-                            itemId: 'mybutton',
+                            itemId: 'resetLoginButton',
+                            id: 'resetLoginButton',
                             scale: 'medium',
                             text: 'Reset'
                         },

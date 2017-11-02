@@ -24,27 +24,42 @@ Ext.application({
         'CityModel',
         'CntrModel',
         'CntrTypeModel',
-        'CntrWgtUntModel'
+        'CntrWgtUntModel',
+        'BkgDetailsModel',
+        'CntrDetailsModel',
+        'UserModel',
+        'UserRoleModel'
     ],
     stores: [
         'CityStore',
         'CntrStore',
         'CntrTypeStore',
-        'CntrWgtUntStore'
+        'CntrWgtUntStore',
+        'BkgStore',
+        'CntrDetailsStore',
+        'StatusStore',
+        'UserStore',
+        'UserRoleStore'
     ],
     views: [
-        'BkgDtlViewport'
+        'BkgDtlViewport',
+        'ListUser',
+        'SearchBookingView'
     ],
     controllers: [
         'LogInController',
+        'LogOutController',
         'ResetController',
         'SearchController',
-        'UpdateController'
+        'UpdateController',
+        "UserList",
+        "ViewUserController",
+        "CreateBookingController"
     ],
     name: 'Booking',
 
     launch: function() {
-        Ext.create('Booking.view.loginWindow');
+        Ext.create('Booking.view.loginWindow', {renderTo: Ext.getBody()});
     }
 
 });

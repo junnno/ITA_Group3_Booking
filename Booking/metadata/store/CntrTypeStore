@@ -1,0 +1,69 @@
+{
+    "type": "arraystore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "data": [
+            "[",
+            "    {",
+            "        \"name\": \"20GP\",",
+            "        \"code\": \"20GP\"",
+            "    },",
+            "    {",
+            "        \"name\": \"40GP\",",
+            "        \"code\": \"40GP\"",
+            "    },",
+            "    {",
+            "        \"name\": \"20HQ\",",
+            "        \"code\": \"20HQ\"",
+            "    },",
+            "    {",
+            "        \"name\": \"40HQ\",",
+            "        \"code\": \"40HQ\"",
+            "    },",
+            "    {",
+            "        \"name\": \"45HQ\",",
+            "        \"code\": \"45HQ\"",
+            "    }",
+            "]"
+        ],
+        "designer|userClassName": "CntrTypeStore",
+        "model": "CntrTypeModel",
+        "storeId": "CntrTypeStore"
+    },
+    "configAlternates": {
+        "data": "array",
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "CityStore1",
+    "designerId": "109962ed-c4b3-4046-92ad-5453ff4307ba",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "name": "MyAjaxProxy",
+            "designerId": "bfd5b7f2-6943-4fbd-bd6a-7b2cf522bc72",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Array",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "name": "MyArrayReader",
+                    "designerId": "9dc05c7e-5cfd-4779-8225-592cf23cba55"
+                }
+            ]
+        }
+    ]
+}

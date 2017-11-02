@@ -27,11 +27,7 @@ Ext.define('Booking.model.StatusModel', {
     fields: [
         {
             type: 'string',
-            defaultValue: 'Active',
-            mapping: 'key',
-            name: 'Key',
-            persist: false,
-            reference: 'Booking.model.StatusModel'
+            name: 'Key'
         },
         {
             type: 'string',

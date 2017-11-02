@@ -1,5 +1,6 @@
 package com.oocl.genesys.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +22,13 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="GS_BOOKING")
-public class Booking {
+public class Booking implements Serializable{
 	
 	@Id
 	@Column(name = "BKG_ID", nullable = false)
 	@SequenceGenerator(name="booking_seq", sequenceName="gs_booking_seq", allocationSize = 1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="booking_seq")
-    private int bkgId;
+    private long bkgId;
 	
 	@NotNull
     @Column(name = "BKG_NUM", nullable = false)
@@ -43,7 +44,7 @@ public class Booking {
     
 	@NotNull
     @Column(name = "IS_APPROVED_DOC", nullable = false)
-    private int isApproved;
+    private int isApprovedDoc;
     
 	@NotNull
     @Column(name = "IS_GOOD_CUSTOMER", nullable = false)
@@ -72,14 +73,14 @@ public class Booking {
 	@Column(name = "IS_DELETED", nullable = true)
     private int isDeleted;
 	
-	@OneToMany(fetch=FetchType.EAGER, targetEntity=Container.class, mappedBy= "booking",cascade={CascadeType.ALL})
+	@OneToMany(fetch=FetchType.EAGER, targetEntity=Container.class, mappedBy= "booking",cascade={CascadeType.ALL}, orphanRemoval = true)
 	private List<Container> containerList = new ArrayList<Container>();
 	
-	public int getBkgId() {
+	public long getBkgId() {
 		return bkgId;
 	}
 
-	public void setBkgId(int bkgId) {
+	public void setBkgId(long bkgId) {
 		this.bkgId = bkgId;
 	}
 	
@@ -116,11 +117,11 @@ public class Booking {
 	}
 
 	public int getIsApprovedDoc() {
-		return isApproved;
+		return isApprovedDoc;
 	}
 
-	public void setIsApprovedDoc(int isApproved) {
-		this.isApproved = isApproved;
+	public void setIsApprovedDoc(int isApprovedDoc) {
+		this.isApprovedDoc = isApprovedDoc;
 	}
 
 	public int getIsGoodCustomer() {

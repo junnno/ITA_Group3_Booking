@@ -1,5 +1,7 @@
 package com.oocl.genesys.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,18 +16,22 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="GS_CONTAINER")
-public class Container {
+public class Container implements Serializable{
 
 	@Id
 	@SequenceGenerator(name="gs_container_seq", sequenceName="gs_container_seq", allocationSize = 1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gs_container_seq")
     private int container_id;
 	
+	@JsonIgnore
 	@NotNull
 	@ManyToOne(targetEntity=Booking.class)
-	@JoinColumn(name="bkg_num", nullable=false)
+	@JoinColumn(name="bkg_num", nullable=false,referencedColumnName="BKG_NUM")
     private Booking booking;
 	
 	@NotNull

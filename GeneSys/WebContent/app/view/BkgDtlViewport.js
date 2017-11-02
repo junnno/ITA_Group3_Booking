@@ -16,7 +16,7 @@
 Ext.define('Booking.view.BkgDtlViewport', {
     extend: 'Ext.container.Viewport',
     alias: 'widget.bkgdtlviewport',
-
+    id: 'BkgDtlViewportId',
     requires: [
         'Booking.view.BkgDtlViewportViewModel',
         'Booking.view.MainController',
@@ -28,28 +28,38 @@ Ext.define('Booking.view.BkgDtlViewport', {
         'Ext.toolbar.Toolbar',
         'Ext.button.Button',
         'Ext.grid.Panel',
+        'Ext.selection.CheckboxModel',
         'Ext.grid.column.Number'
     ],
-
+    action: null,
+    bkg: null,
     controller: 'bkgdtlviewport',
     viewModel: {
         type: 'bkgdtlviewport'
     },
     flex: 1,
     height: 250,
-    id: 'BkgDtlViewportId',
     width: 400,
-    layout: 'fit',
-
+    //layout: 'fit',
+    layout: {
+    	type: 'vbox',
+    	align: 'stretch'
+    },
     items: [
-        {
-            xtype: 'image',
-            dock: 'top',
-            height: '',
-            maxHeight: 45,
-            maxWidth: 100,
-            src: 'brand.png'
-        },
+    	{
+            xtype: 'container',
+            layout: 'auto',
+            items: [
+            	{
+                    xtype: 'image',
+                    flex: 1,
+                    maxHeight: 80,
+                    maxWidth: 200,
+                    padding: 10,
+                    src: 'brand2.png'
+                },
+            ]
+    	},
         {
             xtype: 'container',
             flex: 1,
@@ -90,7 +100,7 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                     xtype: 'container',
                                                     flex: 1,
                                                     items: [
-                                                        {
+                                                    	{
                                                             xtype: 'textfield',
                                                             disabled: true,
                                                             id: 'BkgNumId',
@@ -136,7 +146,7 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                             xtype: 'combobox',
                                                             id: 'BkgToCityId',
                                                             fieldLabel: 'To City',
-                                                            displayField: 'name',
+                                                            displayField: 'code',
                                                             forceSelection: true,
                                                             queryMode: 'local',
                                                             store: 'CityStore',
@@ -164,25 +174,29 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                     xtype: 'radiofield',
                                                     id: 'gcCgoNatId',
                                                     boxLabel: 'GC',
-                                                    inputValue: 'GC'
+                                                    inputValue: 'GC',
+                                                	name: 'cgoNat'
                                                 },
                                                 {
                                                     xtype: 'radiofield',
                                                     id: 'dgCgoNatId',
                                                     boxLabel: 'DG',
-                                                    inputValue: 'DG'
+                                                    inputValue: 'DG',
+                                                	name: 'cgoNat'
                                                 },
                                                 {
                                                     xtype: 'radiofield',
                                                     id: 'rfCgoNatId',
                                                     boxLabel: 'RF',
-                                                    inputValue: 'RF'
+                                                    inputValue: 'RF',
+                                                	name: 'cgoNat'
                                                 },
                                                 {
                                                     xtype: 'radiofield',
                                                     id: 'awCgoNatId',
                                                     boxLabel: 'AW',
-                                                    inputValue: 'AW'
+                                                    inputValue: 'AW',
+                                                	name: 'cgoNat'
                                                 }
                                             ]
                                         },
@@ -216,6 +230,15 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                         },
                                                         {
                                                             xtype: 'button',
+                                                            text: 'Update',
+                                                            id: 'updateCntrDtlId',
+                                                            disabled: true,
+                                                            listeners: {
+                                                                click: 'onCntrInfoUpd'
+                                                            }
+                                                        },
+                                                        {
+                                                            xtype: 'button',
                                                             text: 'Remove',
                                                             listeners: {
                                                                 click: 'onCntrInfoDel'
@@ -231,12 +254,29 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                                     height: 180,
                                                     id: 'CntrInfoGridId',
                                                     margin: '0 0 10 0',
-                                                    maxHeight: 240,
+                                                    maxHeight: 400,
                                                     padding: '',
                                                     scrollable: true,
                                                     bodyBorder: true,
                                                     columnLines: true,
                                                     store: 'CntrStore',
+                                                    selModel: {
+                                                        selType: 'checkboxmodel'
+                                                    },
+                                                    listeners:{
+                                                    	rowclick: {
+                                                    		scope: this,
+                                                    		fn: function(){
+                                                    			var gridSel = Ext.getCmp('CntrInfoGridId').getSelection();
+                                                    			if(gridSel.length == 1){
+                                                    				Ext.getCmp('updateCntrDtlId').setDisabled(false);
+                                                    			}else{
+                                                    				Ext.getCmp('updateCntrDtlId').setDisabled(true);
+                                                    			}
+                                                    			console.log('click');
+                                                    		}
+                                                    	}
+                                                    },
                                                     columns: [
                                                         {
                                                             xtype: 'gridcolumn',
@@ -279,6 +319,7 @@ Ext.define('Booking.view.BkgDtlViewport', {
                             items: [
                                 {
                                     xtype: 'checkboxgroup',
+                                    id: 'bkgValidationCbGroupId',
                                     margin: '0 10 0 0',
                                     fieldLabel: 'Validation',
                                     items: [
@@ -302,8 +343,16 @@ Ext.define('Booking.view.BkgDtlViewport', {
                                 {
                                     xtype: 'button',
                                     text: 'Save',
+                                    margin: '0 10 0 0',
                                     listeners: {
                                         click: 'onBkgSave'
+                                    }
+                                },
+                                {
+                                    xtype: 'button',
+                                    text: 'Cancel',
+                                    listeners: {
+                                        click: 'onBkgCancel'
                                     }
                                 }
                             ]

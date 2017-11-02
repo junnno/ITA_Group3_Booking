@@ -14,17 +14,48 @@
  */
 
 Ext.define('Booking.controller.LogInController', {
-    extend: 'Ext.app.Controller',
+	extend : 'Ext.app.Controller',
 
-    control: {
-        "#mybutton1": {
-            click: 'onMybutton1Click'
-        }
-    },
+	config : {
+		refs : [ 
+			{
+				ref : 'username',
+				selector : 'loginWindow #username'
+			},
+			{
+				ref : 'password',
+				selector : 'loginWindow #password'
+			},
+		]
+	},
+	control : {
+		"#mybutton1" : {
+			click : 'onMybutton1Click'
+		}
+	},
 
-    onMybutton1Click: function(button, e, eOpts) {
-    	Ext.getCmp('logInView').hide();
-    	Ext.create("Booking.view.SearchBookingView");
-    }
+	onMybutton1Click : function(button, e, eOpts) {
+
+		Ext.getCmp("username").getValue();
+		Ext.Ajax.request({
+			url : 'login',
+			method : 'POST',
+			params : {
+				username : this.getUsername().getValue(),
+				password : this.getPassword().getValue()
+			},
+			scope : this,
+			success : function(response) {
+				var data = Ext.decode(response.responseText);
+				console.log(data);
+				if(!data.success)
+				Ext.Msg.alert('Invalid Login', 'Please enter the correct Username/Password!');
+				else{
+					Ext.getCmp("loginWindow").hide();
+					Ext.create("Booking.view.SearchBookingView").show();
+				}
+			}
+		});
+	}
 
 });

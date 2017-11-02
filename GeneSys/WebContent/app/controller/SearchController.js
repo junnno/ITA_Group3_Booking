@@ -14,16 +14,90 @@
  */
 
 Ext.define('Booking.controller.SearchController', {
-    extend: 'Ext.app.Controller',
-
-    control: {
-        "#mybutton3": {
-            click: 'onMybutton3Click'
-        }
-    },
-
-    onMybutton3Click: function(button, e, eOpts) {
-
-    }
+	extend : 'Ext.app.Controller',
+	control : {
+		"#searchButton1" : {
+			click : 'onSearchButtonClick'
+		},
+		"#updateButton" : {
+			click : 'onUpdateButtonClick'
+		},
+		"#deleteButton":{
+			click : 'onDeleteButtonClick'
+		}
+	},
+	onDeleteButtonClick : function(button, e, eOpts) {
+		var cmp = Ext.getCmp('bookingGridId');
+        var selected = cmp.getSelection();
+        var bkgNums="";
+        Ext.each(selected, function(record) {
+        	bkgNums += record.id+" ";
+        });
+        console.log(bkgNums);
+		Ext.Ajax.request({
+			url : 'booking/delete',
+			method : 'POST',
+			datatype : 'String',
+			params : {
+				bkgNums
+			},
+			scope : this,
+			success : function(response) {
+				Ext.Msg.alert('Message','Selected booking: ' + bkgNums +' successfully deleted!');
+			}
+		});
+		this.onSearchButtonClick();
+	},
+	onUpdateButtonClick: function(){
+		var bkg =Ext.getCmp('bookingGridId').getSelection();
+		Ext.create('Booking.view.BkgDtlViewport',{ action:"update", bkg: bkg}).show();
+	},
+	onSearchButtonClick : function(button, e, eOpts) {
+		var store = Ext.getStore('BkgStore');
+		store.removeAll();
+		var criteria = {
+	        	bkgNum : Ext.getCmp('bkgNum').getValue(),
+	        	cntrNum : Ext.getCmp('cntrNum').getValue(),
+	        	fromCity : Ext.getCmp('fromCity').getValue()==null?'':Ext.getCmp('fromCity').getValue(),
+	            toCity :  Ext.getCmp('toCity').getValue()==null?'':Ext.getCmp('toCity').getValue(),
+	            status :  Ext.getCmp('status').getValue()==null?'':Ext.getCmp('status').getValue()
+		}
+		
+		
+		Ext.Ajax.request({
+			url : 'booking/search',
+			method : 'POST',
+			datatype : 'json',
+			params : {
+				criteria: Ext.util.JSON.encode(criteria)
+			},
+			scope : this,
+			success : function(response) {
+				var data = Ext.decode(response.responseText);
+				console.log(data);
+				store.removeAll();
+				if(!data.success){
+					Ext.getCmp('bookingGridId').body.setText('No Record found');
+				}
+				else{
+					Ext.each(data.data, function(record) {
+						var stat
+						if (record.status==1) stat = 'Approved';
+						else stat = 'Pending';
+						var bkg = {
+								BkgNum : record.bkgNum,
+					            Shipper : record.shipper,
+					            Consignee : record.consignee,
+					            From : record.fromCity,
+					    		To : record.toCity,
+					    		Status : stat,
+					    		ContainerDetails : record.containerList
+						};
+						store.add(bkg);
+					});
+				}
+			}
+		});
+	}
 
 });

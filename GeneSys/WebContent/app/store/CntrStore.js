@@ -31,13 +31,15 @@ Ext.define('Booking.store.CntrStore', {
                     CntrType: '20GP',
                     CntrNet: 525.14,
                     CntrGross: 522.19,
-                    CntrUnit: 'lbs'
+                    CntrUnit: 'lbs',
+                    CntrNumber: ''
                 },
                 {
                     CntrType: '20GP',
                     CntrNet: 434.07,
                     CntrGross: 439.36,
-                    CntrUnit: 'lbs'
+                    CntrUnit: 'lbs',
+                    CntrNumber: ''
                 }
             ]
         }, cfg)]);
